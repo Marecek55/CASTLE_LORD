@@ -4,8 +4,8 @@ import Predmety.Zbrane.Zbran;
 import Predmety.Zbroj.Brneni;
 import Predmety.Zbroj.Medailon;
 
-public class Bojovnik extends Postava{
-    public Bojovnik(String jmeno, int zivoty, Zbran zbran, Brneni brneni, Medailon medailon) {
+public class Goblin extends Postava {
+    public Goblin(String jmeno, int zivoty, Zbran zbran, Brneni brneni, Medailon medailon) {
         super(jmeno, zivoty, zbran, brneni, medailon);
     }
 

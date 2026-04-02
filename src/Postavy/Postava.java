@@ -11,14 +11,53 @@ public abstract class Postava {
     protected Brneni brneni;
     protected Medailon medailon;
 
-    public Postava(String jmeno, int zivoty, Zbran zbran, Brneni brneni, Medailon medailon) {
+    public Postava(String jmeno, Zbran zbran, Brneni brneni, Medailon medailon) {
         this.jmeno = jmeno;
-        this.zivoty = zivoty;
         this.zbran = zbran;
         this.brneni = brneni;
         this.medailon = medailon;
     }
 
     public abstract int utok();
-    public abstract int obrana();
+    public abstract int obrana(int utok);
+
+    public String getJmeno() {
+        return jmeno;
+    }
+
+    public void setJmeno(String jmeno) {
+        this.jmeno = jmeno;
+    }
+
+    public int getZivoty() {
+        return zivoty;
+    }
+
+    public void setZivoty(int zivoty) {
+        this.zivoty = zivoty;
+    }
+
+    public Zbran getZbran() {
+        return zbran;
+    }
+
+    public void setZbran(Zbran zbran) {
+        this.zbran = zbran;
+    }
+
+    public Brneni getBrneni() {
+        return brneni;
+    }
+
+    public void setBrneni(Brneni brneni) {
+        this.brneni = brneni;
+    }
+
+    public Medailon getMedailon() {
+        return medailon;
+    }
+
+    public void setMedailon(Medailon medailon) {
+        this.medailon = medailon;
+    }
 }

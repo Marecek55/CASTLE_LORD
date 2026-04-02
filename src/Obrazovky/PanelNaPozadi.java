@@ -6,7 +6,7 @@ import java.net.URL;
 
 public class PanelNaPozadi extends JPanel {
 
-    private final Image bg;
+    protected Image bg;
 
 
     public PanelNaPozadi(String nazevObrazku) {
@@ -37,7 +37,7 @@ public class PanelNaPozadi extends JPanel {
     private Image nactiObrazek(String obrazek) {
         URL url = getClass().getResource(obrazek);
         if (url == null) {
-            System.out.println(obrazek + " nenalezen. Používám černé pozadí.");
+            System.out.println(obrazek + " nenalezen.");
             return null;
         }
         return new ImageIcon(url).getImage();

@@ -1,11 +1,12 @@
     package Predmety.Zbrane;
 
     import Logika.Hra;
+    import Predmety.Predmet;
     import Predmety.Rarita;
 
     import java.util.ArrayList;
 
-    public abstract class Zbran {
+    public abstract class Zbran extends Predmet {
         protected String nazev;
         protected int sila;
         protected int silaCritical;
@@ -13,19 +14,26 @@
         protected double sanceCritical;
 
         public Zbran(String nazev, int sila, int silaCritical, Rarita rarita ) {
+            super(nazev);
             this.nazev = nazev;
             this.sila = sila;
             this.silaCritical = silaCritical;
             this.rarita = rarita;
 
         }
-        public static Zbran vytvoritZbran(int uroven){
-            ArrayList<Rarita> rarity = new ArrayList<>();
+        public static Zbran vytvoritZbran(int uroven, boolean jeZtruhly, Rarita raritaZtruhly) {
+            Rarita rarita = null;
+            if (!jeZtruhly){
+                ArrayList<Rarita> rarity = new ArrayList<>();
                 rarity.add(Rarita.VZÁCNÁ);
                 rarity.add(Rarita.BĚŽNÁ);
                 rarity.add(Rarita.LEGENDÁRNÍ);
-            int cislo = Hra.rand.nextInt(rarity.size());
-            Rarita rarita = rarity.get(cislo);
+                int cislo = Hra.rand.nextInt(rarity.size());
+                rarita = rarity.get(cislo);
+            }else {
+                rarita = raritaZtruhly;
+            }
+
             int cislo2 = Hra.rand.nextInt(1,4);
             int provizorniSila = 0;
             int provizorniCriticalSila = 0;

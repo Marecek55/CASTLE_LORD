@@ -2,24 +2,26 @@
 package Predmety.Zbroj;
 import Logika.Hra;
 import Postavy.Bojovnik;
+import Predmety.Predmet;
 import Predmety.Rarita;
 
 
 import java.util.ArrayList;
 
-public abstract class Medailon {
+public abstract class Medailon extends Predmet {
     protected Rarita rarita;
     protected String nazev;
     protected int zlepsovac;
 
     public Medailon(String nazev, Rarita rarita) {
+        super(nazev);
         this.rarita = rarita;
         this.nazev = nazev;
 
 
     }
 
-    public static Medailon vytvoritMedailon(){
+    public static Medailon vytvoritMedailon( boolean jeZtruhly, Rarita raritaZtruhly){
         ArrayList<Rarita> rarity = new ArrayList<>();
         rarity.add(Rarita.VZÁCNÁ);
         rarity.add(Rarita.BĚŽNÁ);

@@ -1,12 +1,13 @@
 package Predmety.Zbroj;
 
 import Logika.Hra;
+import Predmety.Predmet;
 import Predmety.Rarita;
 
 
 import java.util.ArrayList;
 
-public abstract class Brneni {
+public abstract class Brneni extends Predmet {
     protected Rarita rarita;
     protected String jmeno;
     protected double sanceUltraKryt;
@@ -14,18 +15,25 @@ public abstract class Brneni {
     protected int ultraKryt;
 
     public Brneni(String jmeno ,Rarita rarita, int kryt, int ultraKryt) {
+        super(jmeno);
         this.jmeno  = jmeno;
         this.rarita = rarita;
         this.kryt = kryt;
         this.ultraKryt = ultraKryt;
     }
-    public static Brneni vytvoritBrneni(int uroven){
-        ArrayList<Rarita> rarity = new ArrayList<>();
-        rarity.add(Rarita.VZÁCNÁ);
-        rarity.add(Rarita.BĚŽNÁ);
-        rarity.add(Rarita.LEGENDÁRNÍ);
-        int cislo = Hra.rand.nextInt(rarity.size());
-        Rarita rarita = rarity.get(cislo);
+    public static Brneni vytvoritBrneni(int uroven,  boolean jeZtruhly, Rarita raritaZtruhly){
+        Rarita rarita = null;
+        if (!jeZtruhly){
+            ArrayList<Rarita> rarity = new ArrayList<>();
+            rarity.add(Rarita.VZÁCNÁ);
+            rarity.add(Rarita.BĚŽNÁ);
+            rarity.add(Rarita.LEGENDÁRNÍ);
+            int cislo = Hra.rand.nextInt(rarity.size());
+            rarita = rarity.get(cislo);
+        }else {
+            rarita = raritaZtruhly;
+        }
+
         int cislo2 = Hra.rand.nextInt(1,4);
         int provizorniKryt = 0;
         int provizorniUltraKryt = 0;

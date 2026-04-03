@@ -20,11 +20,7 @@ public class Goblin extends Postava {
 
     @Override
     public int obrana(int utok) {
-        if (brneni != null) {
             return brneni.kryt(utok);
-        } else {
-            return 0;
-        }
 
     }
 }

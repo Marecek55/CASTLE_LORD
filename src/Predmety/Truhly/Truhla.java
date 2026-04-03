@@ -33,7 +33,6 @@ public abstract class Truhla {
             raritaVeci = Rarita.BĚŽNÁ;
         }
 
-
         int nahodaVeci = Hra.rand.nextInt(1, 6);
         switch (nahodaVeci) {
             case 1:

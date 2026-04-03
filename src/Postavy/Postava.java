@@ -60,4 +60,5 @@ public abstract class Postava {
     public void setMedailon(Medailon medailon) {
         this.medailon = medailon;
     }
+
 }

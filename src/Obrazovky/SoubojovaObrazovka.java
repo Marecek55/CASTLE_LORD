@@ -20,7 +20,7 @@ public class SoubojovaObrazovka extends Obrazovka{
 
     @Override
     public void inicializace() {
-        arenaPanel = new PanelNaPozadi("/PozadiBoje.png");
+        arenaPanel = new PanelNaPozadi("/Obrazky/PozadiBoje.png");
         arenaPanel.setLayout(null);
         this.okno.add(arenaPanel);
 

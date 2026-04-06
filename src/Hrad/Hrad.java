@@ -19,51 +19,28 @@ public class Hrad {
             System.out.println("Kasarna nejde vytvorit");
         }
     }
+    public void postavitMistnost(TypMistnosti typ) {
+        try {
+            switch (typ) {
+                case LEKARNA:
+                    if (lekarna == null) lekarna = new Lekarna("Lékárna", 200, 100, 1, 1);
+                    break;
+                case TRENINKOVA_HALA:
+                    if (treninkovaHala == null) treninkovaHala = new TreninkovaHala("Tréninková hala", 300, 200, 1, 1);
+                    break;
+                case SKLAD_PENEZ:
+                    if (skladPenez == null) skladPenez = new SkladPenez("Sklad Peněz", 200, 300, 1, 1);
+                    break;
+                case SKLAD_JIDLA:
+                    if (skladJidla == null) skladJidla = new SkladJidla("Sklad Jídla", 150, 200, 1, 1);
+                    break;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
-    public void postavitLekarnu(){
-        if (lekarna == null){
-            try {
-                lekarna = new Lekarna("Lékárna", 200, 100 ,1,1 );
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }else {
-            return;
-        }
-    }
-    public void postavitTreninkovouHalu(){
-        if (treninkovaHala == null){
-            try {
-                treninkovaHala = new TreninkovaHala("Tréninková hala", 300, 200 ,1,1);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }else {
-            return;
-        }
-    }
-    public void postavitSkladPenez(){
-        if (skladPenez == null){
-            try {
-                skladPenez = new SkladPenez("Sklad Peněz", 200, 300 ,1,1);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }else {
-            return;
-        }
-    }
-    public void postavitSkladJidla(){
-        if (skladJidla == null){
-            try {
-                skladJidla = new SkladJidla("Sklad Jídla", 150, 200 ,1,1);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }else {
-            return;
-        }
-    }
+
 
 
     public Kasarna getKasarna() {

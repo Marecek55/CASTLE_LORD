@@ -16,8 +16,8 @@ public class ObrazovkaHradu extends Obrazovka{
         this.hrad = hrad;
         btnKasarna = new StylTlacitek("Kasárna");
         btnStavba = new StylTlacitek("Stavba");
-        btnKasarna.nastavJakoObrazek("/Obrazky/Barracks.png", 250, 150);
-        btnStavba.nastavJakoObrazek("/Obrazky/StavbaTlacitko.png", 200, 80);
+        btnKasarna.nastavJakoObrazek("/Obrazky/Barracks.png", 400, 225);
+        btnStavba.nastavJakoObrazek("/Obrazky/StavbaTlacitko.png", 280, 80);
     }
 
     @Override

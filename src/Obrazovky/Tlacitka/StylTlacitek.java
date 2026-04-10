@@ -39,21 +39,46 @@ public class StylTlacitek extends JButton {
         b.setBorderPainted(false);
     }
     public void nastavJakoObrazek(String cestaKObrazku, int sirka, int vyska) {
-        java.net.URL url = getClass().getResource(cestaKObrazku);
-        if (url != null) {
-            ImageIcon originalIkona = new ImageIcon(url);
+        try {
+            java.net.URL url = getClass().getResource(cestaKObrazku);
+            if (url != null) {
+                java.awt.Image original = javax.imageio.ImageIO.read(url);
+                java.awt.Image zmensenyObrazek = original.getScaledInstance(sirka, vyska, java.awt.Image.SCALE_SMOOTH);
+                this.setIcon(new javax.swing.ImageIcon(zmensenyObrazek));
+            } else {
+                System.out.println(cestaKObrazku);
+            }
 
 
-            Image zmensenyObrazek = originalIkona.getImage().getScaledInstance(sirka, vyska, java.awt.Image.SCALE_SMOOTH);
+            this.setText(null);
+            this.setBorderPainted(false);
+            this.setFocusPainted(false);
 
-            this.setIcon(new ImageIcon(zmensenyObrazek));
-        } else {
-            System.out.println("Obrázek tlačítka nenalezen: " + cestaKObrazku);
+
+            this.setContentAreaFilled(false);
+            this.setOpaque(false);
+            this.setPreferredSize(new java.awt.Dimension(sirka, vyska));
+
+        } catch (Exception e) {
+            System.out.println(  e.getMessage());
         }
-
-        this.setText(null);
-        this.setContentAreaFilled(false);
-        this.setBorderPainted(false);
-        this.setFocusPainted(false);
     }
+//    public void nastavJakoObrazek(String cestaKObrazku, int sirka, int vyska) {
+//        java.net.URL url = getClass().getResource(cestaKObrazku);
+//        if (url != null) {
+//            ImageIcon originalIkona = new ImageIcon(url);
+//
+//
+//            Image zmensenyObrazek = originalIkona.getImage().getScaledInstance(sirka, vyska, java.awt.Image.SCALE_SMOOTH);
+//
+//            this.setIcon(new ImageIcon(zmensenyObrazek));
+//        } else {
+//            System.out.println("Obrázek tlačítka nenalezen: " + cestaKObrazku);
+//        }
+//
+//        this.setText(null);
+//        this.setContentAreaFilled(false);
+//        this.setBorderPainted(false);
+//        this.setFocusPainted(false);
+//    }
 }

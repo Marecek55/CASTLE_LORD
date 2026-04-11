@@ -1,6 +1,7 @@
 package Predmety.Zbroj;
 
 import Postavy.Bojovnik;
+import Postavy.Postava;
 import Predmety.Rarita;
 
 public class MedailonObrany extends Medailon{
@@ -14,7 +15,10 @@ public class MedailonObrany extends Medailon{
     }
 
     @Override
-    public void vylepsitVlastnost(Bojovnik b) {
-        b.getBrneni().setSanceUltraKryt(b.getBrneni().getSanceUltraKryt() - zlepsovac);
+    public void vylepsitVlastnost(Postava b) {
+        if (b.getBrneni()!= null){
+            b.getBrneni().setSanceUltraKryt(b.getBrneni().getSanceUltraKryt() - zlepsovac);
+        }
+
     }
 }

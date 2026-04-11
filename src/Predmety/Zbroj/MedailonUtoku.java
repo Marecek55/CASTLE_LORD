@@ -1,6 +1,7 @@
 package Predmety.Zbroj;
 
 import Postavy.Bojovnik;
+import Postavy.Postava;
 import Predmety.Rarita;
 
 public class MedailonUtoku extends Medailon{
@@ -14,7 +15,10 @@ public class MedailonUtoku extends Medailon{
     }
 
     @Override
-    public void vylepsitVlastnost(Bojovnik b) {
-        b.getZbran().setSanceCritical(b.getZbran().getSanceCritical() - zlepsovac);
+    public void vylepsitVlastnost(Postava b) {
+        if (b.getZbran()!=null){
+            b.getZbran().setSanceCritical(b.getZbran().getSanceCritical() - zlepsovac);
+        }
+
     }
 }

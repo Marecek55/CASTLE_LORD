@@ -64,6 +64,18 @@
 
         }
 
+        @Override
+        public String toString() {
+            return "Zbran{" +
+                    "nazev='" + nazev + '\'' +
+                    ", sila=" + sila +
+                    ", silaCritical=" + silaCritical +
+                    ", rarita=" + rarita +
+                    ", sanceCritical=" + sanceCritical +
+                    ", nazev='" + nazev + '\'' +
+                    '}';
+        }
+
         public abstract int zautoc();
 
         public String getNazev() {

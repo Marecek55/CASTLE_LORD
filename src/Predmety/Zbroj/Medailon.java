@@ -2,6 +2,8 @@
 package Predmety.Zbroj;
 import Logika.Hra;
 import Postavy.Bojovnik;
+import Postavy.Postava;
+import Predmety.Penize;
 import Predmety.Predmet;
 import Predmety.Rarita;
 
@@ -31,10 +33,10 @@ public abstract class Medailon extends Predmet {
         int cislo2 = Hra.rand.nextInt(1,3);
         switch (cislo2) {
             case 1:
-                Medailon z = new MedailonObrany("Kožené Brnění",rarita);
+                Medailon z = new MedailonObrany("Medailon Obrany",rarita);
                 return z;
             case 2:
-                Medailon z2 = new MedailonUtoku("Ocelové Brnění",rarita);
+                Medailon z2 = new MedailonUtoku("Medailon Utoku",rarita);
                 return z2;
             default:
                 return null;
@@ -57,5 +59,5 @@ public abstract class Medailon extends Predmet {
         this.zlepsovac = zlepsovac;
     }
 
-    public abstract void vylepsitVlastnost(Bojovnik b);
+    public abstract void vylepsitVlastnost(Postava b);
 }

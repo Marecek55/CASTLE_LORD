@@ -17,7 +17,11 @@ public class TvorbaPostav {
         if (urovenStezky>6){
              m = Medailon.vytvoritMedailon(false,null);
         }
-        return new Goblin("Goblin", z,b,m,urovenStezky);
+        Goblin novyGoblin = new Goblin("Goblin", z,b,m, urovenStezky );
+        if (m!=null){
+            m.vylepsitVlastnost(novyGoblin);
+        }
+        return novyGoblin;
     }
     public static Bojovnik tvorbaHracovaBojovnika(String jmeno , int urovenHradu){
         Zbran z = Zbran.vytvoritZbran(urovenHradu,false, null);
@@ -35,8 +39,13 @@ public class TvorbaPostav {
         if (nahoda2<=5){
             m = Medailon.vytvoritMedailon(false, null);
         }
+        Bojovnik novyBojovnik = new Bojovnik(jmeno, z, b, m, urovenHradu);
 
 
-        return new Bojovnik(jmeno, z, b, m, urovenHradu);
+        if (m != null) {
+            m.vylepsitVlastnost(novyBojovnik);
+        }
+
+        return novyBojovnik;
     }
 }

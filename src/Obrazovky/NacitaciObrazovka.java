@@ -15,6 +15,8 @@ public class NacitaciObrazovka extends Obrazovka {
 
         btnPokracovat = new StylTlacitek("Pokračovat");
         btnNovaHra = new StylTlacitek("Nová Hra");
+        StylTlacitek.zmenitStylUvod(btnPokracovat);
+        StylTlacitek.zmenitStylUvod(btnNovaHra);
     }
 
     @Override

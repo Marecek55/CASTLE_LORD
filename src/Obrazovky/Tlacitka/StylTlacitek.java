@@ -10,13 +10,6 @@ public class StylTlacitek extends JButton {
     public StylTlacitek(String text) {
         super(text);
 
-        setContentAreaFilled(false);
-        setBorderPainted(false);
-        setFocusPainted(false);
-
-        setBackground(Color.BLACK);
-        setForeground(Color.WHITE);
-        setFont(new Font("Georgia", Font.BOLD, 20));
     }
 
     @Override
@@ -50,7 +43,7 @@ public class StylTlacitek extends JButton {
             }
 
 
-            this.setText(null);
+
             this.setBorderPainted(false);
             this.setFocusPainted(false);
 
@@ -63,22 +56,5 @@ public class StylTlacitek extends JButton {
             System.out.println(  e.getMessage());
         }
     }
-//    public void nastavJakoObrazek(String cestaKObrazku, int sirka, int vyska) {
-//        java.net.URL url = getClass().getResource(cestaKObrazku);
-//        if (url != null) {
-//            ImageIcon originalIkona = new ImageIcon(url);
-//
-//
-//            Image zmensenyObrazek = originalIkona.getImage().getScaledInstance(sirka, vyska, java.awt.Image.SCALE_SMOOTH);
-//
-//            this.setIcon(new ImageIcon(zmensenyObrazek));
-//        } else {
-//            System.out.println("Obrázek tlačítka nenalezen: " + cestaKObrazku);
-//        }
-//
-//        this.setText(null);
-//        this.setContentAreaFilled(false);
-//        this.setBorderPainted(false);
-//        this.setFocusPainted(false);
-//    }
+
 }

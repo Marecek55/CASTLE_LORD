@@ -14,7 +14,6 @@ public class SoubojovaObrazovka extends Obrazovka {
     private PanelNaPozadi arenaPanel;
     private ArrayList<Postava> hracuvTym;
     private ArrayList<Postava> nepratelskyTym;
-    private ArrayList<LetajiciText> seznamLetajicichTextu;
     private Timer casovac;
     private int maxHPTymu;
     private int maxHPnepratelskehoTymu;
@@ -27,8 +26,11 @@ public class SoubojovaObrazovka extends Obrazovka {
 
     @Override
     public void inicializace() {
-        seznamLetajicichTextu = new ArrayList<>();
-        hracuvTym.add(TvorbaPostav.tvorbaHracovaBojovnika("Hrdina 1", 1));
+        hracuvTym.add(TvorbaPostav.tvorbaHracovaBojovnika("Hrdina 1", 1));//TODO
+        hracuvTym.add(TvorbaPostav.tvorbaHracovaBojovnika("Hrdina 2", 1));//TODO
+        hracuvTym.add(TvorbaPostav.tvorbaHracovaBojovnika("Hrdina 3", 1));//TODO
+        nepratelskyTym.add(TvorbaPostav.tvorbaGoblina(1));
+        nepratelskyTym.add(TvorbaPostav.tvorbaGoblina(1));
         nepratelskyTym.add(TvorbaPostav.tvorbaGoblina(1));
 
         maxHPTymu = 0;
@@ -40,51 +42,13 @@ public class SoubojovaObrazovka extends Obrazovka {
         }
 
         arenaPanel = new PanelBitvy("/Obrazky/PozadiBoje.png", this);
-        arenaPanel.setLayout(null);
         this.okno.add(arenaPanel);
 
         casovac = new Timer(30, e -> {
-            aktualizujAnimaceCisel();
             arenaPanel.repaint();
         });
         casovac.start();
         okno.setVisible(true);
-    }
-
-
-    public void kresleniZasahu(int poskozeni, boolean jeToHrac) {
-        int sirka = arenaPanel.getWidth();
-        int vyska = arenaPanel.getHeight();
-        int poziceX;
-        Color barvaTextu;
-
-        if (jeToHrac == true) {
-            poziceX = (int)(sirka * 0.25);
-            barvaTextu = Color.RED;
-        } else {
-            poziceX = (int)(sirka * 0.75);
-            barvaTextu = Color.GREEN;
-        }
-
-        int poziceY = (int)(vyska * 0.5);
-
-        String text = "-" + poskozeni + " HP";
-        LetajiciText letajici = new LetajiciText(poziceX, poziceY, text, barvaTextu);
-        seznamLetajicichTextu.add(letajici);
-    }
-
-    private void aktualizujAnimaceCisel() {
-        for (int i = 0; i < seznamLetajicichTextu.size(); i = i + 1) {
-            LetajiciText text = seznamLetajicichTextu.get(i);
-
-            text.poziceY = text.poziceY - 2;
-            text.zbyvajiciCasZobrazeni = text.zbyvajiciCasZobrazeni - 1;
-
-            if (text.zbyvajiciCasZobrazeni <= 0) {
-                seznamLetajicichTextu.remove(i);
-                i = i - 1;
-            }
-        }
     }
 
     public void vykresliPostavyATexty(Graphics g) {
@@ -104,8 +68,17 @@ public class SoubojovaObrazovka extends Obrazovka {
 
         int XHrdiny = (int)(sirkaMonitoru * 0.15);
         for (Postava bojovnik : hracuvTym) {
-            grafika.setColor(Color.BLACK);
-            grafika.fillRect(XHrdiny, YPostav, sirkaPostavy, vyskaPostavy);
+
+            if (bojovnik.isUtoci()) {
+                grafika.drawImage(bojovnik.getObrazekVUtoku(), XHrdiny, YPostav, sirkaPostavy, vyskaPostavy, null);
+            } else {
+                grafika.drawImage(bojovnik.getObrazekVKlidu(), XHrdiny, YPostav, sirkaPostavy, vyskaPostavy, null);
+            }
+            if (bojovnik.getPosledniZasah() != null){
+                grafika.setColor(Color.RED);
+                grafika.setFont(new Font("Arial", Font.BOLD, (int)(sirkaMonitoru * 0.015)));
+                grafika.drawString(bojovnik.getPosledniZasah(), XHrdiny, YPostav - 15);
+            }
 
             grafika.setColor(Color.WHITE);
             grafika.setFont(fontJmeno);
@@ -116,8 +89,17 @@ public class SoubojovaObrazovka extends Obrazovka {
 
         int XNepratel = sirkaMonitoru - (int)(sirkaMonitoru * 0.15) - sirkaPostavy;
         for (Postava nepritel : nepratelskyTym) {
-            grafika.setColor(Color.BLUE);
-            grafika.fillRect(XNepratel, YPostav, sirkaPostavy, vyskaPostavy);
+            if (nepritel.isUtoci()) {
+                grafika.drawImage(nepritel.getObrazekVUtoku(), XNepratel, YPostav, sirkaPostavy, vyskaPostavy, null);
+            } else {
+                grafika.drawImage(nepritel.getObrazekVKlidu(), XNepratel, YPostav, sirkaPostavy, vyskaPostavy, null);
+            }
+
+            if (nepritel.getPosledniZasah() != null){
+                grafika.setColor(Color.GREEN);
+                grafika.setFont(new Font("Arial", Font.BOLD, (int)(sirkaMonitoru * 0.015)));
+                grafika.drawString(nepritel.getPosledniZasah(), XNepratel, YPostav - 15);
+            }
 
             grafika.setColor(Color.WHITE);
             grafika.setFont(fontJmeno);
@@ -160,28 +142,13 @@ public class SoubojovaObrazovka extends Obrazovka {
         grafika.drawRect(nepritelBarX, barY, barSirka, barVyska);
         grafika.drawString(aktualniHPNepratelskyTymu + " / " + maxHPnepratelskehoTymu, nepritelBarX + 10, barY + barVyska - 10);
 
-        for (int j = 0; j < seznamLetajicichTextu.size(); j = j + 1) {
-            LetajiciText text = seznamLetajicichTextu.get(j);
-            float pruhlednost = text.zbyvajiciCasZobrazeni / 40.0f;
-
-            if (pruhlednost < 0) {
-                pruhlednost = 0;
-            }
-            if (pruhlednost > 1) {
-                pruhlednost = 1;
-            }
-
-            Color c = text.barvaTextu;
-            grafika.setColor(new Color(c.getRed(), c.getGreen(), c.getBlue(), (int)(pruhlednost * 255)));
-            grafika.setFont(new Font("Arial", Font.BOLD, (int)(sirkaMonitoru * 0.02)));
-            grafika.drawString(text.zobrazovanyText, text.poziceX, text.poziceY);
-        }
     }
 
     @Override
     public void funkcnost() {
         JButton tlacitkoStart = new JButton("ZAČÍT BITVU!");
-        tlacitkoStart.setBounds(10, 10, 300, 60);
+        tlacitkoStart.setLocation(10, 10);
+        tlacitkoStart.setSize(300,60);
 
         tlacitkoStart.setBackground(Color.YELLOW);
         tlacitkoStart.setOpaque(true);

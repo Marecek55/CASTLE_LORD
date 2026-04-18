@@ -22,14 +22,8 @@ public class Souboj {
 
         if (utokZa >0){
             branici.setZivoty(branici.getZivoty() - utokZa);
-            boolean jeToHrac;
-            if (tymHrace.contains(branici)) {
-                jeToHrac = true;
-            } else {
-                jeToHrac = false;
-            }
+            branici.setPosledniZasah("-" + utokZa + " HP");
 
-            obrazovka.kresleniZasahu(utokZa, jeToHrac);
         }
     }
     public void smrtPostavy(Postava obrana , ArrayList<Postava> tym){
@@ -38,7 +32,7 @@ public class Souboj {
         }
     }
     public void spousteniCasovace(Postava utocnik, ArrayList<Postava> jejiNepratele) {
-        int rychlost = 1000 + Hra.rand.nextInt(1500);
+        int rychlost = 1000 + Hra.rand.nextInt(500);
 
         Timer casovac = new Timer(rychlost, null);
         casovac.addActionListener(e -> {

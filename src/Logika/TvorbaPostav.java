@@ -7,8 +7,20 @@ import Predmety.Zbroj.Brneni;
 import Predmety.Zbroj.Medailon;
 
 public class TvorbaPostav {
-    public static Goblin tvorbaGoblina(int urovenStezky){
+    public static Goblin tvorbaGoblina(int urovenStezky ){
         Zbran z = Zbran.vytvoritZbran(urovenStezky,false, null);
+        String utociciObrazek = "";
+        String klidnyObrazek = "";
+        switch ( z.getNazev()){
+            case "Meč": utociciObrazek =  "/Obrazky/ObrazkyPostav/goblinMecUtok.png";
+                klidnyObrazek = "/Obrazky/ObrazkyPostav/goblinMecKlidny.png";
+                break;
+            case "Luk":  utociciObrazek =  "/Obrazky/ObrazkyPostav/goblinLukKlidny.png";
+                klidnyObrazek = "/Obrazky/ObrazkyPostav/goblinLukUtok.png";
+                break;
+            case "Magická Hůl":  utociciObrazek =  "/Obrazky/ObrazkyPostav/goblinMagKlidny.png";
+                klidnyObrazek = "/Obrazky/ObrazkyPostav/goblinMagUtok.png";
+        }
         Brneni b = null;
         if (urovenStezky>3){
              b = Brneni.vytvoritBrneni(urovenStezky,false, null);
@@ -17,15 +29,33 @@ public class TvorbaPostav {
         if (urovenStezky>6){
              m = Medailon.vytvoritMedailon(false,null);
         }
-        Goblin novyGoblin = new Goblin("Goblin", z,b,m, urovenStezky );
+        Goblin novyGoblin = new Goblin("Goblin", z,b,m, klidnyObrazek,utociciObrazek, urovenStezky );
         if (m!=null){
             m.vylepsitVlastnost(novyGoblin);
         }
         return novyGoblin;
     }
-    public static Bojovnik tvorbaHracovaBojovnika(String jmeno , int urovenHradu){
+     static String bojovnikMecKlidny = "/Obrazky/ObrazkyPostav/bojovnikMecKlidny.png";
+     static String bojovnikMecUtok = "/Obrazky/ObrazkyPostav/bojovnikMecUtok.png";
+     static String bojovnikLukUtok = "/Obrazky/ObrazkyPostav/bojovnikLukUtok.png";
+     static String bojovnikLukKlidny = "/Obrazky/ObrazkyPostav/bojovnikLukKlidny.png";
+     static String bojovnikMagKlidny = "/Obrazky/ObrazkyPostav/bojovnikMagKlidny.png";
+     static String bojovnikMagUtok = "/Obrazky/ObrazkyPostav/bojovnikMagUtok.png";
+    public  static Bojovnik tvorbaHracovaBojovnika(String jmeno , int urovenHradu){
         Zbran z = Zbran.vytvoritZbran(urovenHradu,false, null);
-        return new Bojovnik(jmeno, z, null, null, urovenHradu);
+        String utociciObrazek = "";
+        String klidnyObrazek = "";
+        switch ( z.getNazev()){
+            case "Meč": utociciObrazek =  bojovnikMecUtok;
+            klidnyObrazek = bojovnikMecKlidny;
+            break;
+            case "Luk":  utociciObrazek =  bojovnikLukUtok;
+                klidnyObrazek = bojovnikLukKlidny;
+            break;
+            case "Magická Hůl":  utociciObrazek =  bojovnikMagUtok;
+                klidnyObrazek = bojovnikMagKlidny;
+        }
+        return new Bojovnik(jmeno, z, null, null,klidnyObrazek, utociciObrazek, urovenHradu);
     }
     public static Bojovnik tvorbaProtihracovaBojovnika(String jmeno , int urovenHradu){
         Zbran z = Zbran.vytvoritZbran(urovenHradu,false, null);
@@ -39,7 +69,19 @@ public class TvorbaPostav {
         if (nahoda2<=5){
             m = Medailon.vytvoritMedailon(false, null);
         }
-        Bojovnik novyBojovnik = new Bojovnik(jmeno, z, b, m, urovenHradu);
+        String utociciObrazek = "";
+        String klidnyObrazek = "";
+        switch ( z.getNazev()){
+            case "Meč": utociciObrazek =  bojovnikMecUtok;
+                klidnyObrazek = bojovnikMecKlidny;
+                break;
+            case "Luk":  utociciObrazek =  bojovnikLukUtok;
+                klidnyObrazek = bojovnikLukKlidny;
+                break;
+            case "Magická Hůl":  utociciObrazek =  bojovnikMagUtok;
+                klidnyObrazek = bojovnikMagKlidny;
+        }
+        Bojovnik novyBojovnik = new Bojovnik(jmeno, z, b, m,klidnyObrazek, utociciObrazek, urovenHradu);
 
 
         if (m != null) {

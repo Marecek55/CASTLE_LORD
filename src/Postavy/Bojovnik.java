@@ -8,22 +8,25 @@ public class Bojovnik extends Postava{
     private int maxZivoty;
     private int pocetTreninku;
     private int bonusZTreninku;
-    public Bojovnik(String jmeno, Zbran zbran, Brneni brneni, Medailon medailon, int uroven) {
-        super(jmeno, zbran, brneni, medailon);
+
+
+    public Bojovnik(String jmeno, Zbran zbran, Brneni brneni, Medailon medailon, String nazevObrazkuVKlidu, String nazevObrazkuVUtoku , int uroven) {
+        super(jmeno, zbran, brneni, medailon, nazevObrazkuVKlidu, nazevObrazkuVUtoku);
         this.zivoty = uroven*100;
         this.maxZivoty = uroven*100;
-
     }
 
 
     @Override
     public int utok() {
+        setUtoci(true);
         return zbran.zautoc() + bonusZTreninku ;
 
     }
 
     @Override
     public int obrana(int utok) {
+        setUtoci(false);
         if (brneni != null) {
             return brneni.kryt(utok);
         } else {

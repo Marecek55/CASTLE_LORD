@@ -34,10 +34,10 @@ public class PanelNaPozadi extends JPanel {
         }
     }
 
-    private Image nactiObrazek(String obrazek) {
+    public Image nactiObrazek(String obrazek) {
         URL url = getClass().getResource(obrazek);
         if (url == null) {
-            System.out.println(obrazek + " nenalezen.");
+            System.out.println(obrazek + " nejde najit.");
             return null;
         }
         return new ImageIcon(url).getImage();

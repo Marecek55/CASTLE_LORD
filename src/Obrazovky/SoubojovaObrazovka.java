@@ -41,7 +41,7 @@ public class SoubojovaObrazovka extends Obrazovka {
             maxHPnepratelskehoTymu = maxHPnepratelskehoTymu + postava.getZivoty();
         }
 
-        arenaPanel = new PanelBitvy("/Obrazky/PozadiBoje.png", this);
+        arenaPanel = new PanelBitvy("Obrazky/PozadiBoje.png", this);
         this.okno.add(arenaPanel);
 
         casovac = new Timer(30, e -> {
@@ -58,8 +58,8 @@ public class SoubojovaObrazovka extends Obrazovka {
         int sirkaMonitoru = arenaPanel.getWidth();
         int vyskaMonitoru = arenaPanel.getHeight();
 
-        int sirkaPostavy = (int)(sirkaMonitoru * 0.15);
-        int vyskaPostavy = sirkaPostavy;
+        int sirkaPostavy = (int)(sirkaMonitoru * 0.16);
+        int vyskaPostavy = (int)(vyskaMonitoru * 0.30);
         int barSirka = (int)(sirkaMonitoru * 0.30);
         int barVyska = (int)(vyskaMonitoru * 0.03);
 
@@ -95,7 +95,7 @@ public class SoubojovaObrazovka extends Obrazovka {
                 grafika.drawImage(nepritel.getObrazekVKlidu(), XNepratel, YPostav, sirkaPostavy, vyskaPostavy, null);
             }
 
-            if (nepritel.getPosledniZasah() != null){
+            if (nepritel.getPosledniZasah()!= null){
                 grafika.setColor(Color.GREEN);
                 grafika.setFont(new Font("Arial", Font.BOLD, (int)(sirkaMonitoru * 0.015)));
                 grafika.drawString(nepritel.getPosledniZasah(), XNepratel, YPostav - 15);
@@ -124,7 +124,7 @@ public class SoubojovaObrazovka extends Obrazovka {
 
         grafika.setColor(new Color(50, 50, 50));
         grafika.fillRect(hracBarX, barY, barSirka, barVyska);
-        grafika.setColor(new Color(0, 200, 0));
+        grafika.setColor(Color.GREEN);
         grafika.fillRect(hracBarX, barY, (int)(barSirka * pomerZivotuHrac), barVyska);
         grafika.setColor(Color.WHITE);
         grafika.drawRect(hracBarX, barY, barSirka, barVyska);
@@ -136,7 +136,7 @@ public class SoubojovaObrazovka extends Obrazovka {
 
         grafika.setColor(new Color(50, 50, 50));
         grafika.fillRect(nepritelBarX, barY, barSirka, barVyska);
-        grafika.setColor(new Color(200, 0, 0));
+        grafika.setColor(Color.RED);
         grafika.fillRect(nepritelBarX, barY, (int)(barSirka * pomerZivotuNepritel), barVyska);
         grafika.setColor(Color.WHITE);
         grafika.drawRect(nepritelBarX, barY, barSirka, barVyska);

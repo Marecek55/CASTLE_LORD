@@ -41,9 +41,8 @@ public class SoubojovaObrazovka extends Obrazovka {
             maxHPnepratelskehoTymu = maxHPnepratelskehoTymu + postava.getZivoty();
         }
 
-        arenaPanel = new PanelBitvy("Obrazky/PozadiBoje.png", this);
+        arenaPanel = new PanelBitvy("/Obrazky/PozadiBoje.png", this);
         this.okno.add(arenaPanel);
-
         casovac = new Timer(30, e -> {
             arenaPanel.repaint();
         });
@@ -58,15 +57,16 @@ public class SoubojovaObrazovka extends Obrazovka {
         int sirkaMonitoru = arenaPanel.getWidth();
         int vyskaMonitoru = arenaPanel.getHeight();
 
-        int sirkaPostavy = (int)(sirkaMonitoru * 0.16);
+        int sirkaPostavy = (int)(sirkaMonitoru * 0.15);
         int vyskaPostavy = (int)(vyskaMonitoru * 0.30);
         int barSirka = (int)(sirkaMonitoru * 0.30);
-        int barVyska = (int)(vyskaMonitoru * 0.03);
+        int barVyska = (int)(vyskaMonitoru * 0.04);
 
         Font fontJmeno = new Font("Arial", Font.BOLD, (int)(sirkaMonitoru * 0.012));
         int YPostav = (int)(vyskaMonitoru * 0.35);
 
-        int XHrdiny = (int)(sirkaMonitoru * 0.15);
+        int XHrdiny = (sirkaMonitoru / 2) - sirkaPostavy - (int)(sirkaMonitoru * 0.02);
+
         for (Postava bojovnik : hracuvTym) {
 
             if (bojovnik.isUtoci()) {
@@ -84,10 +84,13 @@ public class SoubojovaObrazovka extends Obrazovka {
             grafika.setFont(fontJmeno);
             grafika.drawString(bojovnik.getJmeno(), XHrdiny, YPostav + vyskaPostavy + 30);
 
-            XHrdiny = XHrdiny + sirkaPostavy + (int)(sirkaMonitoru * 0.05);
+
+            XHrdiny = XHrdiny - sirkaPostavy - (int)(sirkaMonitoru * 0.01);
         }
 
-        int XNepratel = sirkaMonitoru - (int)(sirkaMonitoru * 0.15) - sirkaPostavy;
+
+        int XNepratel = (sirkaMonitoru / 2) + (int)(sirkaMonitoru * 0.02);
+
         for (Postava nepritel : nepratelskyTym) {
             if (nepritel.isUtoci()) {
                 grafika.drawImage(nepritel.getObrazekVUtoku(), XNepratel, YPostav, sirkaPostavy, vyskaPostavy, null);
@@ -105,7 +108,8 @@ public class SoubojovaObrazovka extends Obrazovka {
             grafika.setFont(fontJmeno);
             grafika.drawString(nepritel.getJmeno(), XNepratel, YPostav + vyskaPostavy + 30);
 
-            XNepratel = XNepratel - (sirkaPostavy + (int)(sirkaMonitoru * 0.05));
+
+            XNepratel = XNepratel + sirkaPostavy + (int)(sirkaMonitoru * 0.01);
         }
 
         int aktualniHPTymu = 0;
@@ -146,7 +150,7 @@ public class SoubojovaObrazovka extends Obrazovka {
 
     @Override
     public void funkcnost() {
-        JButton tlacitkoStart = new JButton("ZAČÍT BITVU!");
+        JButton tlacitkoStart = new JButton("START!");
         tlacitkoStart.setLocation(10, 10);
         tlacitkoStart.setSize(300,60);
 

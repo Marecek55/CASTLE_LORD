@@ -13,6 +13,7 @@ public class PanelNaPozadi extends JPanel {
         setLayout(new BorderLayout());
         setBackground(Color.BLACK);
         bg = nactiObrazek(nazevObrazku);
+
     }
 
 
@@ -40,6 +41,7 @@ public class PanelNaPozadi extends JPanel {
             System.out.println(obrazek + " nejde najit.");
             return null;
         }
+
         return new ImageIcon(url).getImage();
     }
 }

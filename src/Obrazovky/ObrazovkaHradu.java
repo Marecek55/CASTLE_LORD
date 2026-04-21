@@ -11,9 +11,9 @@ public class ObrazovkaHradu extends Obrazovka{
     private PanelNaPozadi panelHradu;
     private StylTlacitek btnKasarna;
     private StylTlacitek btnStavba;
-    public ObrazovkaHradu(String nazev, boolean malaObrazovka, Hrad hrad) {
+    public ObrazovkaHradu(String nazev, boolean malaObrazovka) {
         super(nazev, malaObrazovka);
-        this.hrad = hrad;
+
         btnKasarna = new StylTlacitek("Kasárna");
         btnStavba = new StylTlacitek("Stavba");
         btnKasarna.nastavJakoObrazek("/Obrazky/ObrazkyVHradu/Barracks.png", 400, 225);

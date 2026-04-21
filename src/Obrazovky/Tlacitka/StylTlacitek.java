@@ -24,12 +24,12 @@ public class StylTlacitek extends JButton {
         super.paintComponent(g);
     }
 
-    public static void zmenitStylUvod(JButton b) {
-        b.setBackground(Color.BLACK);
-        b.setForeground(Color.WHITE);
-        b.setFont(new Font("Georgia", Font.BOLD, 20));
-        b.setFocusPainted(false);
+    public static void zmenitNaNeviditelneTlacitko(JButton b) {
+        b.setOpaque(false);
+        b.setContentAreaFilled(false);
         b.setBorderPainted(false);
+        b.setFocusPainted(false);
+        b.setText(null);
     }
     public void nastavJakoObrazek(String cestaKObrazku, int sirka, int vyska) {
         try {

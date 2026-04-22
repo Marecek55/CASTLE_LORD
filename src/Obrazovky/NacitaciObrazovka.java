@@ -3,7 +3,6 @@ package Obrazovky;
 import Logika.Hra;
 import Obrazovky.Tlacitka.StylTlacitek;
 import javax.swing.*;
-import java.awt.*;
 
 public class NacitaciObrazovka extends Obrazovka {
 
@@ -16,7 +15,7 @@ public class NacitaciObrazovka extends Obrazovka {
 
     public NacitaciObrazovka(String nazev) {
         super(nazev, false);
-        nacitaciPanel = new PanelNaPozadi("/Obrazky/pozadiNacitaciObrazovky.png");
+        nacitaciPanel = new PanelNaPozadi("/Obrazky/ObrazkyNaNacitaciObrazovce/pozadiNacitaciObrazovky.png");
 
     }
     int vyska = Hra.vyskaObrazovky;
@@ -47,8 +46,9 @@ public class NacitaciObrazovka extends Obrazovka {
 
         btnStart.addActionListener(e -> {
 
-            this.okno.dispose();
+
             new ObrazovkaHradu("Hrad", false).inicializace();
+            this.okno.dispose();
 
 
         });

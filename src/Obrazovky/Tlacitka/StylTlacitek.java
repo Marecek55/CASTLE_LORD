@@ -41,13 +41,8 @@ public class StylTlacitek extends JButton {
             } else {
                 System.out.println(cestaKObrazku);
             }
-
-
-
             this.setBorderPainted(false);
             this.setFocusPainted(false);
-
-
             this.setContentAreaFilled(false);
             this.setOpaque(false);
             this.setPreferredSize(new java.awt.Dimension(sirka, vyska));

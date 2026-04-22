@@ -24,11 +24,6 @@ public class ObrazovkaHradu extends Obrazovka{
     public void inicializace() {
         panelHradu = new PanelNaPozadi("/Obrazky/ObrazkyVHradu/PozadiHradu.png");
         panelHradu.setLayout(new BorderLayout());
-        JLabel nadpis = new JLabel("Vítej ve svém novém hradě", SwingConstants.CENTER);
-        nadpis.setFont(new Font("Georgia", Font.BOLD, 40));
-        nadpis.setForeground(Color.WHITE);
-        panelHradu.add(nadpis, BorderLayout.NORTH);
-
         JPanel stredovyPanel = new JPanel(new GridBagLayout());
         stredovyPanel.setOpaque(false);
         stredovyPanel.add(btnKasarna);

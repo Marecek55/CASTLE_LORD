@@ -15,10 +15,9 @@ public class NacitaciObrazovka extends Obrazovka {
 
     public NacitaciObrazovka(String nazev) {
         super(nazev, false);
-        btnHrat = new JButton("");
-        btnNastaveni = new JButton("");
-
-
+        btnHrat = new JButton();
+        btnNastaveni = new JButton();
+        btnKonec = new JButton();
     }
     int vyska = Hra.vyskaObrazovky;
     int sirka = Hra.sirkaObrazovky;
@@ -26,16 +25,22 @@ public class NacitaciObrazovka extends Obrazovka {
     @Override
     public void inicializace() {
         nacitaciPanel = new PanelNaPozadi("/Obrazky/ObrazkyNaNacitaciObrazovce/pozadiNacitaciObrazovky.png");
-        btnNastaveni.setBounds(40,100,100,100);
+        int sirkaTlacitek = (int) (sirka*0.2);
+        int vyskaTlacitek  = (int) (sirkaTlacitek* (368.0 / 679.0));
+        StylTlacitek.nastavJakoObrazek(btnHrat, "/Obrazky/ObrazkyNaNacitaciObrazovce/tlacitkoHrat.png", sirkaTlacitek,vyskaTlacitek);
+        StylTlacitek.nastavJakoObrazek(btnNastaveni, "/Obrazky/ObrazkyNaNacitaciObrazovce/tlacitkoNastaveni.png", sirkaTlacitek,vyskaTlacitek);
+        StylTlacitek.nastavJakoObrazek(btnKonec, "/Obrazky/ObrazkyNaNacitaciObrazovce/tlacitkoKonec.png", sirkaTlacitek,vyskaTlacitek);
+        int xTlacitek = sirka/2 - sirkaTlacitek/2;
+
+        btnHrat.setLocation(xTlacitek, (int) (vyska*0.5));
+        btnNastaveni.setLocation(xTlacitek, (int) (vyska*0.65));
+        btnKonec.setLocation(xTlacitek, (int) (vyska*0.80));
         nacitaciPanel.setLayout(null);
-
         nacitaciPanel.add(btnNastaveni);
-
-
+        nacitaciPanel.add(btnHrat);
+        nacitaciPanel.add(btnKonec);
         this.okno.setContentPane(nacitaciPanel);
-
         funkcnost();
-
         this.okno.setVisible(true);
     }
 
@@ -58,8 +63,8 @@ public class NacitaciObrazovka extends Obrazovka {
         });
 
 
-//        btnKonec.addActionListener(e -> {
-//            this.okno.dispose();
-//        });
+        btnKonec.addActionListener(e -> {
+            this.okno.dispose();
+        });
     }
 }

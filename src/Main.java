@@ -6,13 +6,13 @@ import Obrazovky.SoubojovaObrazovka;
 
 public class Main {
     public static void main(String[] args) {
-//        SoubojovaObrazovka arena = new SoubojovaObrazovka("Bitva", false);
-//        arena.inicializace();
-//        arena.funkcnost();
-          NacitaciObrazovka n = new NacitaciObrazovka("");
-          n.inicializace();
+        SoubojovaObrazovka arena = new SoubojovaObrazovka("Bitva", false);
+        arena.inicializace();
+        arena.funkcnost();
+//          NacitaciObrazovka n = new NacitaciObrazovka("");
+//          n.inicializace();
 
-//        ObrazovkaHradu h = new ObrazovkaHradu("hrad", false, new Hrad());
+//        ObrazovkaHradu h = new ObrazovkaHradu("hrad", false);
 //        h.inicializace();
 
 

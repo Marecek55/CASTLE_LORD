@@ -63,7 +63,7 @@ public class SoubojovaObrazovka extends Obrazovka {
         int barVyska = (int)(vyskaMonitoru * 0.04);
 
         Font fontJmeno = new Font("Arial", Font.BOLD, (int)(sirkaMonitoru * 0.012));
-        int YPostav = (int)(vyskaMonitoru * 0.35);
+        int YPostav = (int)(vyskaMonitoru * 0.45);
 
         int XHrdiny = (sirkaMonitoru / 2) - sirkaPostavy - (int)(sirkaMonitoru * 0.02);
 
@@ -124,7 +124,7 @@ public class SoubojovaObrazovka extends Obrazovka {
 
         float pomerZivotuHrac = (float)aktualniHPTymu / maxHPTymu;
         int hracBarX = (int)(sirkaMonitoru * 0.1);
-        int barY = (int)(vyskaMonitoru * 0.1);
+        int barY = (int)(vyskaMonitoru * 0.2);
 
         grafika.setColor(new Color(50, 50, 50));
         grafika.fillRect(hracBarX, barY, barSirka, barVyska);

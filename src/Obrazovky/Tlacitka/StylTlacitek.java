@@ -1,5 +1,6 @@
 package Obrazovky.Tlacitka;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
@@ -31,25 +32,28 @@ public class StylTlacitek extends JButton {
         b.setFocusPainted(false);
         b.setText(null);
     }
-    public void nastavJakoObrazek(String cestaKObrazku, int sirka, int vyska) {
+    public static void nastavJakoObrazek(JButton tlacitko, String cesta, int sirka, int vyska) {
         try {
-            java.net.URL url = getClass().getResource(cestaKObrazku);
+            URL url = StylTlacitek.class.getResource(cesta);
             if (url != null) {
-                java.awt.Image original = javax.imageio.ImageIO.read(url);
-                java.awt.Image zmensenyObrazek = original.getScaledInstance(sirka, vyska, java.awt.Image.SCALE_SMOOTH);
-                this.setIcon(new javax.swing.ImageIcon(zmensenyObrazek));
+                Image original = ImageIO.read(url);
+                Image zmenseny = original.getScaledInstance(sirka, vyska, Image.SCALE_SMOOTH);
+                tlacitko.setIcon(new ImageIcon(zmenseny));
             } else {
-                System.out.println(cestaKObrazku);
+                System.err.println("Chyba: Obrázek nenalezen: " + cesta);
             }
-            this.setBorderPainted(false);
-            this.setFocusPainted(false);
-            this.setContentAreaFilled(false);
-            this.setOpaque(false);
-            this.setPreferredSize(new java.awt.Dimension(sirka, vyska));
+            tlacitko.setContentAreaFilled(false);
+            tlacitko.setBorderPainted(false);
+            tlacitko.setFocusPainted(false);
+            tlacitko.setOpaque(false);
+            tlacitko.setBorder(null);
+            tlacitko.setText(null);
+
+            tlacitko.setPreferredSize(new Dimension(sirka, vyska));
+            tlacitko.setSize(sirka, vyska);
 
         } catch (Exception e) {
-            System.out.println(  e.getMessage());
+            e.printStackTrace();
         }
     }
-
 }

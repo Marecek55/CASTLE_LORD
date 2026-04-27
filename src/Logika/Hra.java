@@ -6,6 +6,7 @@ public class Hra {
     public static  Random rand = new Random();
     public static int vyskaObrazovky = Toolkit.getDefaultToolkit().getScreenSize().height;
     public static int sirkaObrazovky = Toolkit.getDefaultToolkit().getScreenSize().width;
+    public static Hudba hudbaPozadi;
 
     public Hra() {
     }

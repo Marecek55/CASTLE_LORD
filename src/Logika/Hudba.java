@@ -19,7 +19,10 @@ public class Hudba {
         }
     }
     public boolean hraje() {
-        return clip != null && clip.isRunning();
+        if (clip!= null && clip.isRunning()){
+            return true;
+        }
+        return false;
     }
 
     public void hraj(boolean dokola) {

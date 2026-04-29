@@ -41,7 +41,7 @@ public class StylTlacitek extends JButton {
                 Image zmenseny = original.getScaledInstance(sirka, vyska, Image.SCALE_SMOOTH);
                 tlacitko.setIcon(new ImageIcon(zmenseny));
             } else {
-                System.err.println("Chyba: Obrázek nenalezen: " + cesta);
+                System.err.println("Chyba" + cesta);
             }
             tlacitko.setContentAreaFilled(false);
             tlacitko.setBorderPainted(false);

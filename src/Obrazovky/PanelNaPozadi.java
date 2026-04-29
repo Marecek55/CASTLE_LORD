@@ -7,6 +7,9 @@ import java.net.URL;
 public class PanelNaPozadi extends JPanel {
 
     protected Image bg;
+    public int x = 0;
+    public int y = 0;
+    private boolean pohyblivePozadi = false;
 
 
     public PanelNaPozadi(String nazevObrazku) {
@@ -23,6 +26,10 @@ public class PanelNaPozadi extends JPanel {
         bg = null;
     }
 
+    public void setPohyblivePozadi(boolean pohyblivePozadi) {
+        this.pohyblivePozadi = pohyblivePozadi;
+    }
+
     public Image getImage() {
         return bg;
     }
@@ -31,7 +38,11 @@ public class PanelNaPozadi extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (bg != null) {
-            g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+            if (pohyblivePozadi) {
+                g.drawImage(bg, x, y, this);
+            } else {
+                g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+            }
         }
     }
 

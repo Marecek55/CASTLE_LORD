@@ -4,8 +4,9 @@ import javax.sound.sampled.*;
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 
-public class Hudba {
+public class Hudba implements Runnable {
     private Clip clip;
+    private boolean dokola;
 
     public Hudba(String cesta) {
         try {
@@ -14,30 +15,38 @@ public class Hudba {
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
             clip = AudioSystem.getClip();
             clip.open(audioStream);
+
+            audioStream.close();
+            bufferedIn.close();
         } catch (Exception e) {
-            System.err.println("Chyba"+ e.getMessage());
+            System.out.println("Chyba" + e.getMessage());
         }
     }
+
     public boolean hraje() {
-        if (clip!= null && clip.isRunning()){
-            return true;
-        }
-        return false;
+        return clip != null && clip.isRunning();
     }
 
     public void hraj(boolean dokola) {
         if (clip != null) {
-            new Thread(() -> {
-                if (clip.isRunning()) {
-                    clip.stop();
-                }
-                clip.setFramePosition(0);
-                if (dokola) {
-                    clip.loop(Clip.LOOP_CONTINUOUSLY);
-                }
-                clip.start();
-            }).start();
+            this.dokola = dokola;
+            Thread vlakno = new Thread(this);
+            vlakno.start();
         }
+    }
+
+    @Override
+    public void run() {
+        if (clip.isRunning()) {
+            clip.stop();
+        }
+        clip.setFramePosition(0);
+
+        if (this.dokola) {
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        }
+
+        clip.start();
     }
 
     public void zastav() {

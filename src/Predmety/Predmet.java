@@ -7,3 +7,4 @@ public abstract class Predmet {
         this.nazev = nazev;
     }
 }
+

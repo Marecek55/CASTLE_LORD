@@ -1,5 +1,7 @@
 package Obrazovky;
 
+import Obrazovky.Tlacitka.StylTlacitek;
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -11,7 +13,7 @@ public class ObrazovkaHradu extends Obrazovka {
 
     public ObrazovkaHradu(String nazev, boolean malaObrazovka) {
         super(nazev, malaObrazovka);
-        kasarna = new JButton("Kasarna");
+        kasarna = new JButton();
         inicializace();
         funkcnost();
         okno.setVisible(true);
@@ -20,8 +22,8 @@ public class ObrazovkaHradu extends Obrazovka {
     @Override
     public void inicializace() {
         panelHradu = new PanelPohyblivehoPozadi("/Obrazky/ObrazkyVHradu/PozadiHradu.png");
-
-        kasarna.setBounds(500, 300, 150, 50);
+        StylTlacitek.nastavJakoObrazek(kasarna, "/Obrazky/ObrazkyVHradu/kasarnaMistnost.png", 1495,497);
+        kasarna.setLocation(792,1120);
         kasarna.setFocusable(false);
         panelHradu.add(kasarna);
 

@@ -44,10 +44,11 @@ public class ObrazovkaHradu extends Obrazovka {
         okno.setContentPane(panelHradu);
         hrad = new Hrad(panelHradu, kasarna);
         hrad.nacteniLokaci();
-        hrad.postavitMistnost(TypMistnosti.LEKARNA, 5, lekarna);
-        hrad.postavitMistnost(TypMistnosti.SKLAD_JIDLA, 3, skladJidla);
-        hrad.postavitMistnost(TypMistnosti.SKLAD_PENEZ, 12, skladPenez);
-        hrad.postavitMistnost(TypMistnosti.TRENINKOVA_HALA, 17, trenink);
+        hrad.postavitMistnost(TypMistnosti.LEKARNA, 1, lekarna);
+        hrad.postavitMistnost(TypMistnosti.SKLAD_JIDLA, 14, skladJidla);
+        hrad.postavitMistnost(TypMistnosti.SKLAD_PENEZ, 10, skladPenez);
+        hrad.postavitMistnost(TypMistnosti.TRENINKOVA_HALA, 9, trenink);
+
 
 
     }

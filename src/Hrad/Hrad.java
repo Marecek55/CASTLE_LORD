@@ -31,24 +31,24 @@ public class Hrad {
     }
     HashMap<Integer, Integer[]> lokaceMistnosti;
     public void nacteniLokaci(){
-        lokaceMistnosti.put(1,new Integer[]{791, 617});
-        lokaceMistnosti.put(2,new Integer[]{1536, 617});
-        lokaceMistnosti.put(3,new Integer[]{2295, 617});
-        lokaceMistnosti.put(4,new Integer[]{3058, 617});
-        lokaceMistnosti.put(5,new Integer[]{3816, 617});
-        lokaceMistnosti.put(6,new Integer[]{2295, 1121});
-        lokaceMistnosti.put(7,new Integer[]{3059, 1121});
-        lokaceMistnosti.put(8,new Integer[]{3816, 1121});
-        lokaceMistnosti.put(9,new Integer[]{791, 1625});
-        lokaceMistnosti.put(10,new Integer[]{1536, 1625});
-        lokaceMistnosti.put(11,new Integer[]{2295, 1625});
-        lokaceMistnosti.put(12,new Integer[]{3058, 1625});
-        lokaceMistnosti.put(13,new Integer[]{3816, 1625});
-        lokaceMistnosti.put(14,new Integer[]{791, 2149});
-        lokaceMistnosti.put(15,new Integer[]{1536, 2149});
-        lokaceMistnosti.put(16,new Integer[]{2295, 2149});
-        lokaceMistnosti.put(17,new Integer[]{3058, 2149});
-        lokaceMistnosti.put(18,new Integer[]{3816, 2149});
+        lokaceMistnosti.put(1,new Integer[]{787, 616});
+        lokaceMistnosti.put(2,new Integer[]{1537, 616});
+        lokaceMistnosti.put(3,new Integer[]{2287, 616});
+        lokaceMistnosti.put(4,new Integer[]{3037, 616});
+        lokaceMistnosti.put(5,new Integer[]{3787, 616});
+        lokaceMistnosti.put(6,new Integer[]{2287, 1114});
+        lokaceMistnosti.put(7,new Integer[]{3037, 1114});
+        lokaceMistnosti.put(8,new Integer[]{3787, 1114});
+        lokaceMistnosti.put(9,new Integer[]{787, 1612});
+        lokaceMistnosti.put(10,new Integer[]{1537, 1612});
+        lokaceMistnosti.put(11,new Integer[]{2287, 1612});
+        lokaceMistnosti.put(12,new Integer[]{3037, 1612});
+        lokaceMistnosti.put(13,new Integer[]{3787, 1612});
+        lokaceMistnosti.put(14,new Integer[]{787, 2110});
+        lokaceMistnosti.put(15,new Integer[]{1537, 2110});
+        lokaceMistnosti.put(16,new Integer[]{2287, 2110});
+        lokaceMistnosti.put(17,new Integer[]{3037, 2110});
+        lokaceMistnosti.put(18,new Integer[]{3787, 2110});
     }
     public void postavitMistnost(TypMistnosti typ, int pozice, JButton b) {
         try {
@@ -57,25 +57,25 @@ public class Hrad {
                 case LEKARNA:
                     if (lekarna == null){
                         lekarna = new Lekarna("Lékárna", 200, 100, 1, 1);
-                        StylTlacitek.nastavJakoObrazek(b,"/Obrazky/ObrazkyVHradu/lekarnaMistnost.png", 737,495);
+                        StylTlacitek.nastavJakoObrazek(b,"/Obrazky/ObrazkyVHradu/lekarnaMistnost.png", 747,498);
                         break;
                     }
                 case TRENINKOVA_HALA:
                     if (treninkovaHala == null){
                         treninkovaHala = new TreninkovaHala("Tréninková hala", 300, 200, 1, 1);
-                        StylTlacitek.nastavJakoObrazek(b,"/Obrazky/ObrazkyVHradu/treninkovaMistnost.png", 737,495);
+                        StylTlacitek.nastavJakoObrazek(b,"/Obrazky/ObrazkyVHradu/treninkovaMistnost.png", 747,498);
                         break;
                     }
                 case SKLAD_PENEZ:
                     if (skladPenez == null){
                         skladPenez = new SkladPenez("Sklad Peněz", 200, 300, 1, 1);
-                        StylTlacitek.nastavJakoObrazek(b,"/Obrazky/ObrazkyVHradu/skladPenez.png", 737,495);
+                        StylTlacitek.nastavJakoObrazek(b,"/Obrazky/ObrazkyVHradu/skladPenez.png", 747,498);
                         break;
                     }
                 case SKLAD_JIDLA:
                     if (skladJidla == null){
                         skladJidla = new SkladJidla("Sklad Jídla", 150, 200, 1, 1);
-                        StylTlacitek.nastavJakoObrazek(b,"/Obrazky/ObrazkyVHradu/skladJidla.png", 737,495);
+                        StylTlacitek.nastavJakoObrazek(b,"/Obrazky/ObrazkyVHradu/skladJidla.png", 747,498);
                         break;
                     }
 

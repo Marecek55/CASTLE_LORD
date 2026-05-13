@@ -11,14 +11,14 @@ public class Main {
 //        SoubojovaObrazovka arena = new SoubojovaObrazovka("Bitva", false);
 //        arena.inicializace();
 //        arena.funkcnost();
-    //          StartovaciObrazovka n = new StartovaciObrazovka("");
-    //          n.inicializace();
-    //          hudbaPozadi = new Hudba("/Hudba/HudbaPozadi.wav");
-    //         Hra.hudbaPozadi.hraj(true);
+              StartovaciObrazovka n = new StartovaciObrazovka("");
+              n.inicializace();
+              hudbaPozadi = new Hudba("/Hudba/HudbaPozadi.wav");
+             Hra.hudbaPozadi.hraj(true);
 //
 //        ObrazovkaMapy o = new ObrazovkaMapy("mapa", false);
 //        o.inicializace();
-        ObrazovkaHradu h = new ObrazovkaHradu("hrad", false);
+//        ObrazovkaHradu h = new ObrazovkaHradu("hrad", false);
 
 
 

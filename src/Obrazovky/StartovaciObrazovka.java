@@ -49,7 +49,7 @@ public class StartovaciObrazovka extends Obrazovka {
         btnHrat.addActionListener(e -> {
 
 
-            new ObrazovkaHradu("Hrad", false).inicializace();
+            new ObrazovkaHradu("Hrad", false);
             this.okno.dispose();
 
 

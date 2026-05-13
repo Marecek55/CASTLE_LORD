@@ -1,6 +1,8 @@
 package Obrazovky;
 
-import Obrazovky.Tlacitka.StylTlacitek;
+import Hrad.Hrad;
+import Hrad.TypMistnosti;
+import Predmety.Penize;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -8,26 +10,46 @@ import java.awt.event.*;
 public class ObrazovkaHradu extends Obrazovka {
     private PanelPohyblivehoPozadi panelHradu;
     private JButton kasarna;
+    private JButton lekarna;
+    private JButton trenink;
+    private JButton skladPenez;
+    private JButton skladJidla;
     private int xMysStart;
     private int yMysStart;
+    private Hrad hrad;
+
 
     public ObrazovkaHradu(String nazev, boolean malaObrazovka) {
         super(nazev, malaObrazovka);
         kasarna = new JButton();
+        lekarna = new JButton();
+        trenink = new JButton();
+        skladJidla = new JButton();
+        skladPenez = new JButton();
+        Penize p = new Penize("");
+        p.setPocet(1000000);
         inicializace();
         funkcnost();
+
         okno.setVisible(true);
+
+
+
     }
 
     @Override
     public void inicializace() {
-        panelHradu = new PanelPohyblivehoPozadi("/Obrazky/ObrazkyVHradu/PozadiHradu.png");
-        StylTlacitek.nastavJakoObrazek(kasarna, "/Obrazky/ObrazkyVHradu/kasarnaMistnost.png", 1495,497);
-        kasarna.setLocation(792,1120);
-        kasarna.setFocusable(false);
-        panelHradu.add(kasarna);
 
+        panelHradu = new PanelPohyblivehoPozadi("/Obrazky/ObrazkyVHradu/PozadiHradu.png");
         okno.setContentPane(panelHradu);
+        hrad = new Hrad(panelHradu, kasarna);
+        hrad.nacteniLokaci();
+        hrad.postavitMistnost(TypMistnosti.LEKARNA, 5, lekarna);
+        hrad.postavitMistnost(TypMistnosti.SKLAD_JIDLA, 3, skladJidla);
+        hrad.postavitMistnost(TypMistnosti.SKLAD_PENEZ, 12, skladPenez);
+        hrad.postavitMistnost(TypMistnosti.TRENINKOVA_HALA, 17, trenink);
+
+
     }
 
     @Override

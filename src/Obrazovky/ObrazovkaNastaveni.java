@@ -30,9 +30,10 @@ public class ObrazovkaNastaveni extends Obrazovka {
     int vyska = Hra.vyskaObrazovky;
     int sirka = Hra.sirkaObrazovky;
     int sirkaTlacitek = (int) (sirka * 0.2);
-    int sirkaTlacitek2 = (int) (sirka * 0.3);
-    int vyskaTlacitek = (int) (sirkaTlacitek * (368.0 / 679.0));
+    int sirkaTlacitek2 =  (int) (sirka * 0.3);
     int vyskaTlacitek2 = (int) (sirkaTlacitek2 * (331.0 / 754.0));
+    int vyskaTlacitek = (int) (sirkaTlacitek * (368.0 / 679.0));
+
     int yTlacitek = (int) (vyska * 0.7);
 
     @Override
@@ -42,8 +43,10 @@ public class ObrazovkaNastaveni extends Obrazovka {
 
         if (Hra.hudbaPozadi.hraje()) {
             cesta = "tlacitkoHudbaOn";
+
         } else {
             cesta = "tlacitkoHudbaOff";
+
         }
         StylTlacitek.nastavJakoObrazek(btnHudba, "/Obrazky/ObrazkyNaNacitaciObrazovce/" + cesta + ".png", sirkaTlacitek2, vyskaTlacitek2);
 

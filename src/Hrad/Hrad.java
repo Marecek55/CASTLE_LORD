@@ -21,8 +21,8 @@ public class Hrad {
         this.okno = okno;
         try {
             kasarna = new Kasarna("Kasárna", 0, 100, 1, 1);
-            StylTlacitek.nastavJakoObrazek(b,"/Obrazky/ObrazkyVHradu/kasarnaMistnost.png", 1495,497);
-            b.setLocation(792,1120);
+            StylTlacitek.nastavJakoObrazek(b,"/Obrazky/ObrazkyVHradu/kasarnaMistnost.png", 1494,498);
+            b.setLocation(787,1114);
             okno.add(b);
         } catch (Exception e) {
             System.out.println("Kasarna nejde vytvorit");

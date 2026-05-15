@@ -17,6 +17,10 @@ public class ObrazovkaHradu extends Obrazovka {
     private JButton skladPenez;
     private JButton skladJidla;
     private JButton stavbaTlacitko;
+    private JButton mapaTlacitko;
+    private JButton exitTlacitko;
+    private JButton truhlaTlacitko;
+    private JButton inventarTlacitko;
     private int xMysStart;
     private int yMysStart;
     private Hrad hrad;
@@ -29,7 +33,11 @@ public class ObrazovkaHradu extends Obrazovka {
         trenink = new JButton();
         skladJidla = new JButton();
         stavbaTlacitko = new JButton();
+        mapaTlacitko = new JButton();
         skladPenez = new JButton();
+        exitTlacitko = new JButton();
+        truhlaTlacitko = new JButton();
+        inventarTlacitko = new JButton();
         Penize p = new Penize("");
         p.setPocet(1000000);
         inicializace();
@@ -43,30 +51,14 @@ public class ObrazovkaHradu extends Obrazovka {
     int sirka = Hra.sirkaObrazovky;
     int vyska = Hra.vyskaObrazovky;
 
-//    @Override
-//    public void inicializace() {
-//        int sirkaTlacitek = (int) (sirka*0.8);
-//        int vyskaTlacitek = (int) (sirkaTlacitek * (263.0 / 948.0));
-//
-//        panelHradu = new PanelPohyblivehoPozadi("/Obrazky/ObrazkyVHradu/PozadiHradu.png");
-//        okno.setContentPane(panelHradu);
-//        hrad = new Hrad(panelHradu, kasarna);
-//        hrad.nacteniLokaci();
-//        StylTlacitek.nastavJakoObrazek(stavbaTlacitko,"/Obrazky/ObrazkyVHradu/stavbaTlacitko.png",sirkaTlacitek,vyskaTlacitek );
-//        stavbaTlacitko.setLocation((int) (sirka * 0.1), (int) (vyska*0.8));
-//        panelHradu.add(stavbaTlacitko);
-//        hrad.postavitMistnost(TypMistnosti.LEKARNA, 1, lekarna);
-//        hrad.postavitMistnost(TypMistnosti.SKLAD_JIDLA, 14, skladJidla);
-//        hrad.postavitMistnost(TypMistnosti.SKLAD_PENEZ, 10, skladPenez);
-//        hrad.postavitMistnost(TypMistnosti.TRENINKOVA_HALA, 9, trenink);
-//
-//
-//
-//    }
 @Override
 public void inicializace() {
     int sirkaTlacitek = (int) (sirka * 0.25);
     int vyskaTlacitek = (int) (sirkaTlacitek * (263.0 / 948.0));
+    int ctverec = (int) (sirka * 0.075);
+    int vzdalenostOdKraje = (int) (sirka * 0.009);
+    int yTlacitek1 = vyska - vyskaTlacitek - vzdalenostOdKraje;
+    int yTlacitek2 = yTlacitek1 - ctverec- vzdalenostOdKraje;
 
     panelHradu = new PanelPohyblivehoPozadi("/Obrazky/ObrazkyVHradu/PozadiHradu.png");
     okno.setContentPane(panelHradu);
@@ -74,13 +66,26 @@ public void inicializace() {
     hrad.nacteniLokaci();
 
     StylTlacitek.nastavJakoObrazek(stavbaTlacitko, "/Obrazky/ObrazkyVHradu/stavbaTlacitko.png", sirkaTlacitek, vyskaTlacitek);
-
+    StylTlacitek.nastavJakoObrazek(mapaTlacitko,"/Obrazky/ObrazkyVHradu/mapaTlacitko.png",sirkaTlacitek,vyskaTlacitek );
+    StylTlacitek.nastavJakoObrazek(exitTlacitko,"/Obrazky/ObrazkyVHradu/tlacitkoExit.png", ctverec, ctverec);
+    StylTlacitek.nastavJakoObrazek(truhlaTlacitko,"/Obrazky/ObrazkyVHradu/tlacitkoTruhly.png", ctverec, ctverec);
+    StylTlacitek.nastavJakoObrazek(inventarTlacitko,"/Obrazky/ObrazkyVHradu/tlacitkoInventar.png", ctverec, ctverec);
     stavbaTlacitko.setName("pevneTlacitka");
+    mapaTlacitko.setName("pevneTlacitka");
+    exitTlacitko.setName("pevneTlacitka");
+    truhlaTlacitko.setName("pevneTlacitka");
+    inventarTlacitko.setName("pevneTlacitka");
 
-    int poziceX = (int) (sirka * 0.009);
-    int poziceY = (int) (vyska * 0.85);
-    stavbaTlacitko.setLocation(poziceX, poziceY);
+    stavbaTlacitko.setLocation(vzdalenostOdKraje,yTlacitek1);
+    mapaTlacitko.setLocation((sirka -sirkaTlacitek- vzdalenostOdKraje), yTlacitek1);
+    exitTlacitko.setLocation((sirka - ctverec - vzdalenostOdKraje),vzdalenostOdKraje);
+    truhlaTlacitko.setLocation(vzdalenostOdKraje,yTlacitek2);
+    inventarTlacitko.setLocation(vzdalenostOdKraje,yTlacitek2- ctverec-vzdalenostOdKraje );
     panelHradu.add(stavbaTlacitko);
+    panelHradu.add(mapaTlacitko);
+    panelHradu.add(exitTlacitko);
+    panelHradu.add(truhlaTlacitko);
+    panelHradu.add(inventarTlacitko);
     hrad.postavitMistnost(TypMistnosti.LEKARNA, 1, lekarna);
     hrad.postavitMistnost(TypMistnosti.SKLAD_JIDLA, 14, skladJidla);
     hrad.postavitMistnost(TypMistnosti.SKLAD_PENEZ, 10, skladPenez);

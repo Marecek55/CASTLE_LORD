@@ -47,41 +47,37 @@ public class PanelPohyblivehoPozadi extends PanelNaPozadi {
 
         double minimalniSirka = (double) getWidth() / bg.getWidth(null);
         double minimalniVyska = (double) getHeight() / bg.getHeight(null);
-        double nejmensiMeritko;
+        double minimalniMeritko;
 
         if (minimalniSirka > minimalniVyska) {
-            nejmensiMeritko = minimalniSirka;
+            minimalniMeritko = minimalniSirka;
         } else {
-            nejmensiMeritko = minimalniVyska;
+            minimalniMeritko = minimalniVyska;
         }
 
-        if (meritko < nejmensiMeritko) {
-            meritko = nejmensiMeritko;
+        if (meritko < minimalniMeritko) {
+            meritko = minimalniMeritko;
         }
-        if (meritko > 3.0) {
-            meritko = 3.0;
+        if (meritko > 2.5) {
+            meritko = 2.5;
         }
-
         double procentoRozdilu = meritko / stareMeritko;
         int noveX = (int) (xMysi - (xMysi - xKamery) * procentoRozdilu);
         int noveY = (int) (yMysi - (yMysi - yKamery) * procentoRozdilu);
-
-        int sirkaPoPriblizeni = (int) (bg.getWidth(null) * meritko);
+        int sirkaPoPriblizeni =(int) (bg.getWidth(null) * meritko);
         int vyskaPoPriblizeni = (int) (bg.getHeight(null) * meritko);
 
         if (noveX > 0) {
             noveX = 0;
         }
         if (noveX < getWidth() - sirkaPoPriblizeni) {
-            noveX = getWidth() - sirkaPoPriblizeni;
-        }
+            noveX = getWidth() - sirkaPoPriblizeni;}
         if (noveY > 0) {
             noveY = 0;
         }
         if (noveY < getHeight() - vyskaPoPriblizeni) {
             noveY = getHeight() - vyskaPoPriblizeni;
         }
-
         xKamery = noveX;
         yKamery = noveY;
         repaint();
@@ -90,7 +86,6 @@ public class PanelPohyblivehoPozadi extends PanelNaPozadi {
     @Override
     protected void paintChildren(Graphics grafika) {
         Graphics2D grafika2D = (Graphics2D) grafika.create();
-
         for (Component component : getComponents()) {
             if (component.getName() == null || !component.getName().equals("pevneTlacitka")) {
                 Graphics2D grafikaSveta = (Graphics2D) grafika2D.create();
@@ -99,6 +94,8 @@ public class PanelPohyblivehoPozadi extends PanelNaPozadi {
                 grafikaSveta.translate(component.getX(), component.getY());
                 component.paint(grafikaSveta);
                 grafikaSveta.dispose();
+
+
             }
         }
 
@@ -107,10 +104,10 @@ public class PanelPohyblivehoPozadi extends PanelNaPozadi {
                 Graphics2D grafikaUI = (Graphics2D) grafika2D.create();
                 grafikaUI.translate(component.getX(), component.getY());
                 component.paint(grafikaUI);
+
                 grafikaUI.dispose();
             }
         }
-
         grafika2D.dispose();
     }
 
@@ -119,13 +116,16 @@ public class PanelPohyblivehoPozadi extends PanelNaPozadi {
         for (Component component : getComponents()) {
             if (component.getName() != null && component.getName().equals("pevneTlacitka")) {
                 if (component.getBounds().contains(x, y)) {
+
                     return component;
                 }
             }
         }
 
+
         int xMapy = (int) ((x - xKamery) / meritko);
-        int yMapy = (int) ((y - yKamery) / meritko);
+        int yMapy = (int)((y - yKamery) / meritko);
+
 
         for (Component component : getComponents()) {
             if (component.getName() == null || !component.getName().equals("pevneTlacitka")) {

@@ -85,30 +85,37 @@ public class PanelPohyblivehoPozadi extends PanelNaPozadi {
 
     @Override
     protected void paintChildren(Graphics grafika) {
-        Graphics2D grafika2D = (Graphics2D) grafika.create();
-        for (Component component : getComponents()) {
-            if (component.getName() == null || !component.getName().equals("pevneTlacitka")) {
-                Graphics2D grafikaSveta = (Graphics2D) grafika2D.create();
-                grafikaSveta.translate(xKamery, yKamery);
-                grafikaSveta.scale(meritko, meritko);
-                grafikaSveta.translate(component.getX(), component.getY());
-                component.paint(grafikaSveta);
-                grafikaSveta.dispose();
-
-
+        Graphics2D platno = (Graphics2D) grafika.create();
+        for (Component budova : getComponents()) {
+            if (budova.getName()==null || !budova.getName().equals("pevneTlacitka") && !budova.getName().equals("pevneTlacitkaText")) {
+                Graphics2D gSveta = (Graphics2D) platno.create();
+                gSveta.translate(xKamery, yKamery);
+                gSveta.scale(meritko, meritko);
+                gSveta.translate(budova.getX(), budova.getY());
+                budova.paint(gSveta);
+                gSveta.dispose();
             }
         }
 
-        for (Component component : getComponents()) {
-            if (component.getName() != null && component.getName().equals("pevneTlacitka")) {
-                Graphics2D grafikaUI = (Graphics2D) grafika2D.create();
-                grafikaUI.translate(component.getX(), component.getY());
-                component.paint(grafikaUI);
-
-                grafikaUI.dispose();
+        for (Component panel : getComponents()) {
+            if (panel.getName() != null && panel.getName().equals("pevneTlacitka")) {
+                Graphics2D kresleniPanelu = (Graphics2D) platno.create();
+                kresleniPanelu.translate(panel.getX(), panel.getY());
+                panel.paint(kresleniPanelu);
+                kresleniPanelu.dispose();
             }
         }
-        grafika2D.dispose();
+
+        for (Component texty : getComponents()) {
+            if (texty.getName() != null && texty.getName().equals("pevneTlacitkaText")) {
+                Graphics2D kresleniCisel = (Graphics2D) platno.create();
+                kresleniCisel.translate(texty.getX(), texty.getY());
+                texty.paint(kresleniCisel);
+                kresleniCisel.dispose();
+            }
+        }
+
+        platno.dispose();
     }
 
     @Override
@@ -121,8 +128,6 @@ public class PanelPohyblivehoPozadi extends PanelNaPozadi {
                 }
             }
         }
-
-
         int xMapy = (int) ((x - xKamery) / meritko);
         int yMapy = (int)((y - yKamery) / meritko);
 

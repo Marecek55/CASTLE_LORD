@@ -1,5 +1,7 @@
 package Logika;
+import Obrazovky.PanelGobliniStezky;
 import Obrazovky.SoubojovaObrazovka;
+import Postavy.Bojovnik;
 import Postavy.Postava;
 import javax.swing.*;
 import java.util.ArrayList;
@@ -15,6 +17,9 @@ public class Souboj {
         this.tymNepratel = nepratele;
         this.obrazovka = obrazovka;
     }
+
+
+
     public void vyhodnotRanu(Postava utocici, Postava branici){
         int utok = utocici.utok();
         int obrana = branici.obrana(utok);
@@ -29,7 +34,21 @@ public class Souboj {
     public void smrtPostavy(Postava obrana , ArrayList<Postava> tym){
         if (obrana.getZivoty() <= 0) {
             tym.remove(obrana);
+            zkontrolujKonecBitvy();
         }
+    }
+    private void zkontrolujKonecBitvy() {
+
+        if (tymHrace.isEmpty()) {
+            ukonciBitvu(false);
+        }
+        else if (tymNepratel.isEmpty()) {
+            ukonciBitvu(true);
+        }
+    }
+
+    private void ukonciBitvu(boolean vyhra) {
+        obrazovka.konecBitvy(vyhra);
     }
     public void spousteniCasovace(Postava utocnik, ArrayList<Postava> jejiNepratele) {
         int rychlost = 1000 + Hra.rand.nextInt(500);

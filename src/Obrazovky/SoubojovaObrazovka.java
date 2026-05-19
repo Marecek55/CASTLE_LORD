@@ -1,9 +1,6 @@
 package Obrazovky;
 
-import Logika.Souboj;
-import Postavy.Goblin;
 import Postavy.Postava;
-import Logika.TvorbaPostav;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -17,21 +14,17 @@ public class SoubojovaObrazovka extends Obrazovka {
     private Timer casovac;
     private int maxHPTymu;
     private int maxHPnepratelskehoTymu;
+    private String lokace;
 
-    public SoubojovaObrazovka(String nazev, boolean malaObrazovka) {
+    public SoubojovaObrazovka(String nazev, boolean malaObrazovka, JFrame okno, String lokace) {
         super(nazev, malaObrazovka);
-        hracuvTym = new ArrayList<>();
-        nepratelskyTym = new ArrayList<>();
+        this.okno = okno;
+        this.lokace = lokace;
+
     }
 
     @Override
     public void inicializace() {
-        hracuvTym.add(TvorbaPostav.tvorbaHracovaBojovnika("Hrdina 1", 1));//TODO
-        hracuvTym.add(TvorbaPostav.tvorbaHracovaBojovnika("Hrdina 2", 1));//TODO
-        hracuvTym.add(TvorbaPostav.tvorbaHracovaBojovnika("Hrdina 3", 1));//TODO
-        nepratelskyTym.add(TvorbaPostav.tvorbaGoblina(1));
-        nepratelskyTym.add(TvorbaPostav.tvorbaGoblina(1));
-        nepratelskyTym.add(TvorbaPostav.tvorbaGoblina(1));
 
         maxHPTymu = 0;
         for (Postava postava : hracuvTym) {
@@ -40,17 +33,58 @@ public class SoubojovaObrazovka extends Obrazovka {
         for (Postava postava : nepratelskyTym) {
             maxHPnepratelskehoTymu = maxHPnepratelskehoTymu + postava.getZivoty();
         }
+        String cesta = "/Obrazky/ObrazkyBoje/pozadiBoje.png";
+        if (lokace.equals("arena")) {
+            cesta = "/Obrazky/ObrazkyBoje/pozadiBojeArena.png";
+        }
 
-        arenaPanel = new PanelBitvy("/Obrazky/PozadiBoje.png", this);
-        this.okno.add(arenaPanel);
+        arenaPanel = new PanelBitvy(cesta, this);
+        arenaPanel.setLayout(null);
         casovac = new Timer(30, e -> {
             arenaPanel.repaint();
         });
         casovac.start();
-        okno.setVisible(true);
+    }
+    private boolean bitvaSkoncila = false;
+
+    public void konecBitvy(boolean vyhral) {
+       bitvaSkoncila = true;
+
+        if (casovac != null) {
+            casovac.stop();
+        }
+        String konecnaObrazovka;
+        if (lokace.equals("arena")) {
+            if (vyhral) {
+                konecnaObrazovka = "/Obrazky/ObrazkyBoje/vyhraArena.png";
+            } else {
+                konecnaObrazovka = "/Obrazky/ObrazkyBoje/prohraArena.png";
+            }
+        } else {
+            if (vyhral) {
+                konecnaObrazovka = "/Obrazky/ObrazkyBoje/vyhraGoblin.png";
+            } else {
+                konecnaObrazovka = "/Obrazky/ObrazkyBoje/prohraGoblin.png";
+            }
+        }
+        Image imgResult = arenaPanel.nactiObrazek(konecnaObrazovka);
+        arenaPanel.setBg(imgResult);
+        tlacitkaNaKonci();
+
+        arenaPanel.repaint();
+        arenaPanel.repaint();
+    }
+    private void tlacitkaNaKonci() {
+        int sirka= arenaPanel.getWidth();
+        int vyska= arenaPanel.getHeight();
+
+
     }
 
     public void vykresliPostavyATexty(Graphics g) {
+        if (bitvaSkoncila) {
+            return;
+        }
         Graphics2D grafika = (Graphics2D) g;
         grafika.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
@@ -148,23 +182,20 @@ public class SoubojovaObrazovka extends Obrazovka {
 
     }
 
+    public void setHracuvTym(ArrayList<Postava> hracuvTym) {
+        this.hracuvTym = hracuvTym;
+    }
+
+    public void setNepratelskyTym(ArrayList<Postava> nepratelskyTym) {
+        this.nepratelskyTym = nepratelskyTym;
+    }
+
+    public PanelNaPozadi getArenaPanel() {
+        return arenaPanel;
+    }
+
     @Override
     public void funkcnost() {
-        JButton tlacitkoStart = new JButton("START!");
-        tlacitkoStart.setLocation(10, 10);
-        tlacitkoStart.setSize(300,60);
 
-        tlacitkoStart.setBackground(Color.YELLOW);
-        tlacitkoStart.setOpaque(true);
-        tlacitkoStart.setFont(new Font("Arial", Font.BOLD, 24));
-
-        tlacitkoStart.addActionListener(e -> {
-            tlacitkoStart.setVisible(false);
-            Souboj arena = new Souboj(hracuvTym, nepratelskyTym, this);
-            arena.startBitvy();
-        });
-
-        arenaPanel.add(tlacitkoStart);
-        arenaPanel.repaint();
     }
 }

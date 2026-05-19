@@ -48,13 +48,13 @@ public class StylTlacitek extends JButton {
             tlacitko.setFocusPainted(false);
             tlacitko.setOpaque(false);
             tlacitko.setBorder(null);
-            tlacitko.setText(null);
 
+            tlacitko.setText(null);
             tlacitko.setPreferredSize(new Dimension(sirka, vyska));
             tlacitko.setSize(sirka, vyska);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Chyba" + cesta);
         }
     }
 }

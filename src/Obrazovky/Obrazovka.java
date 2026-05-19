@@ -18,6 +18,14 @@ public abstract class Obrazovka {
         }
 
     }
+    public Obrazovka(JFrame okno) {
+        this.okno = okno;
+    }
+
+    public JFrame getOkno() {
+        return okno;
+    }
+
     public abstract void inicializace();
     public abstract void funkcnost();
 

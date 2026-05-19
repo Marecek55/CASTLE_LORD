@@ -7,6 +7,7 @@ import javax.swing.*;
 
 public class ObrazovkaMapy extends Obrazovka{
     private PanelNaPozadi mapa;
+
     private JButton btnLes;
     private JButton btnArena;
     public ObrazovkaMapy(String nazev, boolean malaObrazovka) {
@@ -15,10 +16,12 @@ public class ObrazovkaMapy extends Obrazovka{
         mapa.setLayout(null);
         btnLes = new JButton();
         btnArena = new JButton();
+        okno.setContentPane(mapa);
+
         inicializace();
         funkcnost();
-        okno.setContentPane(mapa);
         okno.setVisible(true);
+
     }
     int vyska = Hra.vyskaObrazovky;
     int sirka = Hra.sirkaObrazovky;
@@ -36,10 +39,21 @@ public class ObrazovkaMapy extends Obrazovka{
         mapa.add(btnArena);
         mapa.add(btnLes);
 
+
     }
+
 
     @Override
     public void funkcnost() {
+         btnLes.addActionListener(e -> {
+             PanelGobliniStezky panelMapy = new PanelGobliniStezky("/Obrazky/ObrazkyBoje/gobliniStezka.png", okno);
+             panelMapy.setLayout(null);
 
+             okno.setContentPane(panelMapy);
+
+             okno.revalidate();
+             okno.repaint();
+
+         });
     }
 }

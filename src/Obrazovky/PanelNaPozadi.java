@@ -34,6 +34,10 @@ public class PanelNaPozadi extends JPanel {
         return bg;
     }
 
+    public void setBg(Image bg) {
+        this.bg = bg;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

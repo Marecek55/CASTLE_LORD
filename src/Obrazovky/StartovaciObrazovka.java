@@ -13,15 +13,17 @@ public class StartovaciObrazovka extends Obrazovka {
 
     public StartovaciObrazovka(String nazev) {
         super(nazev, false);
-        btnHrat = new JButton();
-        btnNastaveni = new JButton();
-        btnKonec = new JButton();
+        inicializace();
     }
     int vyska = Hra.vyskaObrazovky;
     int sirka = Hra.sirkaObrazovky;
 
     @Override
     public void inicializace() {
+
+        btnHrat = new JButton();
+        btnNastaveni = new JButton();
+        btnKonec = new JButton();
         nacitaciPanel = new PanelNaPozadi("/Obrazky/ObrazkyNaNacitaciObrazovce/pozadiNacitaciObrazovky.png");
         int sirkaTlacitek = (int) (sirka*0.2);
         int vyskaTlacitek  = (int) (sirkaTlacitek* (368.0 / 679.0));
@@ -38,8 +40,10 @@ public class StartovaciObrazovka extends Obrazovka {
         nacitaciPanel.add(btnHrat);
         nacitaciPanel.add(btnKonec);
         this.okno.setContentPane(nacitaciPanel);
+
         funkcnost();
         this.okno.setVisible(true);
+
     }
 
     @Override
@@ -47,16 +51,19 @@ public class StartovaciObrazovka extends Obrazovka {
 
 
         btnHrat.addActionListener(e -> {
-
-
-            new ObrazovkaHradu("Hrad", false);
-            this.okno.dispose();
+            if (Hra.obrazovkaHradu == null) {
+                Hra.obrazovkaHradu = new ObrazovkaHradu("Hrad", false);
+            } else {
+                Hra.obrazovkaHradu.getOkno().setVisible(true);
+            }
+            this.okno.setVisible(false);
 
 
         });
+
         btnNastaveni.addActionListener(e -> {
 
-            new ObrazovkaNastaveni("Nastaveni", false).inicializace();
+            new ObrazovkaNastaveni("Nastaveni", false)  ;
 
         });
 

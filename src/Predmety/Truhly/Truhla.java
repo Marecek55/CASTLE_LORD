@@ -60,4 +60,8 @@ public abstract class Truhla {
         }
         return null;
     }
+
+    public Rarita getRarita() {
+        return rarita;
+    }
 }

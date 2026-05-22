@@ -8,6 +8,12 @@ public class ListoveBrneni extends Brneni{
         super(jmeno, rarita, kryt, ultraKryt);
         this.sanceUltraKryt = 8;
     }
+
+    @Override
+    public String getNazevObrazku() {
+        return "listoveBrneni.png";
+    }
+
     @Override
     public int kryt(int utok) {
 

@@ -26,6 +26,23 @@ public abstract class Postava {
         this.obrazekVKlidu = new ImageIcon(getClass().getResource(nazevObrazkuVKlidu)).getImage();
         this.obrazekVUtoku = new ImageIcon(getClass().getResource(nazevObrazkuVUtoku)).getImage();
     }
+    public int getSilaPostavy() {
+        int celkovaSila = 0;
+
+        if (this.zbran != null) {
+            celkovaSila =celkovaSila+ this.zbran.getSila();
+        }
+
+        if (this.brneni != null) {
+            celkovaSila = celkovaSila+ this.brneni.getKryt();
+        }
+
+        if (this.medailon != null) {
+            celkovaSila =celkovaSila+ this.medailon.getZlepsovac();
+        }
+
+        return celkovaSila;
+    }
 
 
     public boolean isUtoci() {

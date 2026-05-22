@@ -15,6 +15,11 @@ public class MedailonUtoku extends Medailon{
     }
 
     @Override
+    public String getNazevObrazku() {
+        return "medailonUtoku.png";
+    }
+
+    @Override
     public void vylepsitVlastnost(Postava b) {
         if (b.getZbran()!=null){
             b.getZbran().setSanceCritical(b.getZbran().getSanceCritical() - zlepsovac);

@@ -10,6 +10,11 @@ public class OceloveBrneni extends Brneni{
     }
 
     @Override
+    public String getNazevObrazku() {
+        return "oceloveBrneni.png";
+    }
+
+    @Override
     public int kryt(int utok) {
 
         if (Hra.rand.nextInt(1,11)>=sanceUltraKryt){

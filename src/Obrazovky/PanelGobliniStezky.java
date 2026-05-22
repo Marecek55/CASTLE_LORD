@@ -4,17 +4,10 @@ import Logika.Hra;
 import Logika.Souboj;
 import Logika.TvorbaPostav;
 import Obrazovky.Tlacitka.StylTlacitek;
-import Postavy.Bojovnik;
-import Postavy.Goblin;
 import Postavy.Postava;
-import Predmety.Rarita;
-import Predmety.Zbrane.Luk;
-import Predmety.Zbrane.Zbran;
-import Predmety.Zbroj.Brneni;
-import Predmety.Zbroj.Medailon;
-import Predmety.Zbroj.OceloveBrneni;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class PanelGobliniStezky extends PanelNaPozadi {
@@ -22,16 +15,41 @@ public class PanelGobliniStezky extends PanelNaPozadi {
     ArrayList<JButton> seznamTlacitek;
     private JButton bitvaTlacitko;
     private JFrame okno;
+    private JButton btnZpet;
+    private ObrazovkaMapy predchoziObrazovka;
 
-    public PanelGobliniStezky(String obrazek, JFrame okno) {
+    public PanelGobliniStezky(String obrazek, JFrame okno, ObrazovkaMapy predchoziObrazovka) {
         super(obrazek);
+        btnZpet = new JButton();
         seznamTlacitek = new ArrayList<>();
         this.okno = okno;
+        this.predchoziObrazovka = predchoziObrazovka;
+
+        int sirkaTlacitka = (int) (sirka * 0.2);
+        int vzdalenostOdKraje = (int) (sirka * 0.009);
+
+        StylTlacitek.nastavJakoObrazek(btnZpet, "/Obrazky/ObrazkyNaNacitaciObrazovce/tlacitkoZpet.png", sirkaTlacitka, (int) (sirkaTlacitka * (368.0 / 679.0)));
+        btnZpet.setLocation((int) (sirka - (sirkaTlacitka * 0.92)),-vzdalenostOdKraje);
+        add(btnZpet);
         for (int i = 0; i < 20  ; i++) {
             JButton tlacitkoUrovne = new JButton();
             seznamTlacitek.add(tlacitkoUrovne);
 
         }
+        btnZpet.addActionListener(e -> {
+            if (urovneStezky != null && urovneStezky.getParent() != null) {
+                okno.remove(urovneStezky);
+                for (JButton button : seznamTlacitek) {
+                    button.setVisible(true);
+                }
+                okno.revalidate();
+                okno.repaint();
+            } else{
+                okno.setContentPane(predchoziObrazovka.getMapa());
+                okno.revalidate();
+                okno.repaint();
+            }
+        });
 
         tvorbaTlacitka(0, 0.09, 0.730);
         tvorbaTlacitka(1, 0.19, 0.620);
@@ -64,6 +82,7 @@ public class PanelGobliniStezky extends PanelNaPozadi {
         JButton button = seznamTlacitek.get(tlacitko);
         int upravenaUroven = Hra.urovenGobliniStezky - 1;
 
+
         if (tlacitko > upravenaUroven) {
             StylTlacitek.nastavJakoObrazek(button, "/Obrazky/ObrazkyBoje/levelZamcen.png", sirkaTlacitek, vyskaTlacitek);
             Icon krizek = button.getIcon();
@@ -88,6 +107,49 @@ public class PanelGobliniStezky extends PanelNaPozadi {
             if (okno != null) {
                 urovneStezky = new PanelNaPozadi("/Obrazky/ObrazkyBoje/gobliniUrovne.png");
                 StylTlacitek.nastavJakoObrazek(bitvaTlacitko,"/Obrazky/ObrazkyBoje/bitvaTlacitko.png", sirkaTlacitka,vyskaTlacitka);
+                Font font = new Font("Georgia", Font.BOLD, (int)(vyska * 0.06));
+                Color barvaTextu = new Color(240, 210, 150);
+                JLabel uroven = new JLabel(String.valueOf(tlacitko + 1));
+                uroven.setFont(font);
+                uroven.setForeground(barvaTextu);
+                uroven.setHorizontalAlignment(SwingConstants.CENTER);
+                uroven.setBounds((int)(sirka * 0.545), (int)(vyska * 0.12), (int)(sirka * 0.1), (int)(vyska * 0.1));
+                urovneStezky.add(uroven);
+
+                ArrayList<Postava> gobliniTym = new ArrayList<>();
+                gobliniTym.add(TvorbaPostav.tvorbaGoblina(Hra.urovenGobliniStezky));
+                gobliniTym.add(TvorbaPostav.tvorbaGoblina(Hra.urovenGobliniStezky));
+                gobliniTym.add(TvorbaPostav.tvorbaGoblina(Hra.urovenGobliniStezky));
+
+                int silaNepratel = 0;
+                for (Postava goblin : gobliniTym) {
+                    silaNepratel = silaNepratel+ goblin.getSilaPostavy();
+                }
+
+                ArrayList<Postava> hracuvTym = new ArrayList<>();//TODO
+                hracuvTym.add(TvorbaPostav.tvorbaHracovaBojovnika("Ahoj", 1));
+                hracuvTym.add(TvorbaPostav.tvorbaHracovaBojovnika("Ahoj", 1));
+                hracuvTym.add(TvorbaPostav.tvorbaHracovaBojovnika("Ahoj", 1));
+
+                int silaHrace = 0;
+                for (Postava hrdina : hracuvTym) {
+                    silaHrace = silaHrace+ hrdina.getSilaPostavy();
+                }
+
+                JLabel textSilyProtivniku = new JLabel(String.valueOf(silaNepratel));
+                textSilyProtivniku.setFont(font);
+                textSilyProtivniku.setForeground(barvaTextu);
+                textSilyProtivniku.setHorizontalAlignment(SwingConstants.CENTER);
+                textSilyProtivniku.setBounds((int)(sirka * 0.57), (int)(vyska * 0.305), (int)(sirka * 0.18), (int)(vyska * 0.07));
+                urovneStezky.add(textSilyProtivniku);
+
+                JLabel textSily = new JLabel(String.valueOf(silaHrace));
+                textSily.setFont(font);
+                textSily.setForeground(barvaTextu);
+                textSily.setHorizontalAlignment(SwingConstants.CENTER);
+                textSily.setBounds((int)(sirka * 0.57), (int)(vyska * 0.445), (int)(sirka * 0.18), (int)(vyska * 0.07));
+                urovneStezky.add(textSily);
+
                 bitvaTlacitko.setLocation(sirka/2 - sirkaTlacitka/2, (int) (vyska* 0.58));
                 urovneStezky.add(bitvaTlacitko);
                 for (int i = 0; i < seznamTlacitek.size(); i++) {
@@ -96,20 +158,12 @@ public class PanelGobliniStezky extends PanelNaPozadi {
                 }
                 bitvaTlacitko.addActionListener(e1 -> {
                     if (okno != null) {
-                        SoubojovaObrazovka soubojovaObrazovka = new SoubojovaObrazovka("Souboj", false, okno ,"arena");
-                        ArrayList<Postava> hracuvTym = new ArrayList<>();
-                        ArrayList<Postava> goblin = new ArrayList<>();
-                        hracuvTym.add(TvorbaPostav.tvorbaHracovaBojovnika("Ahoj", 1));
-                        hracuvTym.add(TvorbaPostav.tvorbaHracovaBojovnika("Ahoj", 1));
-                        hracuvTym.add(TvorbaPostav.tvorbaHracovaBojovnika("Ahoj", 1));
-                        goblin.add(TvorbaPostav.tvorbaGoblina(upravenaUroven));
-                        goblin.add(TvorbaPostav.tvorbaGoblina(upravenaUroven));
-                        goblin.add(TvorbaPostav.tvorbaGoblina(upravenaUroven));
+                        SoubojovaObrazovka soubojovaObrazovka = new SoubojovaObrazovka("Souboj", false, okno ,"gobliniStezka", predchoziObrazovka);
                         soubojovaObrazovka.setHracuvTym(hracuvTym);
-                        soubojovaObrazovka.setNepratelskyTym(goblin);
+                        soubojovaObrazovka.setNepratelskyTym(gobliniTym);
                         soubojovaObrazovka.inicializace();
                         okno.setContentPane(soubojovaObrazovka.getArenaPanel());
-                        Souboj arena = new Souboj(hracuvTym, goblin, soubojovaObrazovka);
+                        Souboj arena = new Souboj(hracuvTym, gobliniTym, soubojovaObrazovka);
                         okno.revalidate();
                         okno.repaint();
                         arena.startBitvy();

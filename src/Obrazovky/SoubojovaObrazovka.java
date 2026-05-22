@@ -1,6 +1,16 @@
 package Obrazovky;
 
+import Logika.Hra;
+import Obrazovky.Tlacitka.StylTlacitek;
 import Postavy.Postava;
+import Predmety.Rarita;
+import Predmety.Truhly.DrevenaTruhla;
+import Predmety.Truhly.StribrnaTruhla;
+import Predmety.Truhly.Truhla;
+import Predmety.Truhly.ZlataTruhla;
+import Predmety.Zbrane.Zbran;
+import Predmety.Zbroj.Brneni;
+import Predmety.Zbroj.Medailon;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -15,11 +25,13 @@ public class SoubojovaObrazovka extends Obrazovka {
     private int maxHPTymu;
     private int maxHPnepratelskehoTymu;
     private String lokace;
+    private ObrazovkaMapy predchoziObrazovkaMapy;
 
-    public SoubojovaObrazovka(String nazev, boolean malaObrazovka, JFrame okno, String lokace) {
+    public SoubojovaObrazovka(String nazev, boolean malaObrazovka, JFrame okno, String lokace, ObrazovkaMapy predchoziObrazovkaMapy) {
         super(nazev, malaObrazovka);
         this.okno = okno;
         this.lokace = lokace;
+        this.predchoziObrazovkaMapy = predchoziObrazovkaMapy;
 
     }
 
@@ -47,37 +59,153 @@ public class SoubojovaObrazovka extends Obrazovka {
     }
     private boolean bitvaSkoncila = false;
 
-    public void konecBitvy(boolean vyhral) {
-       bitvaSkoncila = true;
-
+    public void konecBitvy(boolean hracVyhral) {
+        bitvaSkoncila = true;
         if (casovac != null) {
             casovac.stop();
         }
-        String konecnaObrazovka;
+        String cestaKObrazku = "";
         if (lokace.equals("arena")) {
-            if (vyhral) {
-                konecnaObrazovka = "/Obrazky/ObrazkyBoje/vyhraArena.png";
+            if (hracVyhral) {
+                cestaKObrazku = "/Obrazky/ObrazkyBoje/vyhraArena.png";
             } else {
-                konecnaObrazovka = "/Obrazky/ObrazkyBoje/prohraArena.png";
+                cestaKObrazku = "/Obrazky/ObrazkyBoje/prohraArena.png";
             }
         } else {
-            if (vyhral) {
-                konecnaObrazovka = "/Obrazky/ObrazkyBoje/vyhraGoblin.png";
+            if (hracVyhral) {
+                cestaKObrazku = "/Obrazky/ObrazkyBoje/vyhraGoblin.png";
             } else {
-                konecnaObrazovka = "/Obrazky/ObrazkyBoje/prohraGoblin.png";
+                cestaKObrazku = "/Obrazky/ObrazkyBoje/prohraGoblin.png";
             }
         }
-        Image imgResult = arenaPanel.nactiObrazek(konecnaObrazovka);
-        arenaPanel.setBg(imgResult);
-        tlacitkaNaKonci();
+        Image obrazekPozadi = arenaPanel.nactiObrazek(cestaKObrazku);
+        arenaPanel.setBg(obrazekPozadi);
+        JPanel panelOdmen = new JPanel();
+        int mezera = (int) (Hra.sirkaObrazovky * 0.015);
+        panelOdmen.setLayout(new FlowLayout(FlowLayout.CENTER, mezera, mezera));
+        panelOdmen.setOpaque(false);
+        panelOdmen.setBounds(0, (int) (Hra.vyskaObrazovky * 0.4), Hra.sirkaObrazovky, (int) (Hra.vyskaObrazovky * 0.25));
+        odmena(panelOdmen, hracVyhral);
+        arenaPanel.add(panelOdmen);
+        panelOdmen.setVisible(true);
+        JButton zpetTlacitko = new JButton();
+        int sirkaTlacitka = (int) (Hra.sirkaObrazovky * 0.2);
+        int vyskaTlacitka = (int) (sirkaTlacitka * (368.0 / 679.0));
 
-        arenaPanel.repaint();
+        StylTlacitek.nastavJakoObrazek(zpetTlacitko, "/Obrazky/ObrazkyNaNacitaciObrazovce/tlacitkoZpet.png", sirkaTlacitka, vyskaTlacitka);
+
+        int vzdalenostOdKraje = (int) (Hra.sirkaObrazovky * 0.009);
+        zpetTlacitko.setLocation((int) (Hra.sirkaObrazovky - (sirkaTlacitka * 0.92)), -vzdalenostOdKraje);
+
+        zpetTlacitko.addActionListener(e -> {
+            if(predchoziObrazovkaMapy != null) {
+                okno.setContentPane(predchoziObrazovkaMapy.getMapa());
+                okno.revalidate();
+                okno.repaint();
+            }
+        });
+
+        arenaPanel.add(zpetTlacitko);
+        arenaPanel.revalidate();
         arenaPanel.repaint();
     }
-    private void tlacitkaNaKonci() {
-        int sirka= arenaPanel.getWidth();
-        int vyska= arenaPanel.getHeight();
 
+    private void odmena(JPanel panelOdmen, boolean hracVyhral) {
+        int uroven;
+
+        if (lokace.equals("arena")) {
+            uroven = Hra.urovenHradu;
+        } else {
+            uroven = Hra.urovenGobliniStezky;
+        }
+
+        int sance = Hra.rand.nextInt(100);
+        Rarita rarita;
+        Rarita raritaTruhly;
+
+        int sanceLegendarni;
+        int sanceVzacna;
+
+        if (hracVyhral) {
+            if (uroven <= 5) {
+                sanceLegendarni = 2;
+                sanceVzacna = 13;
+            } else if (uroven <= 10) {
+                sanceLegendarni = 5;
+                sanceVzacna = 25;
+            } else if (uroven <= 15) {
+                sanceLegendarni = 12;
+                sanceVzacna = 38;
+            } else {
+                sanceLegendarni = 25;
+                sanceVzacna = 45;
+            }
+        } else {
+            sanceLegendarni = 0;
+            sanceVzacna = 5;
+        }
+
+        if (sance < sanceLegendarni) {
+            rarita = Rarita.LEGENDÁRNÍ;
+        } else if (sance < (sanceLegendarni + sanceVzacna)) {
+            rarita = Rarita.VZÁCNÁ;
+        } else {
+            rarita = Rarita.BĚŽNÁ;
+        }
+
+        int sanceTruhly = Hra.rand.nextInt(100);
+        if (sanceTruhly < sanceLegendarni) {
+            raritaTruhly = Rarita.LEGENDÁRNÍ;
+        } else if (sanceTruhly < (sanceLegendarni + sanceVzacna)) {
+            raritaTruhly = Rarita.VZÁCNÁ;
+        } else {
+            raritaTruhly = Rarita.BĚŽNÁ;
+        }
+
+        int nahodnyPredmet = Hra.rand.nextInt(1, 4);
+        if (nahodnyPredmet == 1) {
+            Zbran z = Zbran.vytvoritZbran(uroven, true, rarita);
+            Hra.inventar.pridejPredmet(z);
+            panelOdmen.add(new IkonaVeciVInventari(z.getNazevObrazku(), rarita, z.getSila()));
+        } else if (nahodnyPredmet == 2) {
+            Brneni b = Brneni.vytvoritBrneni(uroven, true, rarita);
+            Hra.inventar.pridejPredmet(b);
+            panelOdmen.add(new IkonaVeciVInventari(b.getNazevObrazku(), rarita, b.getKryt()));
+        } else {
+            Medailon m = Medailon.vytvoritMedailon(true, rarita);
+            Hra.inventar.pridejPredmet(m);
+            panelOdmen.add(new IkonaVeciVInventari(m.getNazevObrazku(), rarita, m.getZlepsovac()));
+        }
+
+        int sanceNaTruhlu = 20 + (uroven * 2);
+        if (sanceNaTruhlu > 60) {
+            sanceNaTruhlu = 60;
+        }
+
+        if (hracVyhral == false) {
+            sanceNaTruhlu = 10;
+        }
+
+        if (Hra.rand.nextInt(100) < sanceNaTruhlu) {
+            Truhla truhla;
+            String nazevObrazkuTruhly = "";
+
+            int truhlaTyp = Hra.rand.nextInt(3);
+
+            if (truhlaTyp == 0) {
+                truhla = new DrevenaTruhla("Dřevěná Truhla", raritaTruhly);
+                nazevObrazkuTruhly = "drevenaTruhla.png";
+            } else if (truhlaTyp == 1) {
+                truhla = new StribrnaTruhla("Stříbrná Truhla", raritaTruhly);
+                nazevObrazkuTruhly = "stribrnaTruhla.png";
+            } else {
+                truhla = new ZlataTruhla("Zlatá Truhla", raritaTruhly);
+                nazevObrazkuTruhly = "zlataTruhla.png";
+            }
+
+            Hra.inventar.pridejTruhlu(truhla);
+            panelOdmen.add(new IkonaVeciVInventari(nazevObrazkuTruhly, raritaTruhly, 0));
+        }
 
     }
 
@@ -87,10 +215,8 @@ public class SoubojovaObrazovka extends Obrazovka {
         }
         Graphics2D grafika = (Graphics2D) g;
         grafika.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
         int sirkaMonitoru = arenaPanel.getWidth();
         int vyskaMonitoru = arenaPanel.getHeight();
-
         int sirkaPostavy = (int)(sirkaMonitoru * 0.15);
         int vyskaPostavy = (int)(vyskaMonitoru * 0.30);
         int barSirka = (int)(sirkaMonitoru * 0.30);
@@ -126,10 +252,17 @@ public class SoubojovaObrazovka extends Obrazovka {
         int XNepratel = (sirkaMonitoru / 2) + (int)(sirkaMonitoru * 0.02);
 
         for (Postava nepritel : nepratelskyTym) {
+            Image obrNepritele;
             if (nepritel.isUtoci()) {
-                grafika.drawImage(nepritel.getObrazekVUtoku(), XNepratel, YPostav, sirkaPostavy, vyskaPostavy, null);
+                obrNepritele = nepritel.getObrazekVUtoku();
             } else {
-                grafika.drawImage(nepritel.getObrazekVKlidu(), XNepratel, YPostav, sirkaPostavy, vyskaPostavy, null);
+                obrNepritele = nepritel.getObrazekVKlidu();
+            }
+
+            if (lokace.equals("arena")) {
+                g.drawImage(obrNepritele, XNepratel + sirkaPostavy, YPostav, XNepratel, YPostav + vyskaPostavy, 0, 0, obrNepritele.getWidth(null), obrNepritele.getHeight(null), null);
+            } else {
+                grafika.drawImage(obrNepritele, XNepratel, YPostav, sirkaPostavy, vyskaPostavy, null);
             }
 
             if (nepritel.getPosledniZasah()!= null){
@@ -181,6 +314,7 @@ public class SoubojovaObrazovka extends Obrazovka {
         grafika.drawString(aktualniHPNepratelskyTymu + " / " + maxHPnepratelskehoTymu, nepritelBarX + 10, barY + barVyska - 10);
 
     }
+
 
     public void setHracuvTym(ArrayList<Postava> hracuvTym) {
         this.hracuvTym = hracuvTym;

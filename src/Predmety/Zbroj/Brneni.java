@@ -63,6 +63,7 @@ public abstract class Brneni extends Predmet {
         }
 
     }
+    public abstract String getNazevObrazku();
     public abstract int kryt(int utok);
     public Rarita getRarita() {
         return rarita;

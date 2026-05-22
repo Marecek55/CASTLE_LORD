@@ -15,6 +15,11 @@ public class MedailonObrany extends Medailon{
     }
 
     @Override
+    public String getNazevObrazku() {
+        return "medailonObrany.png";
+    }
+
+    @Override
     public void vylepsitVlastnost(Postava b) {
         if (b.getBrneni()!= null){
             b.getBrneni().setSanceUltraKryt(b.getBrneni().getSanceUltraKryt() - zlepsovac);

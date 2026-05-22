@@ -23,25 +23,30 @@ public abstract class Medailon extends Predmet {
 
     }
 
-    public static Medailon vytvoritMedailon( boolean jeZtruhly, Rarita raritaZtruhly){
-        ArrayList<Rarita> rarity = new ArrayList<>();
-        rarity.add(Rarita.VZÁCNÁ);
-        rarity.add(Rarita.BĚŽNÁ);
-        rarity.add(Rarita.LEGENDÁRNÍ);
-        int cislo = Hra.rand.nextInt(rarity.size());
-        Rarita rarita = rarity.get(cislo);
-        int cislo2 = Hra.rand.nextInt(1,3);
+    public static Medailon vytvoritMedailon(boolean jeZtruhly, Rarita raritaZtruhly){
+        Rarita rarita = null;
+        if (!jeZtruhly){
+            ArrayList<Rarita> rarity = new ArrayList<>();
+            rarity.add(Rarita.VZÁCNÁ);
+            rarity.add(Rarita.BĚŽNÁ);
+            rarity.add(Rarita.LEGENDÁRNÍ);
+            int cislo = Hra.rand.nextInt(rarity.size());
+            rarita = rarity.get(cislo);
+        } else {
+            rarita = raritaZtruhly;
+        }
+
+        int cislo2 = Hra.rand.nextInt(1, 3);
         switch (cislo2) {
             case 1:
-                Medailon z = new MedailonObrany("Medailon Obrany",rarita);
-                return z;
+                return new MedailonObrany("Medailon Obrany", rarita);
             case 2:
-                Medailon z2 = new MedailonUtoku("Medailon Utoku",rarita);
-                return z2;
+                return new MedailonUtoku("Medailon Útoku", rarita);
             default:
                 return null;
         }
     }
+    public abstract String getNazevObrazku();
 
     public Rarita getRarita() {
         return rarita;

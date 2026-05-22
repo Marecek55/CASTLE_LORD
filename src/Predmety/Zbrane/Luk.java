@@ -12,6 +12,11 @@ public class Luk extends Zbran {
     }
 
     @Override
+    public String getNazevObrazku() {
+        return "luk.png";
+    }
+
+    @Override
     public int zautoc() {
 
         if (Hra.rand.nextInt(1,11)>=sanceCritical){

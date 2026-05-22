@@ -12,7 +12,7 @@ public class Main {
 //        SoubojovaObrazovka arena = new SoubojovaObrazovka("Bitva", false);
 //        arena.inicializace();
 //        arena.funkcnost();
-        Hra h = new Hra();
+//        Hra h = new Hra();
         ObrazovkaMapy o = new ObrazovkaMapy("asd", false);
         o.inicializace();
 //

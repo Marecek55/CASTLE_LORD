@@ -10,12 +10,14 @@ public class ObrazovkaMapy extends Obrazovka{
 
     private JButton btnLes;
     private JButton btnArena;
+    private JButton btnZpet;
     public ObrazovkaMapy(String nazev, boolean malaObrazovka) {
         super(nazev, malaObrazovka);
         mapa = new PanelNaPozadi("/Obrazky/ObrazkyBoje/bojovaMapa.png");
         mapa.setLayout(null);
         btnLes = new JButton();
         btnArena = new JButton();
+        btnZpet = new JButton();
         okno.setContentPane(mapa);
 
         inicializace();
@@ -39,21 +41,42 @@ public class ObrazovkaMapy extends Obrazovka{
         mapa.add(btnArena);
         mapa.add(btnLes);
 
+        int sirkaTlacitka = (int) (sirka * 0.2);
+        int vzdalenostOdKraje = (int) (sirka * 0.009);
 
+        StylTlacitek.nastavJakoObrazek(btnZpet, "/Obrazky/ObrazkyNaNacitaciObrazovce/tlacitkoZpet.png", sirkaTlacitka, (int) (sirkaTlacitka * (368.0 / 679.0)));
+        btnZpet.setLocation((int) (sirka - (sirkaTlacitka * 0.92)),-vzdalenostOdKraje);
+        mapa.add(btnZpet);
+
+
+    }
+    public PanelNaPozadi getMapa() {
+        return this.mapa;
     }
 
 
     @Override
     public void funkcnost() {
          btnLes.addActionListener(e -> {
-             PanelGobliniStezky panelMapy = new PanelGobliniStezky("/Obrazky/ObrazkyBoje/gobliniStezka.png", okno);
+             PanelGobliniStezky panelMapy = new PanelGobliniStezky("/Obrazky/ObrazkyBoje/gobliniStezka.png", okno, this);
              panelMapy.setLayout(null);
-
              okno.setContentPane(panelMapy);
-
              okno.revalidate();
              okno.repaint();
 
          });
+        btnArena.addActionListener(e -> {
+            PanelArena panelAreny = new PanelArena("/Obrazky/ObrazkyBoje/arena.png", okno, this);
+            panelAreny.setLayout(null);
+            okno.setContentPane(panelAreny);
+            okno.revalidate();
+            okno.repaint();
+        });
+        btnZpet.addActionListener(e -> {
+            if (Hra.obrazovkaHradu != null) {
+                Hra.obrazovkaHradu.getOkno().setVisible(true);
+                this.okno.setVisible(false);
+            }
+        });
     }
 }

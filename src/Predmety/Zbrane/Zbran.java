@@ -13,6 +13,7 @@
         protected Rarita rarita;
         protected double sanceCritical;
 
+
         public Zbran(String nazev, int sila, int silaCritical, Rarita rarita ) {
             super(nazev);
             this.nazev = nazev;
@@ -63,6 +64,8 @@
             }
 
         }
+
+        public abstract String getNazevObrazku();
 
         @Override
         public String toString() {

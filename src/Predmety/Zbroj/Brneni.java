@@ -20,6 +20,7 @@ public abstract class Brneni extends Predmet {
         this.rarita = rarita;
         this.kryt = kryt;
         this.ultraKryt = ultraKryt;
+        typ = "Brneni";
     }
     public static Brneni vytvoritBrneni(int uroven,  boolean jeZtruhly, Rarita raritaZtruhly){
         Rarita rarita = null;

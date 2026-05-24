@@ -2,6 +2,7 @@ package Obrazovky;
 
 import Logika.Hra;
 import Obrazovky.Tlacitka.StylTlacitek;
+import Postavy.Postava;
 
 import javax.swing.*;
 
@@ -66,6 +67,14 @@ public class ObrazovkaMapy extends Obrazovka{
 
          });
         btnArena.addActionListener(e -> {
+            int zivoty = 0;
+            for (Postava hrdina : Hra.hracuvTym) {
+                zivoty = zivoty + hrdina.getZivoty();
+            }
+            if (zivoty <= 0) {
+                JOptionPane.showMessageDialog(okno, "Nemůžeš bojovat! Tvoji hrdinové jsou mrtví. Běž se vyléčit do lékárny.");
+                return;
+            }
             PanelArena panelAreny = new PanelArena("/Obrazky/ObrazkyBoje/arena.png", okno, this);
             panelAreny.setLayout(null);
             okno.setContentPane(panelAreny);

@@ -19,6 +19,7 @@ public abstract class Medailon extends Predmet {
         super(nazev);
         this.rarita = rarita;
         this.nazev = nazev;
+        typ = "Medailon";
 
 
     }

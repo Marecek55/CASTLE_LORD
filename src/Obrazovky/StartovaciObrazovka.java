@@ -51,6 +51,14 @@ public class StartovaciObrazovka extends Obrazovka {
 
 
         btnHrat.addActionListener(e -> {
+
+            if (Hra.hracuvTym.isEmpty()) {
+                String zadaneJmeno = JOptionPane.showInputDialog(okno, "Zadej jméno svého prvního hrdiny:");
+                if (zadaneJmeno == null) {
+                    zadaneJmeno = "EDVARD";
+                }
+                Hra.hracuvTym(zadaneJmeno.toUpperCase());
+            }
             if (Hra.obrazovkaHradu == null) {
                 Hra.obrazovkaHradu = new ObrazovkaHradu("Hrad", false);
             } else {
@@ -69,7 +77,9 @@ public class StartovaciObrazovka extends Obrazovka {
 
 
         btnKonec.addActionListener(e -> {
+            Hra.hudbaPozadi.zastav();
             this.okno.dispose();
+
         });
     }
 }

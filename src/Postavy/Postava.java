@@ -17,15 +17,21 @@ public abstract class Postava {
     protected Image obrazekVKlidu;
     protected Image obrazekVUtoku;
     private boolean utoci = false;
+    protected String typ;
 
-    public Postava(String jmeno, Zbran zbran, Brneni brneni, Medailon medailon, String nazevObrazkuVKlidu, String nazevObrazkuVUtoku) {
+    public Postava(String jmeno, Zbran zbran, Brneni brneni, Medailon medailon, String nazevObrazkuVKlidu, String nazevObrazkuVUtoku, String typ) {
         this.jmeno = jmeno;
         this.zbran = zbran;
         this.brneni = brneni;
         this.medailon = medailon;
         this.obrazekVKlidu = new ImageIcon(getClass().getResource(nazevObrazkuVKlidu)).getImage();
         this.obrazekVUtoku = new ImageIcon(getClass().getResource(nazevObrazkuVUtoku)).getImage();
+        this.typ = typ;
     }
+    public String getTyp() {
+        return typ;
+    }
+
     public int getSilaPostavy() {
         int celkovaSila = 0;
 

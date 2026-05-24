@@ -54,19 +54,27 @@ public class PanelArena extends PanelNaPozadi {
 
         int urovenHradu = Hra.urovenHradu;
         ArrayList<Postava> nepratelskyTym = new ArrayList<>();
-        nepratelskyTym.add(TvorbaPostav.tvorbaProtihracovaBojovnika("JMENO", urovenHradu));
-        nepratelskyTym.add(TvorbaPostav.tvorbaProtihracovaBojovnika("JMENO", urovenHradu));
-        nepratelskyTym.add(TvorbaPostav.tvorbaProtihracovaBojovnika("JMENO", urovenHradu));
+        if (Hra.hracuvTym.size() == 1){
+            nepratelskyTym.add(TvorbaPostav.tvorbaProtihracovaBojovnika("Nepřítel", urovenHradu));
+        } else if (Hra.hracuvTym.size() == 2) {
+            nepratelskyTym.add(TvorbaPostav.tvorbaProtihracovaBojovnika("Nepřítel", urovenHradu));
+            nepratelskyTym.add(TvorbaPostav.tvorbaProtihracovaBojovnika("Nepřítel", urovenHradu));
+        }else {
+            nepratelskyTym.add(TvorbaPostav.tvorbaProtihracovaBojovnika("Nepřítel", urovenHradu));
+            nepratelskyTym.add(TvorbaPostav.tvorbaProtihracovaBojovnika("Nepřítel", urovenHradu));
+            nepratelskyTym.add(TvorbaPostav.tvorbaProtihracovaBojovnika("Nepřítel", urovenHradu));
+        }
+
+
+
+
 
         int silaNepratel = 0;
         for (Postava nepritel : nepratelskyTym) {
             silaNepratel = silaNepratel + nepritel.getSilaPostavy();
         }
         int pocetProtivniku = nepratelskyTym.size();
-        ArrayList<Postava> hracuvTym = new ArrayList<>();
-        hracuvTym.add(TvorbaPostav.tvorbaHracovaBojovnika("Ahoj", 1));
-        hracuvTym.add(TvorbaPostav.tvorbaHracovaBojovnika("Ahoj", 1));
-        hracuvTym.add(TvorbaPostav.tvorbaHracovaBojovnika("Ahoj", 1));
+        ArrayList<Postava> hracuvTym = Hra.hracuvTym;
         JLabel silaProtivniku = new JLabel(String.valueOf(silaNepratel));
         silaProtivniku.setFont(font);
         silaProtivniku.setForeground(barvaTextu);

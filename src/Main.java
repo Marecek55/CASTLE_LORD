@@ -1,10 +1,8 @@
 import Logika.Hra;
 import Logika.Hudba;
 
-import Obrazovky.ObrazovkaMapy;
-import Obrazovky.SoubojovaObrazovka;
-import Obrazovky.StartovaciObrazovka;
-import Obrazovky.ObrazovkaHradu;
+import Obrazovky.*;
+
 import static Logika.Hra.hudbaPozadi;
 
 public class Main {
@@ -12,9 +10,11 @@ public class Main {
 //        SoubojovaObrazovka arena = new SoubojovaObrazovka("Bitva", false);
 //        arena.inicializace();
 //        arena.funkcnost();
-//        Hra h = new Hra();
-        ObrazovkaMapy o = new ObrazovkaMapy("asd", false);
-        o.inicializace();
+        Hra h = new Hra();
+//        ObrazovkaInventare i = new ObrazovkaInventare("as", false);
+
+//        ObrazovkaMapy o = new ObrazovkaMapy("asd", false);
+//        o.inicializace();
 //
 //        ObrazovkaMapy o = new ObrazovkaMapy("mapa", false);
 //        o.inicializace();

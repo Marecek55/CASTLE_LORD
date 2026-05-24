@@ -116,20 +116,28 @@ public class PanelGobliniStezky extends PanelNaPozadi {
                 uroven.setBounds((int)(sirka * 0.545), (int)(vyska * 0.12), (int)(sirka * 0.1), (int)(vyska * 0.1));
                 urovneStezky.add(uroven);
 
+
                 ArrayList<Postava> gobliniTym = new ArrayList<>();
-                gobliniTym.add(TvorbaPostav.tvorbaGoblina(Hra.urovenGobliniStezky));
-                gobliniTym.add(TvorbaPostav.tvorbaGoblina(Hra.urovenGobliniStezky));
-                gobliniTym.add(TvorbaPostav.tvorbaGoblina(Hra.urovenGobliniStezky));
+                int urovenCoVybral = tlacitko + 1;
+                if (tlacitko<5){
+                    gobliniTym.add(TvorbaPostav.tvorbaGoblina(urovenCoVybral));
+                } else if (tlacitko<15) {
+                    gobliniTym.add(TvorbaPostav.tvorbaGoblina(urovenCoVybral));
+                    gobliniTym.add(TvorbaPostav.tvorbaGoblina(urovenCoVybral));
+                }else {
+                    gobliniTym.add(TvorbaPostav.tvorbaGoblina(urovenCoVybral));
+                    gobliniTym.add(TvorbaPostav.tvorbaGoblina(urovenCoVybral));
+                    gobliniTym.add(TvorbaPostav.tvorbaGoblina(urovenCoVybral));
+                }
+
 
                 int silaNepratel = 0;
                 for (Postava goblin : gobliniTym) {
                     silaNepratel = silaNepratel+ goblin.getSilaPostavy();
                 }
 
-                ArrayList<Postava> hracuvTym = new ArrayList<>();//TODO
-                hracuvTym.add(TvorbaPostav.tvorbaHracovaBojovnika("Ahoj", 1));
-                hracuvTym.add(TvorbaPostav.tvorbaHracovaBojovnika("Ahoj", 1));
-                hracuvTym.add(TvorbaPostav.tvorbaHracovaBojovnika("Ahoj", 1));
+                ArrayList<Postava> hracuvTym =Hra.hracuvTym;
+
 
                 int silaHrace = 0;
                 for (Postava hrdina : hracuvTym) {
@@ -157,10 +165,19 @@ public class PanelGobliniStezky extends PanelNaPozadi {
 
                 }
                 bitvaTlacitko.addActionListener(e1 -> {
+                    int zivoty = 0;
+                    for (Postava hrdina : Hra.hracuvTym) {
+                        zivoty = zivoty + hrdina.getZivoty();
+                    }
+                    if (zivoty <= 0) {
+                        JOptionPane.showMessageDialog(okno, "Tvoji hrdinové zemřeli. Běž se vyléčit do lékárny.");
+                        return;
+                    }
                     if (okno != null) {
                         SoubojovaObrazovka soubojovaObrazovka = new SoubojovaObrazovka("Souboj", false, okno ,"gobliniStezka", predchoziObrazovka);
                         soubojovaObrazovka.setHracuvTym(hracuvTym);
                         soubojovaObrazovka.setNepratelskyTym(gobliniTym);
+                        soubojovaObrazovka.setVybranaUrovenStezky(tlacitko + 1);
                         soubojovaObrazovka.inicializace();
                         okno.setContentPane(soubojovaObrazovka.getArenaPanel());
                         Souboj arena = new Souboj(hracuvTym, gobliniTym, soubojovaObrazovka);

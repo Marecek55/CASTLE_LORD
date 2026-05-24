@@ -26,6 +26,7 @@ public class SoubojovaObrazovka extends Obrazovka {
     private int maxHPnepratelskehoTymu;
     private String lokace;
     private ObrazovkaMapy predchoziObrazovkaMapy;
+    private int vybranaUrovenStezky;
 
     public SoubojovaObrazovka(String nazev, boolean malaObrazovka, JFrame okno, String lokace, ObrazovkaMapy predchoziObrazovkaMapy) {
         super(nazev, malaObrazovka);
@@ -35,10 +36,17 @@ public class SoubojovaObrazovka extends Obrazovka {
 
     }
 
+    public void setVybranaUrovenStezky(int vybranaUrovenStezky) {
+        this.vybranaUrovenStezky = vybranaUrovenStezky;
+    }
+
     @Override
     public void inicializace() {
 
         maxHPTymu = 0;
+        for (int i = 0; i < hracuvTym.size(); i++) {
+            hracuvTym.get(i).setZivoty(9999999);
+        }
         for (Postava postava : hracuvTym) {
             maxHPTymu = maxHPTymu + postava.getZivoty();
         }
@@ -56,6 +64,12 @@ public class SoubojovaObrazovka extends Obrazovka {
             arenaPanel.repaint();
         });
         casovac.start();
+        if (Hra.hudbaPozadi != null) {
+            Hra.hudbaPozadi.zastav();
+        }
+        if (Hra.hudbaBitva != null) {
+            Hra.hudbaBitva.hraj(true);
+        }
     }
     private boolean bitvaSkoncila = false;
 
@@ -86,8 +100,18 @@ public class SoubojovaObrazovka extends Obrazovka {
         panelOdmen.setOpaque(false);
         panelOdmen.setBounds(0, (int) (Hra.vyskaObrazovky * 0.4), Hra.sirkaObrazovky, (int) (Hra.vyskaObrazovky * 0.25));
         odmena(panelOdmen, hracVyhral);
+        for (Component c : panelOdmen.getComponents()) {
+            c.setEnabled(false);
+        }
         arenaPanel.add(panelOdmen);
         panelOdmen.setVisible(true);
+        if (hracVyhral) {
+            if (lokace.equals("gobliniStezka")) {
+                if (vybranaUrovenStezky == Hra.urovenGobliniStezky) {
+                    Hra.urovenGobliniStezky++;
+                }
+            }
+        }
         JButton zpetTlacitko = new JButton();
         int sirkaTlacitka = (int) (Hra.sirkaObrazovky * 0.2);
         int vyskaTlacitka = (int) (sirkaTlacitka * (368.0 / 679.0));
@@ -99,6 +123,12 @@ public class SoubojovaObrazovka extends Obrazovka {
 
         zpetTlacitko.addActionListener(e -> {
             if(predchoziObrazovkaMapy != null) {
+                if (Hra.hudbaBitva != null) {
+                    Hra.hudbaBitva.zastav();
+                }
+                if (Hra.hudbaPozadi != null) {
+                    Hra.hudbaPozadi.hraj(true);
+                }
                 okno.setContentPane(predchoziObrazovkaMapy.getMapa());
                 okno.revalidate();
                 okno.repaint();
@@ -166,15 +196,21 @@ public class SoubojovaObrazovka extends Obrazovka {
         if (nahodnyPredmet == 1) {
             Zbran z = Zbran.vytvoritZbran(uroven, true, rarita);
             Hra.inventar.pridejPredmet(z);
-            panelOdmen.add(new IkonaVeciVInventari(z.getNazevObrazku(), rarita, z.getSila()));
+            IkonaVeciVInventari ikona = new IkonaVeciVInventari(z.getNazevObrazku(), rarita, z.getSila());
+            ikona.deaktivujKlikani();
+            panelOdmen.add(ikona);
         } else if (nahodnyPredmet == 2) {
             Brneni b = Brneni.vytvoritBrneni(uroven, true, rarita);
             Hra.inventar.pridejPredmet(b);
-            panelOdmen.add(new IkonaVeciVInventari(b.getNazevObrazku(), rarita, b.getKryt()));
+            IkonaVeciVInventari ikona = new IkonaVeciVInventari(b.getNazevObrazku(), rarita, b.getKryt());
+            ikona.deaktivujKlikani();
+            panelOdmen.add(ikona);
         } else {
             Medailon m = Medailon.vytvoritMedailon(true, rarita);
             Hra.inventar.pridejPredmet(m);
-            panelOdmen.add(new IkonaVeciVInventari(m.getNazevObrazku(), rarita, m.getZlepsovac()));
+            IkonaVeciVInventari ikona = new IkonaVeciVInventari(m.getNazevObrazku(), rarita, m.getZlepsovac());
+            ikona.deaktivujKlikani();
+            panelOdmen.add(ikona);
         }
 
         int sanceNaTruhlu = 20 + (uroven * 2);
@@ -185,6 +221,7 @@ public class SoubojovaObrazovka extends Obrazovka {
         if (hracVyhral == false) {
             sanceNaTruhlu = 10;
         }
+        sanceNaTruhlu = 100;
 
         if (Hra.rand.nextInt(100) < sanceNaTruhlu) {
             Truhla truhla;
@@ -193,17 +230,17 @@ public class SoubojovaObrazovka extends Obrazovka {
             int truhlaTyp = Hra.rand.nextInt(3);
 
             if (truhlaTyp == 0) {
-                truhla = new DrevenaTruhla("Dřevěná Truhla", raritaTruhly);
+                truhla = new DrevenaTruhla("Dřevěná Truhla", raritaTruhly, uroven);
                 nazevObrazkuTruhly = "drevenaTruhla.png";
             } else if (truhlaTyp == 1) {
-                truhla = new StribrnaTruhla("Stříbrná Truhla", raritaTruhly);
+                truhla = new StribrnaTruhla("Stříbrná Truhla", raritaTruhly, uroven);
                 nazevObrazkuTruhly = "stribrnaTruhla.png";
             } else {
-                truhla = new ZlataTruhla("Zlatá Truhla", raritaTruhly);
+                truhla = new ZlataTruhla("Zlatá Truhla", raritaTruhly, uroven);
                 nazevObrazkuTruhly = "zlataTruhla.png";
             }
 
-            Hra.inventar.pridejTruhlu(truhla);
+            Hra.inventarTruhel.add(truhla);
             panelOdmen.add(new IkonaVeciVInventari(nazevObrazkuTruhly, raritaTruhly, 0));
         }
 

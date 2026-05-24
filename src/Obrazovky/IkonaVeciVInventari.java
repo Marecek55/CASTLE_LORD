@@ -6,12 +6,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
 
-public class IkonaVeciVInventari extends JPanel {
+public class IkonaVeciVInventari extends JButton {
     private Image pozadi;
     private Image obrazek;
     private String textSily = "";
 
     public IkonaVeciVInventari(String nazevObrazkuVeci, Rarita rarita, int sila) {
+        this.setContentAreaFilled(false);
+        this.setBorderPainted(false);
+        this.setFocusPainted(false);
+        this.setOpaque(false);
         int velikost = (int) (Hra.sirkaObrazovky * 0.1);
         this.setPreferredSize(new Dimension(velikost, velikost));
         this.setOpaque(false);
@@ -33,6 +37,10 @@ public class IkonaVeciVInventari extends JPanel {
         }
 
 
+    }
+    public void deaktivujKlikani() {
+        this.setEnabled(false);
+        this.setFocusable(false);
     }
 
     @Override

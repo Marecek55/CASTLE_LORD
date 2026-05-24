@@ -59,7 +59,6 @@ public class ObrazovkaHradu extends Obrazovka {
         okno.setVisible(true);
 
 
-
     }
     int sirka = Hra.sirkaObrazovky;
     int vyska = Hra.vyskaObrazovky;
@@ -151,6 +150,15 @@ public void inicializace() {
 
 @Override
 public void funkcnost() {
+    truhlaTlacitko.addActionListener(e -> {
+        new ObrazovkaTruhel("Sklad truhel", false);
+        this.okno.setVisible(false);
+    });
+    inventarTlacitko.addActionListener(e -> {
+
+        new ObrazovkaInventare("Inventar", false);
+        this.okno.setVisible(false);
+    });
     exitTlacitko.addActionListener(e -> {
         Hra.startovaciObrazovka.getOkno().setVisible(true);
         this.okno.setVisible(false);

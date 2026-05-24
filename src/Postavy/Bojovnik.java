@@ -9,9 +9,8 @@ public class Bojovnik extends Postava{
     private int pocetTreninku;
     private int bonusZTreninku;
 
-
-    public Bojovnik(String jmeno, Zbran zbran, Brneni brneni, Medailon medailon, String nazevObrazkuVKlidu, String nazevObrazkuVUtoku , int uroven) {
-        super(jmeno, zbran, brneni, medailon, nazevObrazkuVKlidu, nazevObrazkuVUtoku);
+    public Bojovnik(String jmeno, Zbran zbran, Brneni brneni, Medailon medailon, String nazevObrazkuVKlidu, String nazevObrazkuVUtoku, String typ, int uroven) {
+        super(jmeno, zbran, brneni, medailon, nazevObrazkuVKlidu, nazevObrazkuVUtoku, typ);
         this.zivoty = uroven*100;
         this.maxZivoty = uroven*100;
     }

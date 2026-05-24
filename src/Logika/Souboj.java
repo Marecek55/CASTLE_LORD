@@ -12,6 +12,7 @@ public class Souboj {
     private ArrayList<Postava> tymHrace;
     private ArrayList<Postava> tymNepratel;
     private SoubojovaObrazovka obrazovka;
+    private ArrayList<Timer> listCasovacu = new ArrayList<>();
     public Souboj(ArrayList<Postava> hrac, ArrayList<Postava> nepratele, SoubojovaObrazovka obrazovka) {
         this.tymHrace = hrac;
         this.tymNepratel = nepratele;
@@ -48,12 +49,17 @@ public class Souboj {
     }
 
     private void ukonciBitvu(boolean vyhra) {
+        for (Timer t : listCasovacu) {
+            t.stop();
+        }
         obrazovka.konecBitvy(vyhra);
     }
     public void spousteniCasovace(Postava utocnik, ArrayList<Postava> jejiNepratele) {
         int rychlost = 1000 + Hra.rand.nextInt(500);
 
         Timer casovac = new Timer(rychlost, null);
+
+        listCasovacu.add(casovac);
         casovac.addActionListener(e -> {
 
             if (utocnik.getZivoty() > 0 && !jejiNepratele.isEmpty()) {

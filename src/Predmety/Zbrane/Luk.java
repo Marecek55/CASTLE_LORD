@@ -25,4 +25,6 @@ public class Luk extends Zbran {
             return sila;
         }
     }
+
+
 }

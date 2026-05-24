@@ -20,6 +20,7 @@
             this.sila = sila;
             this.silaCritical = silaCritical;
             this.rarita = rarita;
+            typ = "Zbran";
 
         }
         public static Zbran vytvoritZbran(int uroven, boolean jeZtruhly, Rarita raritaZtruhly) {

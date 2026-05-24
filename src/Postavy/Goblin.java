@@ -8,8 +8,8 @@ import Predmety.Zbroj.Medailon;
 public class Goblin extends Postava {
 
 
-    public Goblin(String jmeno, Zbran zbran, Brneni brneni, Medailon medailon, String nazevObrazkuVKlidu, String nazevObrazkuVUtoku, int urovenGobliniStezky) {
-        super(jmeno, zbran, brneni, medailon, nazevObrazkuVKlidu, nazevObrazkuVUtoku);
+    public Goblin(String jmeno, Zbran zbran, Brneni brneni, Medailon medailon, String nazevObrazkuVKlidu, String nazevObrazkuVUtoku, String typ, int urovenGobliniStezky) {
+        super(jmeno, zbran, brneni, medailon, nazevObrazkuVKlidu, nazevObrazkuVUtoku, typ);
         double nasobitel = Hra.rand.nextInt(10, 20)/10.0;
         this.zivoty = (int) (70 * urovenGobliniStezky * nasobitel);
     }

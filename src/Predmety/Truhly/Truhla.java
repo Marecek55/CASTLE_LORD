@@ -9,16 +9,32 @@ import Predmety.Zbrane.Zbran;
 import Predmety.Zbroj.Brneni;
 import Predmety.Zbroj.Medailon;
 
+import java.util.ArrayList;
+
 public abstract class Truhla {
     protected Rarita rarita;
     protected int sanceBezna;
     protected int sanceVzacna;
     protected int sanceLegendarni;
     protected double nasobitelPenezPodleTypu;
+    private ArrayList<Predmet> obsah = new ArrayList<>();
+    private boolean otevreno = false;
+    protected void nastavSance() {}
 
-    public Truhla(String nazev, Rarita rarita) {
+    public Truhla(String nazev, Rarita rarita, int uroven) {
         this.rarita = rarita;
+        nastavSance();
+        if (otevreno) return;
+        int pocetVeci = Hra.rand.nextInt(1, 4);
+        for (int i = 0; i < pocetVeci; i++) {
+            obsah.add(generovaniPredmetu(uroven));
+        }
+        otevreno = true;
 
+    }
+
+    public ArrayList<Predmet> getObsah() {
+        return obsah;
     }
 
     public Predmet generovaniPredmetu(int uroven) {

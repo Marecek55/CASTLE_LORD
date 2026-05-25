@@ -14,10 +14,6 @@ import java.awt.event.*;
 public class ObrazovkaHradu extends Obrazovka {
     private PanelPohyblivehoPozadi panelHradu;
     private JButton kasarna;
-    private JButton lekarna;
-    private JButton trenink;
-    private JButton skladPenez;
-    private JButton skladJidla;
     private JButton stavbaTlacitko;
     private JButton mapaTlacitko;
     private JButton exitTlacitko;
@@ -27,6 +23,8 @@ public class ObrazovkaHradu extends Obrazovka {
     private JLabel pocetJidla;
     private JButton penize;
     private JButton jidlo;
+    private JButton levelUkazatel;
+    private JLabel level;
     private int xMysStart;
     private int yMysStart;
     private Hrad hrad;
@@ -35,17 +33,13 @@ public class ObrazovkaHradu extends Obrazovka {
     public ObrazovkaHradu(String nazev, boolean malaObrazovka) {
         super(nazev, malaObrazovka);
         kasarna = new JButton();
-        lekarna = new JButton();
-        trenink = new JButton();
-        skladJidla = new JButton();
         stavbaTlacitko = new JButton();
         mapaTlacitko = new JButton();
-        skladPenez = new JButton();
         exitTlacitko = new JButton();
         truhlaTlacitko = new JButton();
         inventarTlacitko = new JButton();
-        Penize.setPocet(1000);
-        Jidlo.setPocet(500);
+        levelUkazatel = new JButton();
+        level = new JLabel(String.valueOf(Hra.hrac.getUroven()));
         pocetPenez = new JLabel(String.valueOf(Penize.getPocet()));
         pocetJidla = new JLabel(String.valueOf(Jidlo.getPocet()));
         penize = new JButton();
@@ -61,10 +55,10 @@ public class ObrazovkaHradu extends Obrazovka {
 
     }
     public void aktualizace() {
-        if (pocetPenez != null && pocetJidla != null) {
-            pocetPenez.setText(String.valueOf(Penize.getPocet()));
-            pocetJidla.setText(String.valueOf(Jidlo.getPocet()));
-        }
+        pocetPenez.setText(String.valueOf(Penize.getPocet()));
+        pocetJidla.setText(String.valueOf(Jidlo.getPocet()));
+        level.setText(String.valueOf(Hra.hrac.getUroven()));
+
     }
     int sirka = Hra.sirkaObrazovky;
     int vyska = Hra.vyskaObrazovky;
@@ -100,10 +94,16 @@ public void inicializace() {
     pocetPenez.setForeground(barva);
     pocetJidla.setHorizontalAlignment(SwingConstants.CENTER);
     pocetPenez.setHorizontalAlignment(SwingConstants.CENTER);
+    Font font2 = new Font("Georgia", Font.BOLD, (int) (vyska * 0.065));
+    level.setFont(font2);
+    level.setForeground(new Color(255, 235, 150));
+    level.setHorizontalAlignment(SwingConstants.CENTER);
+    level.setVerticalAlignment(SwingConstants.CENTER);
 
 
     pocetJidla.setBounds((int) (xJidla + sirkaTlacitek2 * 0.25), yTlacitek3, (int) (sirkaTlacitek2 * 0.7), vyskaTlacitek2);
     pocetPenez.setBounds((int) (xPenez + sirkaTlacitek2 * 0.25), yTlacitek3, (int) (sirkaTlacitek2 * 0.7), vyskaTlacitek2);
+    level.setBounds((int) (sirka*0.046), (int) (sirka*0.043), ctverec,ctverec);
 
 
     StylTlacitek.nastavJakoObrazek(stavbaTlacitko, "/Obrazky/ObrazkyVHradu/stavbaTlacitko.png", sirkaTlacitek, vyskaTlacitek);
@@ -113,6 +113,8 @@ public void inicializace() {
     StylTlacitek.nastavJakoObrazek(inventarTlacitko,"/Obrazky/ObrazkyVHradu/tlacitkoInventar.png", ctverec, ctverec);
     StylTlacitek.nastavJakoObrazek(jidlo,"/Obrazky/ObrazkyVHradu/jidlo.png", sirkaTlacitek2, vyskaTlacitek2);
     StylTlacitek.nastavJakoObrazek(penize,"/Obrazky/ObrazkyVHradu/penize.png", sirkaTlacitek2, vyskaTlacitek2);
+    StylTlacitek.nastavJakoObrazek(levelUkazatel, "/Obrazky/ObrazkyVHradu/ukazatelLevelu.png", (int) (sirka*0.15), (int) (sirka*0.15));
+    levelUkazatel.setName("pevneTlacitka");
     stavbaTlacitko.setName("pevneTlacitka");
     mapaTlacitko.setName("pevneTlacitka");
     exitTlacitko.setName("pevneTlacitka");
@@ -120,6 +122,7 @@ public void inicializace() {
     inventarTlacitko.setName("pevneTlacitka");
     penize.setName("pevneTlacitka");
     jidlo.setName("pevneTlacitka");
+    level.setName("pevneTlacitka");
 
     stavbaTlacitko.setLocation(vzdalenostOdKraje,yTlacitek1);
     mapaTlacitko.setLocation((sirka -sirkaTlacitek- vzdalenostOdKraje), yTlacitek1);
@@ -128,6 +131,7 @@ public void inicializace() {
     inventarTlacitko.setLocation(vzdalenostOdKraje,yTlacitek2- ctverec-vzdalenostOdKraje );
     jidlo.setLocation(xJidla, yTlacitek3);
     penize.setLocation( xPenez, yTlacitek3);
+    levelUkazatel.setLocation(vzdalenostOdKraje,vzdalenostOdKraje);
     panelHradu.add(stavbaTlacitko);
     panelHradu.add(mapaTlacitko);
     panelHradu.add(exitTlacitko);
@@ -135,14 +139,12 @@ public void inicializace() {
     panelHradu.add(inventarTlacitko);
     panelHradu.add(penize);
     panelHradu.add(jidlo);
+    panelHradu.add(levelUkazatel);
     panelHradu.add(pocetJidla);
     panelHradu.add(pocetPenez);
+    panelHradu.add(level);
     pocetJidla.setName("pevneTlacitkaText");
     pocetPenez.setName("pevneTlacitkaText");
-    hrad.postavitMistnost(TypMistnosti.LEKARNA, 1, lekarna);
-    hrad.postavitMistnost(TypMistnosti.SKLAD_JIDLA, 14, skladJidla);
-    hrad.postavitMistnost(TypMistnosti.SKLAD_PENEZ, 10, skladPenez);
-    hrad.postavitMistnost(TypMistnosti.TRENINKOVA_HALA, 9, trenink);
     panelHradu.setComponentZOrder(stavbaTlacitko, 0);
     panelHradu.setComponentZOrder(mapaTlacitko, 0);
     panelHradu.setComponentZOrder(exitTlacitko, 0);

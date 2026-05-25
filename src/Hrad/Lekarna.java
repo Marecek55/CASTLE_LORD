@@ -32,6 +32,8 @@ public class Lekarna extends Mistnost{
             Penize.setPocet(Penize.getPocet() - cena);
             this.uroven++;
             this.maxKapacita = uroven;
+        }else {
+            throw new RuntimeException("Nemáš dostatek peněz na vylepšení!");
         }
     }
 

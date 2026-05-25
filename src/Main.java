@@ -18,7 +18,7 @@ public class Main {
 //
 //        ObrazovkaMapy o = new ObrazovkaMapy("mapa", false);
 //        o.inicializace();
-//        ObrazovkaHradu h = new ObrazovkaHradu("hrad", false);
+//        ObrazovkaHradu hrac = new ObrazovkaHradu("hrad", false);
 
 
 

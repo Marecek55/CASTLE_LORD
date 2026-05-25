@@ -14,9 +14,8 @@ public class Hrad {
     private ArrayList<TreninkovaHala> treninkoveHaly = new ArrayList<>();
     private ArrayList<SkladPenez> skladyPenez = new ArrayList<>();
     private ArrayList<SkladJidla> skladyJidla = new ArrayList<>();
+    private ArrayList<Integer> obsazenePozice = new ArrayList<>();
     private JPanel okno;
-
-
     public Hrad(JPanel okno, JButton b)  {
         this.okno = okno;
         try {
@@ -28,6 +27,7 @@ public class Hrad {
             System.out.println("Kasarna nejde vytvorit");
         }
         lokaceMistnosti = new HashMap<>();
+        nacteniLokaci();
     }
     HashMap<Integer, Integer[]> lokaceMistnosti;
     public void nacteniLokaci(){
@@ -52,40 +52,55 @@ public class Hrad {
     }
     public void postavitMistnost(TypMistnosti typ, int pozice, JButton b) {
         try {
-
-            switch (typ) {
-                case LEKARNA:
+            if (obsazenePozice.contains(pozice) == true) {
+                JOptionPane.showMessageDialog(okno, "Tato pozice je obsazená jinou budovou!");
+            }else {
+                switch (typ) {
+                    case LEKARNA:
                         Lekarna l = new Lekarna("Lékárna", 200, 100, 1, 1);
                         lekarny.add(l);
                         StylTlacitek.nastavJakoObrazek(b,"/Obrazky/ObrazkyVHradu/lekarnaMistnost.png", 747,498);
                         break;
 
-                case TRENINKOVA_HALA:
+                    case TRENINKOVA_HALA:
                         TreninkovaHala h = new TreninkovaHala("Tréninková hala", 300, 200, 1, 1);
                         treninkoveHaly.add(h);
                         StylTlacitek.nastavJakoObrazek(b,"/Obrazky/ObrazkyVHradu/treninkovaMistnost.png", 747,498);
                         break;
 
-                case SKLAD_PENEZ:
+                    case SKLAD_PENEZ:
                         SkladPenez s = new SkladPenez("Sklad Peněz", 200, 300, 1, 1);
                         skladyPenez.add(s);
                         StylTlacitek.nastavJakoObrazek(b,"/Obrazky/ObrazkyVHradu/skladPenez.png", 747,498);
                         break;
 
-                case SKLAD_JIDLA:
+                    case SKLAD_JIDLA:
                         SkladJidla sklad = new SkladJidla("Sklad Jídla", 150, 200, 1, 1);
                         skladyJidla.add(sklad);
                         StylTlacitek.nastavJakoObrazek(b,"/Obrazky/ObrazkyVHradu/skladJidla.png", 747,498);
                         break;
 
 
+                }
+                obsazenePozice.add(pozice);
+                b.setLocation(lokaceMistnosti.get(pozice)[0],lokaceMistnosti.get(pozice)[1]);
+                okno.add(b);
+                if (okno.getMouseListeners().length > 0) {
+                    b.addMouseListener(okno.getMouseListeners()[0]);
+                    b.addMouseMotionListener(okno.getMouseMotionListeners()[0]);
+                    b.addMouseWheelListener(okno.getMouseWheelListeners()[0]);
+                }
+
             }
-            b.setLocation(lokaceMistnosti.get(pozice)[0],lokaceMistnosti.get(pozice)[1]);
-            okno.add(b);
+
+
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
+
+
+
 
     public Kasarna getKasarna() {
         return kasarna;

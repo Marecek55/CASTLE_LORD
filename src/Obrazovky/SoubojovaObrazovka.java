@@ -106,11 +106,14 @@ public class SoubojovaObrazovka extends Obrazovka {
         arenaPanel.add(panelOdmen);
         panelOdmen.setVisible(true);
         if (hracVyhral) {
+            Hra.hrac.pridejxp();
             if (lokace.equals("gobliniStezka")) {
                 if (vybranaUrovenStezky == Hra.urovenGobliniStezky) {
                     Hra.urovenGobliniStezky++;
                 }
             }
+        }else {
+            Hra.hrac.odeberxp();
         }
         JButton zpetTlacitko = new JButton();
         int sirkaTlacitka = (int) (Hra.sirkaObrazovky * 0.2);
@@ -129,6 +132,9 @@ public class SoubojovaObrazovka extends Obrazovka {
                 if (Hra.hudbaPozadi != null) {
                     Hra.hudbaPozadi.hraj(true);
                 }
+                if (Hra.obrazovkaHradu != null) {
+                    Hra.obrazovkaHradu.aktualizace();
+                }
                 okno.setContentPane(predchoziObrazovkaMapy.getMapa());
                 okno.revalidate();
                 okno.repaint();
@@ -144,7 +150,7 @@ public class SoubojovaObrazovka extends Obrazovka {
         int uroven;
 
         if (lokace.equals("arena")) {
-            uroven = Hra.urovenHradu;
+            uroven = Hra.hrac.getUroven();
         } else {
             uroven = Hra.urovenGobliniStezky;
         }
@@ -221,7 +227,6 @@ public class SoubojovaObrazovka extends Obrazovka {
         if (hracVyhral == false) {
             sanceNaTruhlu = 10;
         }
-        sanceNaTruhlu = 100;
 
         if (Hra.rand.nextInt(100) < sanceNaTruhlu) {
             Truhla truhla;

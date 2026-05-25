@@ -52,7 +52,7 @@ public class PanelArena extends PanelNaPozadi {
         Color barvaTextu = new Color(60, 30, 10);
 
 
-        int urovenHradu = Hra.urovenHradu;
+        int urovenHradu = Hra.hrac.getUroven();
         ArrayList<Postava> nepratelskyTym = new ArrayList<>();
         if (Hra.hracuvTym.size() == 1){
             nepratelskyTym.add(TvorbaPostav.tvorbaProtihracovaBojovnika("Nepřítel", urovenHradu));

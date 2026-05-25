@@ -2,11 +2,10 @@ package Logika;
 
 import Obrazovky.ObrazovkaHradu;
 import Obrazovky.ObrazovkaMapy;
-import Obrazovky.ObrazovkaNastaveni;
 import Obrazovky.StartovaciObrazovka;
-import Postavy.Bojovnik;
 import Postavy.Postava;
 import Predmety.Inventar;
+import Predmety.Jidlo;
 import Predmety.Penize;
 import Predmety.Rarita;
 import Predmety.Truhly.Truhla;
@@ -29,13 +28,13 @@ public class Hra {
     public static Hudba hudbaPozadi;
     public static Hudba hudbaBitva;
     public static int urovenGobliniStezky = 1;
-    public static int urovenHradu = 1;
     public static StartovaciObrazovka startovaciObrazovka;
     public static ObrazovkaHradu obrazovkaHradu;
     public static ObrazovkaMapy obrazovkaMapy;
     public static ArrayList<Postava> hracuvTym = new ArrayList<>();
     public static ArrayList<Truhla> inventarTruhel = new ArrayList<>();
     public static Inventar inventar = new Inventar();
+    public static Hrac hrac;
     public static void hracuvTym(String jmeno) {
         if (hracuvTym.isEmpty()) {
             int sila = rand.nextInt(3, 8);
@@ -62,9 +61,13 @@ public class Hra {
         }
     }
     public Hra() {
+
+        hrac = new Hrac(1,Penize.getPocet(), Jidlo.getPocet(),1,0);
         hudbaPozadi = new Hudba("/Hudba/HudbaPozadi.wav");
         hudbaBitva = new Hudba("/Hudba/HudbaBitva.wav");
         Hra.hudbaPozadi.hraj(true);
+        Penize.setPocet(1000);
+        Jidlo.setPocet(500);
 
         startovaciObrazovka = new StartovaciObrazovka("Start");
 

@@ -27,6 +27,8 @@ public class TreninkovaHala extends Mistnost{
         if (Penize.getPocet() >= cena) {
             Penize.setPocet(Penize.getPocet() - cena);
             this.uroven++;
+        }else {
+            throw new RuntimeException("Nemáš dostatek peněz na vylepšení!");
         }
     }
     public void trenovaniBojovnika(Bojovnik b ){

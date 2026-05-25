@@ -29,6 +29,8 @@ public class SkladJidla extends Mistnost{
             this.uroven++;
             Jidlo.setMaxpocet(Jidlo.getMaxpocet() + 5000 * uroven);
 
+        }else {
+            throw new RuntimeException("Nemáš dostatek peněz na vylepšení!");
         }
     }
 }

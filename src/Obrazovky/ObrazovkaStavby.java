@@ -4,7 +4,7 @@ import Hrad.Hrad;
 import Hrad.Mistnost;
 import Logika.Hra;
 import Obrazovky.Tlacitka.StylTlacitek;
-
+import Hrad.TypMistnosti;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -167,5 +167,91 @@ public class ObrazovkaStavby extends Obrazovka {
             }
             this.okno.setVisible(false);
         });
+
+        btnPostavitLekarna.addActionListener(e -> {
+            staveni(TypMistnosti.LEKARNA);
+        });
+
+        btnPostavitSkladPenez.addActionListener(e -> {
+            staveni(TypMistnosti.SKLAD_PENEZ);
+        });
+
+        btnPostavitSkladJidla.addActionListener(e -> {
+            staveni(TypMistnosti.SKLAD_JIDLA);
+        });
+
+        btnPostavitTrenink.addActionListener(e -> {
+            staveni(TypMistnosti.TRENINKOVA_HALA);
+        });
+
+        btnVylepsitLekarna.addActionListener(e -> {
+            if (hrad.getLekarny().isEmpty() == false) {
+                try {
+                    hrad.getLekarny().get(0).vylepsitMistnost();
+                    obnovitObrazovku();
+                } catch (Exception exception) {
+                    JOptionPane.showMessageDialog(okno, exception.getMessage());
+                }
+            }
+        });
+
+        btnVylepsitSkladPenez.addActionListener(e -> {
+            if (hrad.getSkladyPenez().isEmpty() == false) {
+                try {
+                    hrad.getSkladyPenez().get(0).vylepsitMistnost();
+                    obnovitObrazovku();
+                } catch (Exception exception) {
+                    JOptionPane.showMessageDialog(okno, exception.getMessage());
+                }
+            }
+        });
+
+        btnVylepsitSkladJidla.addActionListener(e -> {
+            if (hrad.getSkladyJidla().isEmpty() == false) {
+                try {
+                    hrad.getSkladyJidla().get(0).vylepsitMistnost();
+                    obnovitObrazovku();
+                } catch (Exception exception) {
+                    JOptionPane.showMessageDialog(okno, exception.getMessage());
+                }
+            }
+        });
+
+        btnVylepsitTrenink.addActionListener(e -> {
+            if (hrad.getTreninkoveHaly().isEmpty() == false) {
+                try {
+                    hrad.getTreninkoveHaly().get(0).vylepsitMistnost();
+                    obnovitObrazovku();
+                } catch (Exception exception) {
+                    JOptionPane.showMessageDialog(okno, exception.getMessage());
+                }
+            }
+        });
+    }
+    private void staveni(TypMistnosti typ) {
+        String odpoved = JOptionPane.showInputDialog(okno, "Na jakou pozici (1-18) chceš budovu postavit?");
+        if (odpoved != null) {
+            try {
+                int pozice = Integer.parseInt(odpoved.trim());
+
+                if (pozice >= 1 && pozice <= 18) {
+                    hrad.postavitMistnost(typ, pozice, new JButton());
+                    obnovitObrazovku();
+                } else {
+                    JOptionPane.showMessageDialog(okno, "Pozice musí být mezi 1 až 18!");
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(okno, "Musíš zadat číslo!");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(okno, e.getMessage());
+            }
+        }
+    }
+
+    private void obnovitObrazovku() {
+        panelStavby.removeAll();
+        inicializace();
+        panelStavby.revalidate();
+        panelStavby.repaint();
     }
 }

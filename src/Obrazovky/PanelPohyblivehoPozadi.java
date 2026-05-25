@@ -121,20 +121,20 @@ public class PanelPohyblivehoPozadi extends PanelNaPozadi {
     @Override
     public Component getComponentAt(int x, int y) {
         for (Component component : getComponents()) {
-            if (component.getName() != null && component.getName().equals("pevneTlacitka")) {
-                if (component.getBounds().contains(x, y)) {
-
-                    return component;
+            if (component.getName() != null) {
+                if (component.getName().equals("pevneTlacitka") == true) {
+                    if (component.getBounds().contains(x, y) == true) {
+                        return component;
+                    }
                 }
             }
         }
-        int xMapy = (int) ((x - xKamery) / meritko);
-        int yMapy = (int)((y - yKamery) / meritko);
-
+        int xMapy =(int) ((x - xKamery) / meritko);
+        int yMapy = (int) ((y - yKamery) /meritko);
 
         for (Component component : getComponents()) {
-            if (component.getName() == null || !component.getName().equals("pevneTlacitka")) {
-                if (component.getBounds().contains(xMapy, yMapy)) {
+            if (component.getName() == null || component.getName().equals("pevneTlacitka") == false) {
+                if (component.getBounds().contains(xMapy, yMapy) == true) {
                     return component;
                 }
             }

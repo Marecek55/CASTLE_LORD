@@ -11,11 +11,14 @@ public class Kasarna extends Mistnost{
     public Kasarna(String nazev, int cenaZaPostaveni, int cenaZaVylepseni, int uroven, int velikost) throws Exception {
         super(nazev, cenaZaPostaveni, cenaZaVylepseni, uroven, velikost);
         maxPostaveni = 1;
+        if (Penize.getPocet() >= cenaZaPostaveni) {
             Penize.setPocet(Penize.getPocet() - cenaZaPostaveni);
             aktualniPocetPostaveni++;
             this.bojovnici = new ArrayList<>();
             this.maxKapacita = 1;
+        } else {
             throw new Exception("Nemáš peníze");
+        }
 
 
     }

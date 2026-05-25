@@ -52,7 +52,7 @@ public class ObrazovkaStavby extends Obrazovka {
     int sirkaTlacitka = (int) (sirka * 0.15);
     int vzdalenostOdKraje = (int) (sirka * 0.009);
     int sirkaTlacitka2 = (int) (vyska * 0.4);
-    int vyskaTlacitka2 = (int) (sirkaTlacitka2 *  (272.0 / 917.0));
+    int vyskaTlacitka2 = (int) (sirkaTlacitka2 * (272.0 / 917.0));
 
     @Override
     public void inicializace() {
@@ -84,21 +84,25 @@ public class ObrazovkaStavby extends Obrazovka {
         panelStavby.add(btnPostavitSkladJidla);
         panelStavby.add(btnVylepsitSkladPenez);
         panelStavby.add(btnPostavitSkladPenez);
+
         for (Component c : panelStavby.getComponents()) {
             if (c instanceof JButton) {
                 ((JButton) c).setEnabled(true);
             }
         }
+
         int maxUroven = 5;
         budovaTlacitkaKontrola(hrad.getLekarny(), 2, maxUroven, btnVylepsitLekarna, btnPostavitLekarna);
         budovaTlacitkaKontrola(hrad.getSkladyPenez(), 4, maxUroven, btnVylepsitSkladPenez, btnPostavitSkladPenez);
         budovaTlacitkaKontrola(hrad.getSkladyJidla(), 4, maxUroven, btnVylepsitSkladJidla, btnPostavitSkladJidla);
         budovaTlacitkaKontrola(hrad.getTreninkoveHaly(), 3, maxUroven, btnVylepsitTrenink, btnPostavitTrenink);
+
         vytvortexty(hrad.getLekarny(), 200, 100, 2, (int)(sirka * 0.4), (int)(vyska * 0.14));
         vytvortexty(hrad.getSkladyPenez(), 200, 300, 4, (int)(sirka * 0.4), (int)(vyska * 0.56));
         vytvortexty(hrad.getSkladyJidla(), 150, 200, 4, (int)(sirka * 0.89), (int)(vyska * 0.14));
         vytvortexty(hrad.getTreninkoveHaly(), 300, 200, 3, (int)(sirka * 0.89), (int)(vyska * 0.56));
     }
+
     private void budovaTlacitkaKontrola(ArrayList<? extends Mistnost> mistnosti, int maxPostaveni, int maxUroven, JButton vylepsit, JButton postavit) {
         int aktualniPocet = mistnosti.size();
 
@@ -123,26 +127,10 @@ public class ObrazovkaStavby extends Obrazovka {
 
     private void vytvortexty(ArrayList<? extends Mistnost> mistnosti, int cenaZaPostaveni, int cenaZaVylepseni, int maxPostaveni, int x, int y) {
         int pocet = mistnosti.size();
-        boolean jePostaveno;
-        if (pocet > 0) {
-            jePostaveno = true;
-        }else {
-            jePostaveno = false;
-        }
-        int uroven;
-        if (jePostaveno == true) {
-            uroven = mistnosti.get(0).getUroven();
-        } else {
-            uroven = 0;
-        }
+        boolean jePostaveno = pocet > 0;
+        int uroven = jePostaveno ? mistnosti.get(0).getUroven() : 0;
 
-        String cena = "";
-        if (jePostaveno) {
-            int cenaVylepseni = cenaZaVylepseni * (uroven + 1);
-            cena = String.valueOf(cenaVylepseni);
-        } else {
-            cena = String.valueOf(cenaZaPostaveni);
-        }
+        String cena = jePostaveno ? String.valueOf(cenaZaVylepseni * (uroven + 1)) : String.valueOf(cenaZaPostaveni);
 
         pridatText(cena, x, y, new Color(150, 255, 150));
         pridatText(String.valueOf(maxPostaveni), x, y + (int)(vyska * 0.04), new Color(245, 240, 210));
@@ -168,24 +156,13 @@ public class ObrazovkaStavby extends Obrazovka {
             this.okno.setVisible(false);
         });
 
-        btnPostavitLekarna.addActionListener(e -> {
-            staveni(TypMistnosti.LEKARNA);
-        });
-
-        btnPostavitSkladPenez.addActionListener(e -> {
-            staveni(TypMistnosti.SKLAD_PENEZ);
-        });
-
-        btnPostavitSkladJidla.addActionListener(e -> {
-            staveni(TypMistnosti.SKLAD_JIDLA);
-        });
-
-        btnPostavitTrenink.addActionListener(e -> {
-            staveni(TypMistnosti.TRENINKOVA_HALA);
-        });
+        btnPostavitLekarna.addActionListener(e -> staveni(TypMistnosti.LEKARNA));
+        btnPostavitSkladPenez.addActionListener(e -> staveni(TypMistnosti.SKLAD_PENEZ));
+        btnPostavitSkladJidla.addActionListener(e -> staveni(TypMistnosti.SKLAD_JIDLA));
+        btnPostavitTrenink.addActionListener(e -> staveni(TypMistnosti.TRENINKOVA_HALA));
 
         btnVylepsitLekarna.addActionListener(e -> {
-            if (hrad.getLekarny().isEmpty() == false) {
+            if (!hrad.getLekarny().isEmpty()) {
                 try {
                     hrad.getLekarny().get(0).vylepsitMistnost();
                     obnovitObrazovku();
@@ -196,7 +173,7 @@ public class ObrazovkaStavby extends Obrazovka {
         });
 
         btnVylepsitSkladPenez.addActionListener(e -> {
-            if (hrad.getSkladyPenez().isEmpty() == false) {
+            if (!hrad.getSkladyPenez().isEmpty()) {
                 try {
                     hrad.getSkladyPenez().get(0).vylepsitMistnost();
                     obnovitObrazovku();
@@ -207,7 +184,7 @@ public class ObrazovkaStavby extends Obrazovka {
         });
 
         btnVylepsitSkladJidla.addActionListener(e -> {
-            if (hrad.getSkladyJidla().isEmpty() == false) {
+            if (!hrad.getSkladyJidla().isEmpty()) {
                 try {
                     hrad.getSkladyJidla().get(0).vylepsitMistnost();
                     obnovitObrazovku();
@@ -218,7 +195,7 @@ public class ObrazovkaStavby extends Obrazovka {
         });
 
         btnVylepsitTrenink.addActionListener(e -> {
-            if (hrad.getTreninkoveHaly().isEmpty() == false) {
+            if (!hrad.getTreninkoveHaly().isEmpty()) {
                 try {
                     hrad.getTreninkoveHaly().get(0).vylepsitMistnost();
                     obnovitObrazovku();
@@ -228,17 +205,17 @@ public class ObrazovkaStavby extends Obrazovka {
             }
         });
     }
+
     private void staveni(TypMistnosti typ) {
-        String odpoved = JOptionPane.showInputDialog(okno, "Na jakou pozici (1-18) chceš budovu postavit?");
+        String odpoved = JOptionPane.showInputDialog(okno, "Na jakou pozici 1-18 chceš budovu postavit?");
         if (odpoved != null) {
             try {
                 int pozice = Integer.parseInt(odpoved.trim());
-
                 if (pozice >= 1 && pozice <= 18) {
-                    hrad.postavitMistnost(typ, pozice, new JButton());
+                    hrad.postavitMistnost(typ, pozice);
                     obnovitObrazovku();
                 } else {
-                    JOptionPane.showMessageDialog(okno, "Pozice musí být mezi 1 až 18!");
+                    JOptionPane.showMessageDialog(okno, "Pozice musí být 1-18!");
                 }
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(okno, "Musíš zadat číslo!");
@@ -249,9 +226,10 @@ public class ObrazovkaStavby extends Obrazovka {
     }
 
     private void obnovitObrazovku() {
-        panelStavby.removeAll();
-        inicializace();
-        panelStavby.revalidate();
-        panelStavby.repaint();
+            panelStavby.removeAll();
+            inicializace();
+            panelStavby.revalidate();
+            panelStavby.repaint();
     }
+
 }

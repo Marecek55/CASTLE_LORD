@@ -23,14 +23,6 @@ public class ObrazovkaTruhel extends Obrazovka {
 
     public ObrazovkaTruhel(String nazev, boolean malaObrazovka) {
         super(nazev, malaObrazovka);
-        if (Hra.inventarTruhel.isEmpty()) {
-            for (int i = 0; i < 16; i++) {
-                // Vytvoříme mix truhel, aby ses podíval, jak vypadají
-                if (i % 3 == 0) Hra.inventarTruhel.add(new DrevenaTruhla("Testovací Dřevo", Rarita.BĚŽNÁ, 1));
-                else if (i % 3 == 1) Hra.inventarTruhel.add(new StribrnaTruhla("Testovací Stříbro", Rarita.VZÁCNÁ, 5));
-                else Hra.inventarTruhel.add(new ZlataTruhla("Testovací Zlato", Rarita.LEGENDÁRNÍ, 10));
-            }
-        }
         panelTruhel = new PanelNaPozadi("/obrazkyInventar/pozadiTruhly.png");
         panelTruhel.setLayout(null);
 
@@ -55,6 +47,7 @@ public class ObrazovkaTruhel extends Obrazovka {
 
         btnZpet.addActionListener(e -> {
             if (Hra.obrazovkaHradu != null) {
+                Hra.obrazovkaHradu.aktualizace();
                 Hra.obrazovkaHradu.getOkno().setVisible(true);
             }
             this.okno.setVisible(false);

@@ -30,7 +30,6 @@ public class Hra {
     public static Hudba hudbaBitva;
     public static int urovenGobliniStezky = 1;
     public static int urovenHradu = 1;
-    public static ObrazovkaNastaveni obrazovkaNastaveni;
     public static StartovaciObrazovka startovaciObrazovka;
     public static ObrazovkaHradu obrazovkaHradu;
     public static ObrazovkaMapy obrazovkaMapy;

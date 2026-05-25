@@ -10,25 +10,31 @@ public class Lekarna extends Mistnost{
     private int maxKapacita;
     public Lekarna(String nazev, int cenaZaPostaveni, int cenaZaVylepseni, int uroven, int velikost) throws Exception {
         super(nazev, cenaZaPostaveni, cenaZaVylepseni, uroven, velikost);
+        maxPostaveni =2;
+
         if (Penize.getPocet() >= cenaZaPostaveni) {
-            Penize.setPocet(Penize.getPocet() - cenaZaPostaveni);
-            this.leceniBojovnici = new ArrayList<>();
-            this.maxKapacita = 1;
-        } else {
-            throw new Exception("Nemáš peníze");
-        }
+                Penize.setPocet(Penize.getPocet() - cenaZaPostaveni);
+                aktualniPocetPostaveni++;
+                this.leceniBojovnici = new ArrayList<>();
+                this.maxKapacita = 1;
+            } else {
+                throw new Exception("Nemáš peníze");
+            }
+
+
 
     }
 
     @Override
     public void vylepsitMistnost() {
-        int cena = cenaZaVylepseni * (uroven+1);
+        int cena = getCenaZaDalsiVylepseni();
         if (Penize.getPocet() >= cena) {
             Penize.setPocet(Penize.getPocet() - cena);
             this.uroven++;
             this.maxKapacita = uroven;
         }
     }
+
     public  void pridatBojovnikyDoLekarny(Bojovnik b){
         if (leceniBojovnici.size() <maxKapacita){
             if (b.getMaxZivoty()>b.getZivoty()){

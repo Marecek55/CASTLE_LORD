@@ -234,7 +234,7 @@ public class ObrazovkaInventare extends Obrazovka {
         inventarVeci.removeAll();
         int velikost = (int)(sirka * 0.11);
         int mezeraX = (int)(sirka * -0.009);
-        int mezeraY = (int)(vyska * -0.01);
+        int mezeraY = (int)(vyska * -0.015);
 
         int startX = aktualniStranka * 16;
 

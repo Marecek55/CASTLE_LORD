@@ -65,11 +65,11 @@ public abstract class Truhla {
 
             case 4:
                 int pocet = Penize.dostanePenize(uroven, rarita, nasobitelPenezPodleTypu);
-                Penize.pridaniDoHromadyPenezZTruhly(pocet, uroven);
+                Penize.pridaniDoHromadyPenezZTruhly(pocet, Hra.urovenHradu);
                 return null;
                 case 5:
                     int pocet2 = Jidlo.dostaneJidlo(uroven,rarita,nasobitelPenezPodleTypu);
-                    Jidlo.pridaniDoHromadyJidlaZTruhly(pocet2, uroven);
+                    Jidlo.pridaniDoHromadyJidlaZTruhly(pocet2, Hra.urovenHradu);
                     return null;
 
 

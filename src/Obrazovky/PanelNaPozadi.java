@@ -1,8 +1,11 @@
 package Obrazovky;
 
+import org.w3c.dom.ls.LSOutput;
+
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
+import java.sql.SQLOutput;
 
 public class PanelNaPozadi extends JPanel {
 
@@ -18,6 +21,8 @@ public class PanelNaPozadi extends JPanel {
         bg = nactiObrazek(nazevObrazku);
 
     }
+
+
 
 
     public PanelNaPozadi() {

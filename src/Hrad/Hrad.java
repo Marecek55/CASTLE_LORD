@@ -10,10 +10,10 @@ public class Hrad {
 
 
     private Kasarna kasarna;
-    private Lekarna lekarna;
-    private TreninkovaHala treninkovaHala;
-    private SkladPenez skladPenez;
-    private SkladJidla skladJidla;
+    private ArrayList<Lekarna> lekarny = new ArrayList<>();
+    private ArrayList<TreninkovaHala> treninkoveHaly = new ArrayList<>();
+    private ArrayList<SkladPenez> skladyPenez = new ArrayList<>();
+    private ArrayList<SkladJidla> skladyJidla = new ArrayList<>();
     private JPanel okno;
 
 
@@ -55,29 +55,29 @@ public class Hrad {
 
             switch (typ) {
                 case LEKARNA:
-                    if (lekarna == null){
-                        lekarna = new Lekarna("Lékárna", 200, 100, 1, 1);
+                        Lekarna l = new Lekarna("Lékárna", 200, 100, 1, 1);
+                        lekarny.add(l);
                         StylTlacitek.nastavJakoObrazek(b,"/Obrazky/ObrazkyVHradu/lekarnaMistnost.png", 747,498);
                         break;
-                    }
+
                 case TRENINKOVA_HALA:
-                    if (treninkovaHala == null){
-                        treninkovaHala = new TreninkovaHala("Tréninková hala", 300, 200, 1, 1);
+                        TreninkovaHala h = new TreninkovaHala("Tréninková hala", 300, 200, 1, 1);
+                        treninkoveHaly.add(h);
                         StylTlacitek.nastavJakoObrazek(b,"/Obrazky/ObrazkyVHradu/treninkovaMistnost.png", 747,498);
                         break;
-                    }
+
                 case SKLAD_PENEZ:
-                    if (skladPenez == null){
-                        skladPenez = new SkladPenez("Sklad Peněz", 200, 300, 1, 1);
+                        SkladPenez s = new SkladPenez("Sklad Peněz", 200, 300, 1, 1);
+                        skladyPenez.add(s);
                         StylTlacitek.nastavJakoObrazek(b,"/Obrazky/ObrazkyVHradu/skladPenez.png", 747,498);
                         break;
-                    }
+
                 case SKLAD_JIDLA:
-                    if (skladJidla == null){
-                        skladJidla = new SkladJidla("Sklad Jídla", 150, 200, 1, 1);
+                        SkladJidla sklad = new SkladJidla("Sklad Jídla", 150, 200, 1, 1);
+                        skladyJidla.add(sklad);
                         StylTlacitek.nastavJakoObrazek(b,"/Obrazky/ObrazkyVHradu/skladJidla.png", 747,498);
                         break;
-                    }
+
 
             }
             b.setLocation(lokaceMistnosti.get(pozice)[0],lokaceMistnosti.get(pozice)[1]);
@@ -87,46 +87,31 @@ public class Hrad {
         }
     }
 
-
-
-
     public Kasarna getKasarna() {
         return kasarna;
     }
 
-    public void setKasarna(Kasarna kasarna) {
-        this.kasarna = kasarna;
+    public ArrayList<Lekarna> getLekarny() {
+        return lekarny;
     }
 
-    public Lekarna getLekarna() {
-        return lekarna;
+    public ArrayList<TreninkovaHala> getTreninkoveHaly() {
+        return treninkoveHaly;
     }
 
-    public void setLekarna(Lekarna lekarna) {
-        this.lekarna = lekarna;
+    public ArrayList<SkladPenez> getSkladyPenez() {
+        return skladyPenez;
     }
 
-    public TreninkovaHala getTreninkovaHala() {
-        return treninkovaHala;
+    public ArrayList<SkladJidla> getSkladyJidla() {
+        return skladyJidla;
     }
 
-    public void setTreninkovaHala(TreninkovaHala treninkovaHala) {
-        this.treninkovaHala = treninkovaHala;
+    public JPanel getOkno() {
+        return okno;
     }
 
-    public SkladPenez getSkladPenez() {
-        return skladPenez;
-    }
-
-    public void setSkladPenez(SkladPenez skladPenez) {
-        this.skladPenez = skladPenez;
-    }
-
-    public SkladJidla getSkladJidla() {
-        return skladJidla;
-    }
-
-    public void setSkladJidla(SkladJidla skladJidla) {
-        this.skladJidla = skladJidla;
+    public HashMap<Integer, Integer[]> getLokaceMistnosti() {
+        return lokaceMistnosti;
     }
 }

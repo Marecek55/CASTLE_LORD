@@ -32,6 +32,7 @@ public class Penize extends Predmet{
         maxpocet = levelHrace*1000;
         pocet  = pocet + penize;
 
+
         if (pocet > maxpocet) {
             pocet = maxpocet;
         }

@@ -44,8 +44,8 @@ public class ObrazovkaHradu extends Obrazovka {
         exitTlacitko = new JButton();
         truhlaTlacitko = new JButton();
         inventarTlacitko = new JButton();
-        Penize.setPocet(124782);
-        Jidlo.setPocet(124782);
+        Penize.setPocet(1000);
+        Jidlo.setPocet(500);
         pocetPenez = new JLabel(String.valueOf(Penize.getPocet()));
         pocetJidla = new JLabel(String.valueOf(Jidlo.getPocet()));
         penize = new JButton();
@@ -59,6 +59,12 @@ public class ObrazovkaHradu extends Obrazovka {
         okno.setVisible(true);
 
 
+    }
+    public void aktualizace() {
+        if (pocetPenez != null && pocetJidla != null) {
+            pocetPenez.setText(String.valueOf(Penize.getPocet()));
+            pocetJidla.setText(String.valueOf(Jidlo.getPocet()));
+        }
     }
     int sirka = Hra.sirkaObrazovky;
     int vyska = Hra.vyskaObrazovky;
@@ -150,6 +156,10 @@ public void inicializace() {
 
 @Override
 public void funkcnost() {
+    stavbaTlacitko.addActionListener(e -> {
+        new ObrazovkaStavby("Stavba", false, hrad);
+        this.okno.setVisible(false);
+    });
     truhlaTlacitko.addActionListener(e -> {
         new ObrazovkaTruhel("Sklad truhel", false);
         this.okno.setVisible(false);

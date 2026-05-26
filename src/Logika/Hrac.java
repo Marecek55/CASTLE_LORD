@@ -2,9 +2,10 @@ package Logika;
 
 import Postavy.Bojovnik;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Hrac {
+public class Hrac implements Serializable {
     private int uroven;
     private int zlataky;
     private int jidlo;

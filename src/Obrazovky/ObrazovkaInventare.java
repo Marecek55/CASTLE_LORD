@@ -11,6 +11,8 @@ import Predmety.Zbroj.Medailon;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ObrazovkaInventare extends Obrazovka {
     private PanelNaPozadi panelInventare;
@@ -46,7 +48,7 @@ public class ObrazovkaInventare extends Obrazovka {
         panelInventare.add(inventarVeci);
 
         jmenoBojovnika = new JLabel("", SwingConstants.CENTER);
-        jmenoBojovnika.setFont(new Font("Georgia", Font.BOLD, 40));
+        jmenoBojovnika.setFont(new Font("Georgia", Font.BOLD, (int) (Hra.vyskaObrazovky * 0.04)));
         Color color = new Color(245, 240, 210);
         jmenoBojovnika.setForeground(color);
         panelInventare.add(jmenoBojovnika);
@@ -130,10 +132,12 @@ public class ObrazovkaInventare extends Obrazovka {
                     icon = new ImageIcon(getClass().getResource("/Obrazky/ObrazkyPostav/bojovnikMagKlidny.png"));
                     break;
             }
+            int sirkaBojovnika = (int) (sirka * 0.3);
+            int vyskaBojovnika  = sirkaBojovnika * 612/408;
 
             if (icon != null) {
                 obrazekBojovnika.setIcon(icon);
-                obrazekBojovnika.setBounds((int) (sirka * 0.17), (int) (vyska * 0.2), icon.getIconWidth(), icon.getIconHeight());
+                obrazekBojovnika.setBounds((int) (sirka * 0.17), (int) (vyska * 0.06), sirkaBojovnika, vyskaBojovnika);
             }
 
 
@@ -270,8 +274,20 @@ public class ObrazovkaInventare extends Obrazovka {
                 int x = (i % 4) * (velikost + mezeraX);
                 int y = (i / 4) * (velikost + mezeraY);
                 ikona.setBounds(x, y, velikost, velikost);
-
-                ikona.addActionListener(e -> nasadit(p));
+                ikona.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        if (SwingUtilities.isRightMouseButton(e)) {
+                            int odpoved = JOptionPane.showConfirmDialog(okno, "Opravdu chceš vyhodit předmět: " + p.getNazev() + "?", "Zahodit předmět", JOptionPane.YES_NO_OPTION);
+                            if (odpoved == JOptionPane.YES_OPTION) {
+                                Hra.inventar.getPredmety().remove(p);
+                                dalsiStranka();
+                            }
+                        } else if (SwingUtilities.isLeftMouseButton(e)) {
+                            nasadit(p);
+                        }
+                    }
+                });
                 inventarVeci.add(ikona);
             }
         }

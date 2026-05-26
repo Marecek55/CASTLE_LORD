@@ -1,6 +1,8 @@
 package Hrad;
 
-public abstract class Mistnost {
+import java.io.Serializable;
+
+public abstract class Mistnost implements Serializable {
     protected String nazev;
     protected int cenaZaPostaveni;
     protected int cenaZaVylepseni;

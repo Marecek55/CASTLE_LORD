@@ -9,9 +9,10 @@ import Predmety.Zbrane.Zbran;
 import Predmety.Zbroj.Brneni;
 import Predmety.Zbroj.Medailon;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Truhla {
+public abstract class Truhla implements Serializable {
     protected Rarita rarita;
     protected int sanceBezna;
     protected int sanceVzacna;

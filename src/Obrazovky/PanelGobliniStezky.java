@@ -164,6 +164,9 @@ public class PanelGobliniStezky extends PanelNaPozadi {
                     seznamTlacitek.get(i).setVisible(false);
 
                 }
+                for (java.awt.event.ActionListener al : bitvaTlacitko.getActionListeners()) {//TODO
+                    bitvaTlacitko.removeActionListener(al);
+                }
                 bitvaTlacitko.addActionListener(e1 -> {
                     int zivoty = 0;
                     for (Postava hrdina : Hra.hracuvTym) {

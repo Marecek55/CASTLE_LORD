@@ -1,6 +1,8 @@
 package Predmety;
 
-public abstract class Predmet {
+import java.io.Serializable;
+
+public abstract class Predmet implements Serializable {
     protected String nazev;
     protected String typ;
 

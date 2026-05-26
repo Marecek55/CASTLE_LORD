@@ -46,6 +46,10 @@ public class ObrazovkaHradu extends Obrazovka {
         okno.setVisible(true);
     }
 
+    public void setHrad(Hrad hrad) {
+        this.hrad = hrad;
+    }
+
     public void aktualizace() {
         pocetPenez.setText(String.valueOf(Penize.getPocet()));
         pocetJidla.setText(String.valueOf(Jidlo.getPocet()));
@@ -78,7 +82,7 @@ public class ObrazovkaHradu extends Obrazovka {
 
         hrad = new Hrad(panelHradu);
 
-        Font font = new Font("Georgia", Font.BOLD, 50);
+        Font font = new Font("Georgia", Font.BOLD, (int) (vyska * 0.045));
         pocetJidla.setFont(font);
         pocetPenez.setFont(font);
         Color barva = new Color(60, 30, 10);

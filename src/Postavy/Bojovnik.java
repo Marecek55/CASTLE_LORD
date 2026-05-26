@@ -33,6 +33,16 @@ public class Bojovnik extends Postava{
         }
 
     }
+    @Override
+    public int getSilaPostavy() {
+        int celkovaSila = super.getSilaPostavy();
+        celkovaSila = celkovaSila + bonusZTreninku;
+        if (this.medailon != null) {
+            celkovaSila = celkovaSila + this.medailon.getZlepsovac();
+        }
+
+        return celkovaSila;
+    }
     public boolean trenuje(int bonus){
         if (pocetTreninku<2) {
             bonusZTreninku = bonusZTreninku + bonus;

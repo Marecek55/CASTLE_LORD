@@ -2,6 +2,7 @@ package Obrazovky;
 
 import Logika.Hra;
 import Obrazovky.Tlacitka.StylTlacitek;
+import Postavy.Bojovnik;
 import Postavy.Postava;
 import Predmety.Rarita;
 import Predmety.Truhly.DrevenaTruhla;
@@ -44,9 +45,6 @@ public class SoubojovaObrazovka extends Obrazovka {
     public void inicializace() {
 
         maxHPTymu = 0;
-        for (int i = 0; i < hracuvTym.size(); i++) {
-            hracuvTym.get(i).setZivoty(9999999);
-        }
         for (Postava postava : hracuvTym) {
             maxHPTymu = maxHPTymu + postava.getZivoty();
         }
@@ -77,6 +75,11 @@ public class SoubojovaObrazovka extends Obrazovka {
         bitvaSkoncila = true;
         if (casovac != null) {
             casovac.stop();
+        }
+        for (Postava p : hracuvTym) {
+            if (p instanceof Bojovnik) {
+                ((Bojovnik) p).resetTreninkuPoBoji();
+            }
         }
         String cestaKObrazku = "";
         if (lokace.equals("arena")) {
@@ -279,12 +282,12 @@ public class SoubojovaObrazovka extends Obrazovka {
             if (bojovnik.getPosledniZasah() != null){
                 grafika.setColor(Color.RED);
                 grafika.setFont(new Font("Arial", Font.BOLD, (int)(sirkaMonitoru * 0.015)));
-                grafika.drawString(bojovnik.getPosledniZasah(), XHrdiny, YPostav - 15);
+                grafika.drawString(bojovnik.getPosledniZasah(), XHrdiny, YPostav -(int)(vyskaMonitoru * 0.02));
             }
 
             grafika.setColor(Color.WHITE);
             grafika.setFont(fontJmeno);
-            grafika.drawString(bojovnik.getJmeno(), XHrdiny, YPostav + vyskaPostavy + 30);
+            grafika.drawString(bojovnik.getJmeno(), XHrdiny, YPostav + vyskaPostavy + (int)(vyskaMonitoru * 0.04));
 
 
             XHrdiny = XHrdiny - sirkaPostavy - (int)(sirkaMonitoru * 0.01);

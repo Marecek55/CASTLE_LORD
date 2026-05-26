@@ -31,16 +31,16 @@ public class TreninkovaHala extends Mistnost{
             throw new RuntimeException("Nemáš dostatek peněz na vylepšení!");
         }
     }
-    public void trenovaniBojovnika(Bojovnik b ){
-        int cenaTreninku = 50*uroven;
-        int bonusKUtoku = uroven;
+    public boolean trenovaniBojovnika(Bojovnik b) {
+        int cenaTreninku = 50 * uroven;
+        int bonusKUtoku = uroven * 3;
 
-        if (Jidlo.getPocet() >= cenaTreninku){
-            if (b.trenuje(bonusKUtoku)== true){
+        if (Jidlo.getPocet() >= cenaTreninku) {
+            if (b.trenuje(bonusKUtoku)) {
                 Jidlo.setPocet(Jidlo.getPocet() - cenaTreninku);
+                return true;
             }
-
         }
-
+        return false;
     }
 }

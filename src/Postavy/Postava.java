@@ -6,30 +6,44 @@ import Predmety.Zbroj.Medailon;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 
-public abstract class Postava {
+public abstract class Postava implements Serializable {
     protected String jmeno;
     protected int zivoty;
     protected Zbran zbran;
     protected Brneni brneni;
     protected Medailon medailon;
     protected String posledniZasah;
-    protected Image obrazekVKlidu;
-    protected Image obrazekVUtoku;
+    protected transient Image obrazekVKlidu;
+    protected transient Image obrazekVUtoku;
     private boolean utoci = false;
     protected String typ;
+    protected String cestaVKlidu;
+    protected String cestaVUtoku;
 
     public Postava(String jmeno, Zbran zbran, Brneni brneni, Medailon medailon, String nazevObrazkuVKlidu, String nazevObrazkuVUtoku, String typ) {
         this.jmeno = jmeno;
         this.zbran = zbran;
         this.brneni = brneni;
         this.medailon = medailon;
+        this.cestaVKlidu = nazevObrazkuVKlidu;
+        this.cestaVUtoku = nazevObrazkuVUtoku;
         this.obrazekVKlidu = new ImageIcon(getClass().getResource(nazevObrazkuVKlidu)).getImage();
         this.obrazekVUtoku = new ImageIcon(getClass().getResource(nazevObrazkuVUtoku)).getImage();
         this.typ = typ;
+        obnoveni();
     }
     public String getTyp() {
         return typ;
+    }
+    public void obnoveni() {
+        if (cestaVKlidu != null) {
+            this.obrazekVKlidu = new ImageIcon(getClass().getResource(cestaVKlidu)).getImage();
+        }
+        if (cestaVUtoku != null) {
+            this.obrazekVUtoku = new ImageIcon(getClass().getResource(cestaVUtoku)).getImage();
+        }
     }
 
     public int getSilaPostavy() {

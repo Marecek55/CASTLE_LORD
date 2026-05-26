@@ -6,10 +6,11 @@ import Postavy.Postava;
 import Predmety.Penize;
 
 import javax.swing.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Hrad {
+public class Hrad implements Serializable {
 
     private Kasarna kasarna;
     private ArrayList<Lekarna> lekarny = new ArrayList<>();
@@ -17,7 +18,7 @@ public class Hrad {
     private ArrayList<SkladPenez> skladyPenez = new ArrayList<>();
     private ArrayList<SkladJidla> skladyJidla = new ArrayList<>();
     private ArrayList<Integer> pozicePostavenych = new ArrayList<>();
-    private JPanel okno;
+    private transient JPanel okno;
     private HashMap<Integer, Integer[]> lokaceMistnosti;
     private HashMap<Integer, TypMistnosti> postavene = new HashMap<>();
 
@@ -60,19 +61,19 @@ public class Hrad {
             } else {
                 switch (typ) {
                     case LEKARNA:
-                        Lekarna l = new Lekarna("Lékárna", 200, 100, 1, 1);
+                        Lekarna l = new Lekarna("Lékárna", 1000, 1000, 1, 1);
                         lekarny.add(l);
                         break;
                     case TRENINKOVA_HALA:
-                        TreninkovaHala h = new TreninkovaHala("Tréninková hala", 300, 200, 1, 1);
+                        TreninkovaHala h = new TreninkovaHala("Tréninková hala", 1500, 800, 1, 1);
                         treninkoveHaly.add(h);
                         break;
                     case SKLAD_PENEZ:
-                        SkladPenez s = new SkladPenez("Sklad Peněz", 200, 300, 1, 1);
+                        SkladPenez s = new SkladPenez("Sklad Peněz", 2000, 1500, 1, 1);
                         skladyPenez.add(s);
                         break;
                     case SKLAD_JIDLA:
-                        SkladJidla sklad = new SkladJidla("Sklad Jídla", 150, 200, 1, 1);
+                        SkladJidla sklad = new SkladJidla("Sklad Jídla", 3000, 2000, 1, 1);
                         skladyJidla.add(sklad);
                         break;
                 }
@@ -108,9 +109,11 @@ public class Hrad {
     private void kliknutiKasarna() {
         if (Hra.hrac.getUroven() < 2) {
             JOptionPane.showMessageDialog(okno, "Kasárna je zamčená! Musíš mít alespoň úroveň 2.");
+        } else if (Hra.hracuvTym.size() >= 3) {
+            JOptionPane.showMessageDialog(okno, "Máš plný tým! Můžeš mít maximálně 3 bojovníky.");
         } else {
             int cenaVojaka = 500;
-            int volba = JOptionPane.showConfirmDialog(okno, "Chceš koupit nového bojovníka? \nCena: " + cenaVojaka+ " zlaťáků", "Koupení", JOptionPane.YES_NO_OPTION);
+            int volba = JOptionPane.showConfirmDialog(okno, "Chceš koupit nového bojovníka? \nCena: " + cenaVojaka + " zlaťáků", "Koupení", JOptionPane.YES_NO_OPTION);
             if (volba == JOptionPane.YES_OPTION) {
                 if (Penize.getPocet() >= cenaVojaka) {
                     String jmeno = JOptionPane.showInputDialog(okno, "Zadej jméno pro nového bojovníka:");
@@ -125,6 +128,8 @@ public class Hrad {
                     JOptionPane.showMessageDialog(okno, "Nemáš dostatek peněz!");
                 }
             }
+
+
         }
     }
 
@@ -180,9 +185,13 @@ public class Hrad {
                         Bojovnik bojovnik = (Bojovnik) p;
                         int cena = 50 * h.getUroven();
                         if (Predmety.Jidlo.getPocet() >= cena) {
-                            h.trenovaniBojovnika(bojovnik);
-                            JOptionPane.showMessageDialog(okno, bojovnik.getJmeno() + " je vytrenovaný!");
-                            Hra.obrazovkaHradu.aktualizace();
+                            boolean uspech = h.trenovaniBojovnika(bojovnik);
+                            if (uspech) {
+                                JOptionPane.showMessageDialog(okno, bojovnik.getJmeno() + " úspěšně potrénoval a zvedl si útok!");
+                                Hra.obrazovkaHradu.aktualizace();
+                            } else {
+                                JOptionPane.showMessageDialog(okno, bojovnik.getJmeno() + " už trénoval 2x! Musí jít nejdřív do bitvy.");
+                            }
                         } else {
                             JOptionPane.showMessageDialog(okno, "Nemáš dostatek jídla!");
                         }
@@ -191,6 +200,7 @@ public class Hrad {
             }
         }
     }
+
 
     public Kasarna getKasarna() {
         return kasarna;

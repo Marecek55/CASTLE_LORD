@@ -7,6 +7,9 @@ import Predmety.Rarita;
 
 import java.util.ArrayList;
 
+/**
+ * Tato trida je abstraktni trida pro brneni a urcuje hodnotu obrany brneni a tvori ho
+ */
 public abstract class Brneni extends Predmet {
     protected Rarita rarita;
     protected String jmeno;
@@ -22,6 +25,14 @@ public abstract class Brneni extends Predmet {
         this.ultraKryt = ultraKryt;
         typ = "Brneni";
     }
+
+    /**
+     * Tato metoda tvori brneni podle urovne hrace a ririty a nahodnych cisel
+     * @param uroven uroven hrace
+     * @param jeZtruhly jeslti je z truhly
+     * @param raritaZtruhly rarita te truhly
+     * @return
+     */
     public static Brneni vytvoritBrneni(int uroven,  boolean jeZtruhly, Rarita raritaZtruhly){
         Rarita rarita = null;
         if (!jeZtruhly){

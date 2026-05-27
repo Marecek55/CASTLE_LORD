@@ -6,11 +6,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
 
+/**
+ * Trida Ikon pracuje s ikony v invenatari jako podklad zbrani
+ */
 public class IkonaVeciVInventari extends JButton {
     private Image pozadi;
     private Image obrazek;
     private String textSily = "";
 
+    /**
+     * Konstruktor nastavuje pozadi podle rarity predmetu
+     * @param nazevObrazkuVeci nazev obrazku rarity
+     * @param rarita rarita predmetu
+     * @param sila sila predmetu
+     */
     public IkonaVeciVInventari(String nazevObrazkuVeci, Rarita rarita, int sila) {
         this.setContentAreaFilled(false);
         this.setBorderPainted(false);
@@ -38,11 +47,19 @@ public class IkonaVeciVInventari extends JButton {
 
 
     }
+
+    /**
+     * Tato trida deaktivuje klikani na tlacitko
+     */
     public void deaktivujKlikani() {
         this.setEnabled(false);
         this.setFocusable(false);
     }
 
+    /**
+     * Tato metoda prekresluje tlacitko a dava mu vrstvy zbrane pozadi a cisla
+     * @param g the <code>Graphics</code> object to protect
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

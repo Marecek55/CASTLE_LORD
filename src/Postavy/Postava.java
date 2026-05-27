@@ -8,6 +8,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.Serializable;
 
+/**
+ * Tato trida je abstraktni trida postava ktera resi silu a obrazek bojovnika
+ */
 public abstract class Postava implements Serializable {
     protected String jmeno;
     protected int zivoty;
@@ -37,6 +40,10 @@ public abstract class Postava implements Serializable {
     public String getTyp() {
         return typ;
     }
+
+    /**
+     * Tato metoda obnovoje obrazek po nacteni hry
+     */
     public void obnoveni() {
         if (cestaVKlidu != null) {
             this.obrazekVKlidu = new ImageIcon(getClass().getResource(cestaVKlidu)).getImage();
@@ -46,6 +53,10 @@ public abstract class Postava implements Serializable {
         }
     }
 
+    /**
+     * Tato metoda vraci silu postavy podle zbrane
+     * @return
+     */
     public int getSilaPostavy() {
         int celkovaSila = 0;
 

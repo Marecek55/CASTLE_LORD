@@ -6,12 +6,21 @@ import Postavy.Postava;
 
 import javax.swing.*;
 
+/**
+ * ObrazovkaMpay vytvari pozadi mapy a dava funkcnost tlactikum
+ */
 public class ObrazovkaMapy extends Obrazovka{
     private PanelNaPozadi mapa;
 
     private JButton btnLes;
     private JButton btnArena;
     private JButton btnZpet;
+
+    /**
+     * Konstruktor nacita a inicializuje promene
+     * @param nazev nazev obrazovky
+     * @param malaObrazovka jestli ma byt mala
+     */
     public ObrazovkaMapy(String nazev, boolean malaObrazovka) {
         super(nazev, malaObrazovka);
         mapa = new PanelNaPozadi("/Obrazky/ObrazkyBoje/bojovaMapa.png");
@@ -32,6 +41,9 @@ public class ObrazovkaMapy extends Obrazovka{
     int vyskaTlacitek = (int) (sirkaTlacitek * (371.0 / 673.0));
     int yTlacitek = (int) (vyska * 0.7);
 
+    /**
+     * V inicializaci se nacitaji tlacitka a jejich souradnice
+     */
     @Override
     public void inicializace() {
 
@@ -55,7 +67,9 @@ public class ObrazovkaMapy extends Obrazovka{
         return this.mapa;
     }
 
-
+    /**
+     * V teto metode se spousti funkcnost jednotlivych tlacitek
+     */
     @Override
     public void funkcnost() {
          btnLes.addActionListener(e -> {

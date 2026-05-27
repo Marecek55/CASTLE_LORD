@@ -5,7 +5,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
 
-
+/**
+ * Trida StylTlacitek upravuje vzhled tlacitek
+ */
 public class StylTlacitek extends JButton {
 
     public StylTlacitek(String text) {
@@ -13,7 +15,10 @@ public class StylTlacitek extends JButton {
 
     }
 
-
+    /**
+     * Tato metoda vykresluje zaobleny obdelnik s vyhlazenymi hrany
+     * @param g the <code>Graphics</code> object to protect
+     */
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
@@ -26,6 +31,10 @@ public class StylTlacitek extends JButton {
         super.paintComponent(g);
     }
 
+    /**
+     * Tato metoda zmeni tlacitko na neviditelne
+     * @param b tlacitko
+     */
     public static void zmenitNaNeviditelneTlacitko(JButton b) {
         b.setOpaque(false);
         b.setContentAreaFilled(false);
@@ -33,6 +42,14 @@ public class StylTlacitek extends JButton {
         b.setFocusPainted(false);
         b.setText(null);
     }
+
+    /**
+     * Tato metoda nastavi tlacitko jako obrazek pomoci url
+     * @param tlacitko tlacitko
+     * @param cesta cesta k tlacitku
+     * @param sirka sirka obrazku
+     * @param vyska vyska obrazku
+     */
     public static void nastavJakoObrazek(JButton tlacitko, String cesta, int sirka, int vyska) {
         try {
             URL url = StylTlacitek.class.getResource(cesta);

@@ -3,7 +3,9 @@ package Predmety.Zbroj;
 import Postavy.Bojovnik;
 import Postavy.Postava;
 import Predmety.Rarita;
-
+/**
+ * Tato trida urcuje vylepseni medailonu utoku
+ */
 public class MedailonUtoku extends Medailon{
     public MedailonUtoku(String nazev, Rarita rarita) {
         super(nazev,rarita);
@@ -18,7 +20,10 @@ public class MedailonUtoku extends Medailon{
     public String getNazevObrazku() {
         return "medailonUtoku.png";
     }
-
+    /**
+     * Tato metoda vylepsuje vlastnost zbrane dane postavy medailonem
+     * @param b postava
+     */
     @Override
     public void vylepsitVlastnost(Postava b) {
         if (b.getZbran()!=null){

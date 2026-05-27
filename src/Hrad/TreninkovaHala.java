@@ -3,7 +3,9 @@ package Hrad;
 import Postavy.Bojovnik;
 import Predmety.Jidlo;
 import Predmety.Penize;
-
+/**
+ * Trida TreninkovaHala nastavuje co hala bude delat a co se odecte uzivateli po postaveni
+ */
 public class TreninkovaHala extends Mistnost{
     public TreninkovaHala(String nazev, int cenaZaPostaveni, int cenaZaVylepseni, int uroven, int velikost) throws Exception {
         super(nazev, cenaZaPostaveni, cenaZaVylepseni, uroven, velikost);
@@ -20,6 +22,9 @@ public class TreninkovaHala extends Mistnost{
 
 
     }
+    /**
+     * Tato metoda vylepsuje a odecita penize za vylepseni haly
+     */
 
     @Override
     public void vylepsitMistnost() {
@@ -31,6 +36,9 @@ public class TreninkovaHala extends Mistnost{
             throw new RuntimeException("Nemáš dostatek peněz na vylepšení!");
         }
     }
+    /**
+     * Tato metoda uskutecnuje trenink bojovniku za jidlo a podava cislo k bonusu utokua pocita ho
+     */
     public boolean trenovaniBojovnika(Bojovnik b) {
         int cenaTreninku = 50 * uroven;
         int bonusKUtoku = uroven * 3;

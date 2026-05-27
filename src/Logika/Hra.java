@@ -21,6 +21,9 @@ import Predmety.Zbroj.MedailonObrany;
 import java.util.ArrayList;
 import java.util.Random;
 import java.awt.Toolkit;
+/**
+ * Trida Hra v sobe drzi hlavni tridy a staticke promene potrebne pro chod hry
+ */
 public class Hra {
     public static  Random rand = new Random();
     public static int vyskaObrazovky = Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -35,6 +38,11 @@ public class Hra {
     public static ArrayList<Truhla> inventarTruhel = new ArrayList<>();
     public static Inventar inventar = new Inventar();
     public static Hrac hrac;
+
+    /**
+     * Tato metoda vytvari hracova prvniho hrace na start hry
+     * @param jmeno
+     */
     public static void hracuvTym(String jmeno) {
         if (hracuvTym.isEmpty()) {
             int sila = rand.nextInt(3, 8);
@@ -45,21 +53,14 @@ public class Hra {
             Postava p = TvorbaPostav.tvorbaHracovaBojovnika(jmeno, 1, m);
             p.setBrneni(b);
             p.setMedailon(me);
-            Zbran m2 = new MagickaHul("Magická Hůl", sila, crit, Rarita.BĚŽNÁ);
-            Postava p2 = TvorbaPostav.tvorbaHracovaBojovnika(jmeno, 1, m2);
-            p2.setBrneni(b);
-            p2.setMedailon(me);
-            p2.setJmeno("Bobis");
-            Zbran m3 = new Luk("Luk", sila, crit, Rarita.BĚŽNÁ);
-            Postava p3 = TvorbaPostav.tvorbaHracovaBojovnika(jmeno, 1, m3);
-            p3.setBrneni(b);
-            p3.setMedailon(me);
-            p3.setJmeno("KUBA");
             hracuvTym.add(p);
-            hracuvTym.add(p2);
-            hracuvTym.add(p3);
+
         }
     }
+
+    /**
+     * Konstruktor tridy hra spousti hudbu a prvni startovaciObrazovku
+     */
     public Hra() {
 
         hrac = new Hrac(1,Penize.getPocet(), Jidlo.getPocet(),1,0);

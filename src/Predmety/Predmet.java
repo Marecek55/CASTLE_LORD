@@ -2,6 +2,9 @@ package Predmety;
 
 import java.io.Serializable;
 
+/**
+ * Toto je abstraktni trida pro predmet
+ */
 public abstract class Predmet implements Serializable {
     protected String nazev;
     protected String typ;

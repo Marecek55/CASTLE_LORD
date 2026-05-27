@@ -2,7 +2,9 @@ package Predmety.Zbrane;
 
 import Logika.Hra;
 import Predmety.Rarita;
-
+/**
+ * Tato trida pridava hodnotu silu mece
+ */
 public class Mec extends Zbran {
 
     public Mec(String nazev, int sila, int silaCritical, Rarita rarita) {
@@ -14,7 +16,10 @@ public class Mec extends Zbran {
     public String getNazevObrazku() {
         return "mec.png";
     }
-
+    /**
+     * Tato metoda nastavuje a vraci silu mece
+     * @return
+     */
     @Override
     public int zautoc() {
 

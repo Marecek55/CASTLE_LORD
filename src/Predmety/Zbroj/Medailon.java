@@ -9,7 +9,9 @@ import Predmety.Rarita;
 
 
 import java.util.ArrayList;
-
+/**
+ * Tato trida je abstraktni trida pro medailon a urcuje hodnotu vylepseni a tvori ho
+ */
 public abstract class Medailon extends Predmet {
     protected Rarita rarita;
     protected String nazev;
@@ -24,6 +26,12 @@ public abstract class Medailon extends Predmet {
 
     }
 
+    /**
+     * Tato metoda tvori medailon podle rarity truhly
+     * @param jeZtruhly jeslti je z truhly
+     * @param raritaZtruhly rarita te truhly
+     * @return
+     */
     public static Medailon vytvoritMedailon(boolean jeZtruhly, Rarita raritaZtruhly){
         Rarita rarita = null;
         if (!jeZtruhly){

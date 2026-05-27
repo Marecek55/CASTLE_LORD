@@ -9,6 +9,9 @@ import Predmety.Truhly.Truhla;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Tato trida uchovava hru po nacteni
+ */
 public class UlozenaHra implements Serializable {
     public ArrayList<Postava> hracuvTym;
     public ArrayList<Truhla> inventarTruhel;

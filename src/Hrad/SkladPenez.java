@@ -1,7 +1,9 @@
 package Hrad;
 
 import Predmety.Penize;
-
+/**
+ * Trida SkladPenez nastavuje co sklad bude delat a co se odecte uzivateli po postaveni
+ */
 public class SkladPenez extends Mistnost{
 
 
@@ -14,11 +16,15 @@ public class SkladPenez extends Mistnost{
                 aktualniPocetPostaveni++;
                 Penize.setPocet(Penize.getPocet() - cenaZaPostaveni);
             }else {
-                throw new Exception("Nema penize");
+                throw new Exception("Nemáš peníze");
             }
 
 
     }
+    /**
+     * Tato metoda vylepsuje a odecita penize za vylepseni skladu
+     */
+
 
     @Override
     public void vylepsitMistnost() {

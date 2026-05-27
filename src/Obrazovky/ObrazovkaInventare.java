@@ -14,6 +14,9 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * ObrazovkaInventare sklada inventar a urcuje fungovani inventare a jeho komponent
+ */
 public class ObrazovkaInventare extends Obrazovka {
     private PanelNaPozadi panelInventare;
     private JButton sipka;
@@ -30,7 +33,11 @@ public class ObrazovkaInventare extends Obrazovka {
     private JPanel inventarVeci;
     private int aktualniStranka = 0;
 
-
+    /**
+     * Konstruktor inventare nastavuje tlacitka a zakladni inicializaci
+     * @param nazev nazev
+     * @param malaObrazovka jestli ma byt mala obrazovka
+     */
     public ObrazovkaInventare(String nazev, boolean malaObrazovka) {
         super(nazev, malaObrazovka);
         panelInventare = new PanelNaPozadi("/obrazkyInventar/pozadiInventare.png");
@@ -74,6 +81,9 @@ public class ObrazovkaInventare extends Obrazovka {
     int vyskaTlacitek = (int) (sirkaTlacitek * (369.0 / 677.0));
     int vyskaTlacitek2 = (int) (sirkaTlacitek * (677.0 / 369.0));
 
+    /**
+     * Inicializace urcuje lokaci a pozadi tlacitek
+     */
     @Override
     public void inicializace() {
         StylTlacitek.nastavJakoObrazek(sipka, "/obrazkyInventar/sipky/sipka.png", sirkaTlacitek, vyskaTlacitek);
@@ -108,6 +118,10 @@ public class ObrazovkaInventare extends Obrazovka {
         dalsiStranka();
     }
 
+    /**
+     * Tato metoda dava pozici bojovnikovi a zobrazuje jeho i jeho zbrane pomoci
+     * @param pozice
+     */
     public void obrazekBojovnika(int pozice) {
         if (pozice >= Hra.hracuvTym.size()) {
             JOptionPane.showMessageDialog(okno, "Nemáš už další bojovníky.");
@@ -188,6 +202,11 @@ public class ObrazovkaInventare extends Obrazovka {
         panelInventare.repaint();
 
     }
+
+    /**
+     * Tato metoda nasazuje predmet bojovnikovi a kontroluje jestli si muze tuto zbran nasadit a odebere ho z inventare
+     * @param p predmet ktery se nasazuje
+     */
     public void nasadit(Predmet p){
         Postava postava = Hra.hracuvTym.get(poziceBojovnika);
         if (p instanceof Zbran) {
@@ -234,6 +253,9 @@ public class ObrazovkaInventare extends Obrazovka {
         dalsiStranka();
     }
 
+    /**
+     * Tato metoda prekresluje inventar po kliknuti na dalsi stranku a zpracovava funkci vymazani predmetu
+     */
     public void dalsiStranka() {
         inventarVeci.removeAll();
         int velikost = (int)(sirka * 0.11);
@@ -295,7 +317,9 @@ public class ObrazovkaInventare extends Obrazovka {
         inventarVeci.repaint();
     }
 
-
+    /**
+     * Tato metoda dava funkcnost tlacitkum a sipkam
+     */
     @Override
     public void funkcnost() {
 

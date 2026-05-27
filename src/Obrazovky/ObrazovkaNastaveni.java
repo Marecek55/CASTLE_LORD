@@ -11,7 +11,9 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-
+/**
+ * Tato obrazovka v sobe ma nastaveni hudby a ulozeni a nacteni hry
+ */
 public class ObrazovkaNastaveni extends Obrazovka {
     private JButton btnHudba;
     private JButton btnZpet;
@@ -22,6 +24,11 @@ public class ObrazovkaNastaveni extends Obrazovka {
     private PanelNaPozadi pozadiNastaveni;
     private boolean stavHudbyVNastaveni;
 
+    /**
+     * Nastavuje tlacitka a tvori je
+     * @param nazev nazev obrazovky
+     * @param malaObrazovka jeslti ma byt mala obrazovka
+     */
     public ObrazovkaNastaveni(String nazev, boolean malaObrazovka) {
         super(nazev, malaObrazovka);
         this.dialog = new JDialog(okno, nazev, true);
@@ -47,6 +54,9 @@ public class ObrazovkaNastaveni extends Obrazovka {
 
     int yTlacitek = (int) (vyska * 0.7);
 
+    /**
+     * Tato metoda nastavuje lokaci tlacitkum a urcuje tlacitko hudby
+     */
     @Override
     public void inicializace() {
         pozadiNastaveni.setLayout(null);
@@ -83,6 +93,9 @@ public class ObrazovkaNastaveni extends Obrazovka {
 
     }
 
+    /**
+     * Tato metoda uklada parametry do tridy na ulozeni hry a prepina tlacitko hudby
+     */
     @Override
     public void funkcnost() {
         btnHudba.addActionListener(e -> {

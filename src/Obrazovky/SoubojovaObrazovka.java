@@ -17,7 +17,10 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.awt.*;
 
-
+/**
+ * Tato trida nastavuje zivota tymu a pozadi souboje spousti hudbu pro bitvu resi konec
+ * bitvy a vykresluje konecnou obrazovku a odmeny a bojovniky s bary a animace
+ */
 public class SoubojovaObrazovka extends Obrazovka {
     private PanelNaPozadi arenaPanel;
     private ArrayList<Postava> hracuvTym;
@@ -41,6 +44,9 @@ public class SoubojovaObrazovka extends Obrazovka {
         this.vybranaUrovenStezky = vybranaUrovenStezky;
     }
 
+    /**
+     * Tato metoda pocita HP tymu a spousti pozadi podle typu a casovac a hudby pozadi
+     */
     @Override
     public void inicializace() {
 
@@ -71,6 +77,11 @@ public class SoubojovaObrazovka extends Obrazovka {
     }
     private boolean bitvaSkoncila = false;
 
+    /**
+     * Tato metoda vyhodnoti kdo vyhral stopne prekreslovani animaci a vybere vyherne nebo pro herni pozadi
+     * kazdemu bojovnikovi resetuje trenink a vytvori panel odmen kam se vykresli vyhra
+     * @param hracVyhral boolen jestli hrac vyhral
+     */
     public void konecBitvy(boolean hracVyhral) {
         bitvaSkoncila = true;
         if (casovac != null) {
@@ -149,9 +160,14 @@ public class SoubojovaObrazovka extends Obrazovka {
         arenaPanel.repaint();
     }
 
+    /**
+     * Tato metoda vytvari sance na ruzne predmety pomoci IkonyVeciVInventari ktera prida urovne a sance na truhlu
+     * a prida ho na panel s pozadim textem sily a raritou
+     * @param panelOdmen panel kam se pridavaji odmeny
+     * @param hracVyhral jeslti hrac vyhral
+     */
     private void odmena(JPanel panelOdmen, boolean hracVyhral) {
         int uroven;
-
         if (lokace.equals("arena")) {
             uroven = Hra.hrac.getUroven();
         } else {
@@ -254,26 +270,29 @@ public class SoubojovaObrazovka extends Obrazovka {
 
     }
 
+    /**
+     * Tato metoda nejdriv vyhladi grafiku a vykresluje hrdiny na levou stranu a protivniky na druhou
+     * dava jim lokaci a velikost a otaci nepratele pro boj v arene a vykresluje baner zivotu podle pomeru zivotu
+     * take vykresluje nad hlavy hodnotu zasahu cervenou a zelenou barvou
+     * @param g grafika panelu
+     */
     public void vykresliPostavyATexty(Graphics g) {
         if (bitvaSkoncila) {
             return;
         }
         Graphics2D grafika = (Graphics2D) g;
         grafika.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        int sirkaMonitoru = arenaPanel.getWidth();
-        int vyskaMonitoru = arenaPanel.getHeight();
-        int sirkaPostavy = (int)(sirkaMonitoru * 0.15);
-        int vyskaPostavy = (int)(vyskaMonitoru * 0.30);
-        int barSirka = (int)(sirkaMonitoru * 0.30);
-        int barVyska = (int)(vyskaMonitoru * 0.04);
+        int sirka = arenaPanel.getWidth();
+        int vyska = arenaPanel.getHeight();
+        int sirkaPostavy = (int)(sirka * 0.15);
+        int vyskaPostavy = (int)(vyska * 0.30);
+        int sirkaBaru = (int)(sirka * 0.30);
+        int vyskaBaru = (int)(vyska * 0.04);
 
-        Font fontJmeno = new Font("Arial", Font.BOLD, (int)(sirkaMonitoru * 0.012));
-        int YPostav = (int)(vyskaMonitoru * 0.45);
-
-        int XHrdiny = (sirkaMonitoru / 2) - sirkaPostavy - (int)(sirkaMonitoru * 0.02);
-
+        Font fontJmena = new Font("Arial", Font.BOLD, (int)(sirka * 0.012));
+        int YPostav = (int)(vyska * 0.45);
+        int XHrdiny = (sirka / 2) - sirkaPostavy - (int)(sirka * 0.02);
         for (Postava bojovnik : hracuvTym) {
-
             if (bojovnik.isUtoci()) {
                 grafika.drawImage(bojovnik.getObrazekVUtoku(), XHrdiny, YPostav, sirkaPostavy, vyskaPostavy, null);
             } else {
@@ -281,82 +300,75 @@ public class SoubojovaObrazovka extends Obrazovka {
             }
             if (bojovnik.getPosledniZasah() != null){
                 grafika.setColor(Color.RED);
-                grafika.setFont(new Font("Arial", Font.BOLD, (int)(sirkaMonitoru * 0.015)));
-                grafika.drawString(bojovnik.getPosledniZasah(), XHrdiny, YPostav -(int)(vyskaMonitoru * 0.02));
+                grafika.setFont(new Font("Arial", Font.BOLD, (int)(sirka * 0.015)));
+                grafika.drawString(bojovnik.getPosledniZasah(), XHrdiny, YPostav -(int)(vyska * 0.02));
             }
 
             grafika.setColor(Color.WHITE);
-            grafika.setFont(fontJmeno);
-            grafika.drawString(bojovnik.getJmeno(), XHrdiny, YPostav + vyskaPostavy + (int)(vyskaMonitoru * 0.04));
-
-
-            XHrdiny = XHrdiny - sirkaPostavy - (int)(sirkaMonitoru * 0.01);
+            grafika.setFont(fontJmena);
+            grafika.drawString(bojovnik.getJmeno(), XHrdiny, YPostav + vyskaPostavy + (int)(vyska * 0.04));
+            XHrdiny = XHrdiny - sirkaPostavy - (int)(sirka * 0.01);
         }
 
 
-        int XNepratel = (sirkaMonitoru / 2) + (int)(sirkaMonitoru * 0.02);
+        int XNepratel = (sirka / 2) + (int)(sirka * 0.02);
 
         for (Postava nepritel : nepratelskyTym) {
-            Image obrNepritele;
+            Image obrazekNepritele;
             if (nepritel.isUtoci()) {
-                obrNepritele = nepritel.getObrazekVUtoku();
+                obrazekNepritele = nepritel.getObrazekVUtoku();
             } else {
-                obrNepritele = nepritel.getObrazekVKlidu();
+                obrazekNepritele = nepritel.getObrazekVKlidu();
             }
 
             if (lokace.equals("arena")) {
-                g.drawImage(obrNepritele, XNepratel + sirkaPostavy, YPostav, XNepratel, YPostav + vyskaPostavy, 0, 0, obrNepritele.getWidth(null), obrNepritele.getHeight(null), null);
+                g.drawImage(obrazekNepritele, XNepratel + sirkaPostavy, YPostav, XNepratel, YPostav + vyskaPostavy, 0, 0, obrazekNepritele.getWidth(null), obrazekNepritele.getHeight(null), null);
             } else {
-                grafika.drawImage(obrNepritele, XNepratel, YPostav, sirkaPostavy, vyskaPostavy, null);
+                grafika.drawImage(obrazekNepritele, XNepratel, YPostav, sirkaPostavy, vyskaPostavy, null);
             }
-
             if (nepritel.getPosledniZasah()!= null){
                 grafika.setColor(Color.GREEN);
-                grafika.setFont(new Font("Arial", Font.BOLD, (int)(sirkaMonitoru * 0.015)));
+                grafika.setFont(new Font("Arial", Font.BOLD, (int)(sirka * 0.015)));
                 grafika.drawString(nepritel.getPosledniZasah(), XNepratel, YPostav - 15);
             }
 
             grafika.setColor(Color.WHITE);
-            grafika.setFont(fontJmeno);
+            grafika.setFont(fontJmena);
             grafika.drawString(nepritel.getJmeno(), XNepratel, YPostav + vyskaPostavy + 30);
-
-
-            XNepratel = XNepratel + sirkaPostavy + (int)(sirkaMonitoru * 0.01);
+            XNepratel = XNepratel + sirkaPostavy + (int)(sirka * 0.01);
         }
 
         int aktualniHPTymu = 0;
-        int aktualniHPNepratelskyTymu = 0;
+        int aktualniHPNepratelskehoTymu = 0;
 
         for (Postava p : hracuvTym) {
             aktualniHPTymu = aktualniHPTymu + p.getZivoty();
         }
         for (Postava p : nepratelskyTym) {
-            aktualniHPNepratelskyTymu = aktualniHPNepratelskyTymu + p.getZivoty();
+            aktualniHPNepratelskehoTymu = aktualniHPNepratelskehoTymu + p.getZivoty();
         }
 
         float pomerZivotuHrac = (float)aktualniHPTymu / maxHPTymu;
-        int hracBarX = (int)(sirkaMonitoru * 0.1);
-        int barY = (int)(vyskaMonitoru * 0.2);
+        int xBaruHrace = (int)(sirka * 0.1);
+        int yBaru = (int)(vyska * 0.2);
 
         grafika.setColor(new Color(50, 50, 50));
-        grafika.fillRect(hracBarX, barY, barSirka, barVyska);
+        grafika.fillRect(xBaruHrace, yBaru, sirkaBaru, vyskaBaru);
         grafika.setColor(Color.GREEN);
-        grafika.fillRect(hracBarX, barY, (int)(barSirka * pomerZivotuHrac), barVyska);
+        grafika.fillRect(xBaruHrace, yBaru, (int)(sirkaBaru * pomerZivotuHrac), vyskaBaru);
         grafika.setColor(Color.WHITE);
-        grafika.drawRect(hracBarX, barY, barSirka, barVyska);
-        grafika.setFont(fontJmeno);
-        grafika.drawString(aktualniHPTymu + " / " + maxHPTymu, hracBarX + 10, barY + barVyska - 10);
-
-        float pomerZivotuNepritel = (float)aktualniHPNepratelskyTymu / maxHPnepratelskehoTymu;
-        int nepritelBarX = sirkaMonitoru - (int)(sirkaMonitoru * 0.1) - barSirka;
-
+        grafika.drawRect(xBaruHrace, yBaru, sirkaBaru, vyskaBaru);
+        grafika.setFont(fontJmena);
+        grafika.drawString(aktualniHPTymu + " / " + maxHPTymu, xBaruHrace + 10, yBaru + vyskaBaru - 10);
+        float pomerZivotuNepritel = (float) aktualniHPNepratelskehoTymu / maxHPnepratelskehoTymu;
+        int xBaruNepritele = sirka - (int)(sirka * 0.1) - sirkaBaru;
         grafika.setColor(new Color(50, 50, 50));
-        grafika.fillRect(nepritelBarX, barY, barSirka, barVyska);
+        grafika.fillRect(xBaruNepritele, yBaru, sirkaBaru, vyskaBaru);
         grafika.setColor(Color.RED);
-        grafika.fillRect(nepritelBarX, barY, (int)(barSirka * pomerZivotuNepritel), barVyska);
+        grafika.fillRect(xBaruNepritele, yBaru, (int)(sirkaBaru * pomerZivotuNepritel), vyskaBaru);
         grafika.setColor(Color.WHITE);
-        grafika.drawRect(nepritelBarX, barY, barSirka, barVyska);
-        grafika.drawString(aktualniHPNepratelskyTymu + " / " + maxHPnepratelskehoTymu, nepritelBarX + 10, barY + barVyska - 10);
+        grafika.drawRect(xBaruNepritele, yBaru, sirkaBaru, vyskaBaru);
+        grafika.drawString(aktualniHPNepratelskehoTymu + " / " + maxHPnepratelskehoTymu, xBaruNepritele + 10, yBaru + vyskaBaru - 10);
 
     }
 

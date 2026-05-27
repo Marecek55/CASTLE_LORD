@@ -3,7 +3,9 @@ package Predmety;
 import Logika.Hra;
 
 import java.util.ArrayList;
-
+/**
+ * Tato trida v sobe ma instanci penez
+ */
 public class Penize extends Predmet{
     private static int pocet = 0;
     private static int maxpocet = 0;
@@ -12,31 +14,6 @@ public class Penize extends Predmet{
 
     }
 
-    public static int  dostanePenize(int level, Rarita raritaTruhly,double nasobitelPenezPodleTruhly) {
-        int pocetPenez = 0;
-        switch (raritaTruhly){
-            case VZÁCNÁ:
-                pocetPenez = 1000;
-                break;
-            case BĚŽNÁ:
-                pocetPenez = 500;
-                break;
-            case LEGENDÁRNÍ:
-                pocetPenez = 2000;
-                break;
-        }
-        return (int) (pocetPenez * level* nasobitelPenezPodleTruhly);
-
-    }
-    public static void  pridaniDoHromadyPenezZTruhly(int penize,int levelHrace){
-        maxpocet = levelHrace*1000;
-        pocet  = pocet + penize;
-
-
-        if (pocet > maxpocet) {
-            pocet = maxpocet;
-        }
-    }
     public static int getPocet() {
         return pocet;
     }

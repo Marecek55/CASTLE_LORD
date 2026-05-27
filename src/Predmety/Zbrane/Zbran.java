@@ -6,6 +6,9 @@
 
     import java.util.ArrayList;
 
+    /**
+     * Tato trida je abstraktni trida bro zbrane a  tvori zbran pomoci rarity a random nahody a urovne
+     */
     public abstract class Zbran extends Predmet {
         protected String nazev;
         protected int sila;
@@ -23,6 +26,14 @@
             typ = "Zbran";
 
         }
+
+        /**
+         * Tato metoda vytvori zbran pomoci nahodnych cisel a urovne hrace
+         * @param uroven uroven hrace
+         * @param jeZtruhly jestli je z truhly
+         * @param raritaZtruhly rarita truhly
+         * @return
+         */
         public static Zbran vytvoritZbran(int uroven, boolean jeZtruhly, Rarita raritaZtruhly) {
             Rarita rarita = null;
             if (!jeZtruhly){

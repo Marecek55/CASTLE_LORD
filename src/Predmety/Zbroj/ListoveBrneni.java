@@ -2,7 +2,9 @@ package Predmety.Zbroj;
 
 import Logika.Hra;
 import Predmety.Rarita;
-
+/**
+ * Tato trida urcuje kryt listoveho brneni
+ */
 public class ListoveBrneni extends Brneni{
     public ListoveBrneni(String jmeno,Rarita rarita, int kryt, int ultraKryt) {
         super(jmeno, rarita, kryt, ultraKryt);
@@ -13,7 +15,9 @@ public class ListoveBrneni extends Brneni{
     public String getNazevObrazku() {
         return "listoveBrneni.png";
     }
-
+    /**
+     * Tato metoda vraci kryt listoveho brneni
+     */
     @Override
     public int kryt(int utok) {
 

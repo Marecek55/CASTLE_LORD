@@ -3,7 +3,9 @@ package Hrad;
 import Predmety.Jidlo;
 import Predmety.Penize;
 
-
+/**
+ * Trida SkladJidla nastavuje co sklad bude delat a co se odecte uzivateli po postaveni
+ */
 public class SkladJidla extends Mistnost{
     public SkladJidla(String nazev, int cenaZaPostaveni, int cenaZaVylepseni, int uroven, int velikost ) throws Exception {
         super(nazev, cenaZaPostaveni, cenaZaVylepseni, uroven, velikost);
@@ -14,11 +16,15 @@ public class SkladJidla extends Mistnost{
                 Jidlo.setMaxpocet(Jidlo.getMaxpocet() + 5000);
                 Penize.setPocet(Penize.getPocet() - cenaZaPostaveni);
             }else {
-                throw new Exception("Nema penize");
+                throw new Exception("Nemáš peníze");
             }
 
 
     }
+    /**
+     * Tato metoda vylepsuje a odecita penize za vylepseni skladu
+     */
+
 
     @Override
     public void vylepsitMistnost() {

@@ -5,6 +5,9 @@ import Postavy.Bojovnik;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Trida hrac urcuje atributy hrace penez a urovne hradu a pracuje s xp
+ */
 public class Hrac implements Serializable {
     private int uroven;
     private int zlataky;
@@ -20,6 +23,9 @@ public class Hrac implements Serializable {
         this.xp = xp;
     }
 
+    /**
+     * Tato metoda pridava xp a pridava uroven a nastavuje xp potrebne na dalsi level
+     */
     public void pridejxp() {
         this.xp = this.xp + 50;
         int xpNaDalsi = this.uroven * 100;
@@ -29,6 +35,10 @@ public class Hrac implements Serializable {
             xpNaDalsi = this.uroven * 100;
         }
     }
+
+    /**
+     * Odebira xp po prohre
+     */
     public void odeberxp(){
         if (xp>0){
             this.xp = xp - 25;

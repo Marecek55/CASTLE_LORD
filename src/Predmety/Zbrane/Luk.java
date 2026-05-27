@@ -3,6 +3,9 @@ package Predmety.Zbrane;
 import Logika.Hra;
 import Predmety.Rarita;
 
+/**
+ * Tato trida pridava hodnotu silu luku
+ */
 public class Luk extends Zbran {
 
 
@@ -16,6 +19,10 @@ public class Luk extends Zbran {
         return "luk.png";
     }
 
+    /**
+     * Tato metoda nastavuje a vraci silu luku
+     * @return
+     */
     @Override
     public int zautoc() {
 

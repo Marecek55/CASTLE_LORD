@@ -2,7 +2,9 @@ package Predmety.Zbrane;
 
 import Logika.Hra;
 import Predmety.Rarita;
-
+/**
+ * Tato trida pridava hodnotu silu magicke hole
+ */
 public class MagickaHul extends Zbran{
 
 
@@ -15,7 +17,10 @@ public class MagickaHul extends Zbran{
     public String getNazevObrazku() {
         return "hul.png";
     }
-
+    /**
+     * Tato metoda nastavuje a vraci magicke hole
+     * @return
+     */
     @Override
     public int zautoc() {
 

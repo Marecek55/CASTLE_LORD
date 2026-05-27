@@ -2,6 +2,9 @@ package Obrazovky;
 
 import java.awt.*;
 
+/**
+ * Tato trida vykresluje a prekresluje postavy v souboji
+ */
 public class PanelBitvy extends PanelNaPozadi{
     private SoubojovaObrazovka soubojovaObrazovka;
 

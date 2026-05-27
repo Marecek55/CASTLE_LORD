@@ -7,6 +7,9 @@ import java.awt.*;
 import java.net.URL;
 import java.sql.SQLOutput;
 
+/**
+ * Tato trida kresli obrazek na pozadi
+ */
 public class PanelNaPozadi extends JPanel {
 
     protected Image bg;
@@ -14,7 +17,10 @@ public class PanelNaPozadi extends JPanel {
     public int y = 0;
     private boolean pohyblivePozadi = false;
 
-
+    /**
+     * Kdyz se nevykrelsli nastavi se barva na cernou
+     * @param nazevObrazku
+     */
     public PanelNaPozadi(String nazevObrazku) {
         setLayout(new BorderLayout());
         setBackground(Color.BLACK);
@@ -23,7 +29,9 @@ public class PanelNaPozadi extends JPanel {
     }
 
 
-
+    /**
+     * Konstruktor kdyz nechceme obrazek
+     */
 
     public PanelNaPozadi() {
         setLayout(new BorderLayout());
@@ -43,6 +51,10 @@ public class PanelNaPozadi extends JPanel {
         this.bg = bg;
     }
 
+    /**
+     * Tato metoda prekresluje obrazek a kresli ho na souradnice
+     * @param g the <code>Graphics</code> object to protect
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -55,6 +67,11 @@ public class PanelNaPozadi extends JPanel {
         }
     }
 
+    /**
+     * Tato metoda ho nacita pomoci url z res
+     * @param obrazek cesta k obrazku
+     * @return
+     */
     public Image nactiObrazek(String obrazek) {
         URL url = getClass().getResource(obrazek);
         if (url == null) {

@@ -10,6 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * ObrazovkaHradu pridava na svoji obrazovku tlacitka a zpracovava se zde pohyb hradem
+ */
 public class ObrazovkaHradu extends Obrazovka {
     private PanelPohyblivehoPozadi panelHradu;
     private JButton stavbaTlacitko;
@@ -27,6 +30,11 @@ public class ObrazovkaHradu extends Obrazovka {
     private int yMysStart;
     private Hrad hrad;
 
+    /**
+     * V konstruktoru se nastavuji tlacitka a promene
+     * @param nazev nazev obrazovky
+     * @param malaObrazovka ma byt malou obrazovkou
+     */
     public ObrazovkaHradu(String nazev, boolean malaObrazovka) {
         super(nazev, malaObrazovka);
         stavbaTlacitko = new JButton();
@@ -50,6 +58,9 @@ public class ObrazovkaHradu extends Obrazovka {
         this.hrad = hrad;
     }
 
+    /**
+     * Tato trida aktualizuje pocet penez jidla a uroven
+     */
     public void aktualizace() {
         pocetPenez.setText(String.valueOf(Penize.getPocet()));
         pocetJidla.setText(String.valueOf(Jidlo.getPocet()));
@@ -61,6 +72,9 @@ public class ObrazovkaHradu extends Obrazovka {
     int sirka = Hra.sirkaObrazovky;
     int vyska = Hra.vyskaObrazovky;
 
+    /**
+     * Inicializace urcuje rozmer a lokaci komponentu
+     */
     @Override
     public void inicializace() {
         int sirkaTlacitek = (int) (sirka * 0.25);
@@ -151,6 +165,9 @@ public class ObrazovkaHradu extends Obrazovka {
         panelHradu.repaint();
     }
 
+    /**
+     * Funkcnost dava smysl po kliknuti na tlacitka a zpracovava ovladani mysi
+     */
     @Override
     public void funkcnost() {
         stavbaTlacitko.addActionListener(e -> {

@@ -10,6 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Tato metoda spousti souboj vytvari tlacitka a urovne goblini stezky
+ */
 public class PanelGobliniStezky extends PanelNaPozadi {
     private PanelNaPozadi urovneStezky;
     ArrayList<JButton> seznamTlacitek;
@@ -18,6 +21,12 @@ public class PanelGobliniStezky extends PanelNaPozadi {
     private JButton btnZpet;
     private ObrazovkaMapy predchoziObrazovka;
 
+    /**
+     * Tato metoda vytvari seznam tlacitek a definuje jejich lokaci na obrazovce
+     * @param obrazek
+     * @param okno
+     * @param predchoziObrazovka
+     */
     public PanelGobliniStezky(String obrazek, JFrame okno, ObrazovkaMapy predchoziObrazovka) {
         super(obrazek);
         btnZpet = new JButton();
@@ -78,6 +87,15 @@ public class PanelGobliniStezky extends PanelNaPozadi {
     int vyska = Hra.vyskaObrazovky;
     int sirkaTlacitek = (int) (sirka * 0.07);
     int vyskaTlacitek = sirkaTlacitek * 495/504;
+
+    /**
+     * Tato metoda tvori tlacitko na obrazovce podle toho na jake je hrac urovni tak se vykresli vzhled jestli je zamcena
+     * ta uroven  a po vyhre se prekresli na dokonceny a nastavuje obrazovku s tlacitkem bitvy po kliknuti na uroven a
+     * nasledny start bitvy do ktere preda tymy do soubojoveObrazovky a kontroluje jestli hrac muze vstoupit do souboje
+     * @param tlacitko tlacitko
+     * @param x souradnice x
+     * @param y souradnice y
+     */
     public void tvorbaTlacitka(int tlacitko, double x , double y) {
         JButton button = seznamTlacitek.get(tlacitko);
         int upravenaUroven = Hra.urovenGobliniStezky - 1;

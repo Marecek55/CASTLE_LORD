@@ -4,6 +4,9 @@ import Logika.Hra;
 import Obrazovky.Tlacitka.StylTlacitek;
 import javax.swing.*;
 
+/**
+ * Tato trida v sobe ma pridava zacatecnicka tlactika na spusteni hry a nastaveni a ukonceni
+ */
 public class StartovaciObrazovka extends Obrazovka {
     private JButton btnHrat;
     private JButton btnNastaveni;
@@ -18,6 +21,9 @@ public class StartovaciObrazovka extends Obrazovka {
     int vyska = Hra.vyskaObrazovky;
     int sirka = Hra.sirkaObrazovky;
 
+    /**
+     * Tato metoda nastavuje lokaci velikost a obrazky tlacitek
+     */
     @Override
     public void inicializace() {
 
@@ -46,6 +52,9 @@ public class StartovaciObrazovka extends Obrazovka {
 
     }
 
+    /**
+     * Tato metoda dava funkce tlacitkum a pta se hrace na jmeno prvniho bojovnika
+     */
     @Override
     public void funkcnost() {
 

@@ -10,6 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Tato trida je panel pro arenu ktery vykresluje  jeji tlacitka a pridava postavy do souboje
+ */
 public class PanelArena extends PanelNaPozadi {
     private JFrame okno;
 
@@ -17,6 +20,12 @@ public class PanelArena extends PanelNaPozadi {
     private JButton bitvaTlacitko;
     private ObrazovkaMapy predchoziObrazovka;
 
+    /**
+     * Tato metoda pridava funkcnost tlacitku zpet a nacita pozadi
+     * @param obrazek obrazek
+     * @param okno okno ktere chceme prekreslit
+     * @param predchoziObrazovka predchozi obrazovka pro vraceni se
+     */
     public PanelArena(String obrazek, JFrame okno, ObrazovkaMapy predchoziObrazovka) {
         super("/Obrazky/ObrazkyBoje/arena.png");
         this.okno = okno;
@@ -44,6 +53,10 @@ public class PanelArena extends PanelNaPozadi {
     int sirka = Hra.sirkaObrazovky;
     int vyska = Hra.vyskaObrazovky;
 
+    /**
+     * Tato metoda nastavuje lokaci a velikost tlacitak a tvori podle urovne hradu pocet bojovniku
+     * a kresli text na silu protivniku a jejich pocet a nastavuje tymy do soubojove obrazovky a spousti souboj volanim souboje
+     */
     private void inicializace() {
         int sirkaTlacitka = (int) (sirka * 0.4);
         int vyskaTlacitka = sirkaTlacitka * 273 / 914;
@@ -64,11 +77,6 @@ public class PanelArena extends PanelNaPozadi {
             nepratelskyTym.add(TvorbaPostav.tvorbaProtihracovaBojovnika("Nepřítel", urovenHradu));
             nepratelskyTym.add(TvorbaPostav.tvorbaProtihracovaBojovnika("Nepřítel", urovenHradu));
         }
-
-
-
-
-
         int silaNepratel = 0;
         for (Postava nepritel : nepratelskyTym) {
             silaNepratel = silaNepratel + nepritel.getSilaPostavy();
@@ -101,10 +109,10 @@ public class PanelArena extends PanelNaPozadi {
 
                 okno.setContentPane(soubojovaObrazovka.getArenaPanel());
 
-                Souboj arena = new Souboj(hracuvTym, nepratelskyTym, soubojovaObrazovka);
+                Souboj s = new Souboj(hracuvTym, nepratelskyTym, soubojovaObrazovka);
                 okno.revalidate();
                 okno.repaint();
-                arena.startBitvy();
+                s.startBitvy();
             }
         });
     }

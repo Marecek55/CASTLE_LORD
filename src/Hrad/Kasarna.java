@@ -5,6 +5,9 @@ import Predmety.Penize;
 
 import java.util.ArrayList;
 
+/**
+ * Trida Kasarnu nastavuje co kasarna bude delat a co se odecte uzivateli po postaveni
+ */
 public class Kasarna extends Mistnost{
     private ArrayList<Bojovnik> bojovnici;
     private int maxKapacita;
@@ -23,6 +26,10 @@ public class Kasarna extends Mistnost{
 
     }
 
+    /**
+     * Tato metoda vylepsuje a odecita penize za vylepseni Kasarny
+     */
+
     @Override
     public void vylepsitMistnost() {
         int cena = getCenaZaDalsiVylepseni();
@@ -33,6 +40,11 @@ public class Kasarna extends Mistnost{
         }
 
     }
+
+    /**
+     * Tato metoda pridava bojovnik a odecita penize
+     * @param novy bojovnik ktereho pridava
+     */
     public void pridatBojovnika(Bojovnik novy){
         int cenaZaBojovnika = 500 * uroven;
         if (Penize.getPocet()>= cenaZaBojovnika){

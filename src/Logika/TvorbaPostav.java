@@ -6,7 +6,15 @@ import Predmety.Zbrane.Zbran;
 import Predmety.Zbroj.Brneni;
 import Predmety.Zbroj.Medailon;
 
+/**
+ * Trida TvorbaPostav tvori postavy a prirazuje jim obrazky
+ */
 public class TvorbaPostav {
+    /**
+     * Tato metoda tvori goblina dava mu obrazek a vybavu
+     * @param urovenStezky uroven goblini stezky
+     * @return
+     */
     public static Goblin tvorbaGoblina(int urovenStezky ){
         Zbran z = Zbran.vytvoritZbran(urovenStezky,false, null);
         String utociciObrazek = "";
@@ -45,6 +53,14 @@ public class TvorbaPostav {
      static String bojovnikLukKlidny = "/Obrazky/ObrazkyPostav/bojovnikLukKlidny.png";
      static String bojovnikMagKlidny = "/Obrazky/ObrazkyPostav/bojovnikMagKlidny.png";
      static String bojovnikMagUtok = "/Obrazky/ObrazkyPostav/bojovnikMagUtok.png";
+
+    /**
+     * Tato metoda tvori hracoveho bojovnika dava mu obrazek a vybavu
+     * @param jmeno jmeno bojovnika
+     * @param urovenHradu uroven hradu
+     * @param z zbran bojovnika
+     * @return
+     */
     public  static Bojovnik tvorbaHracovaBojovnika(String jmeno , int urovenHradu, Zbran z){
         String utociciObrazek = "";
         String klidnyObrazek = "";
@@ -69,6 +85,13 @@ public class TvorbaPostav {
         }
         return new Bojovnik(jmeno, z, null, null, klidnyObrazek, utociciObrazek,typ, urovenHradu);
     }
+
+    /**
+     * Tato metoda tvori protihracoveho bojovnika dava mu obrazek a vybavu
+     * @param jmeno jmeno bojovnika
+     * @param urovenHradu uroven hradu
+     * @return
+     */
     public static Bojovnik tvorbaProtihracovaBojovnika(String jmeno , int urovenHradu){
         Zbran z = Zbran.vytvoritZbran(urovenHradu,false, null);
         int nahoda = Hra.rand.nextInt(1,11);

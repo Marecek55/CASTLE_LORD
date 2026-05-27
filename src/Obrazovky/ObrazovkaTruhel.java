@@ -13,6 +13,9 @@ import Predmety.Zbroj.Medailon;
 import javax.swing.*;
 import java.util.ArrayList;
 
+/**
+ * Tato obrazovka pracuje s inventarem pro truhly nastavuje jejich lokaci a vzhled a animaci otevreni
+ */
 public class ObrazovkaTruhel extends Obrazovka {
     private PanelNaPozadi panelTruhel;
     private JButton btnZpet;
@@ -21,6 +24,11 @@ public class ObrazovkaTruhel extends Obrazovka {
     int vyska = Hra.vyskaObrazovky;
     int sirka = Hra.sirkaObrazovky;
 
+    /**
+     * Nastavuje pozadi a spousti metody inicializace a funkcnost
+     * @param nazev nezev obrazovky
+     * @param malaObrazovka jeslti ma byt obrazovka mala
+     */
     public ObrazovkaTruhel(String nazev, boolean malaObrazovka) {
         super(nazev, malaObrazovka);
         panelTruhel = new PanelNaPozadi("/obrazkyInventar/pozadiTruhly.png");
@@ -35,6 +43,12 @@ public class ObrazovkaTruhel extends Obrazovka {
         okno.setVisible(true);
     }
 
+    /**
+     * Tato metoda dava lokaci a velikst tlacitkam truhel a pocita grid pro rozestaveni truhel na 16 poli
+     * tim ze zbytek po deleni 4 takze ve 4 je to nula a jde to od znova 1 zbytek deleni 4 je 1 atd 0 zbytek deleni 4 je 0
+     * 2 zbytek deleni 4 je 2 to znamena 2. sloupec
+     * i/4 pocita pozici v radku kde 0 deleno 4 je nula 1 deleno 4 je 0 2 deleno 4 je 0 atd ale pak napr 7 deleno 4 je jedna
+     */
     @Override
     public void inicializace() {
         tlacitkaTruhel = new ArrayList<>();
@@ -90,6 +104,12 @@ public class ObrazovkaTruhel extends Obrazovka {
         panelTruhel.repaint();
     }
 
+    /**
+     * Tato metoda vizualizuje co se stane po otevreni truhly deaktivuje vsechna ostatni tlacitka
+     *  a vykrasli velky otaznik a pak se hracovi bud odkryje ze to jsou surviny nebo se mu odkryje rarita
+     *  a pak po dalsim kliknuti cela zbran se silou
+     * @param truhla
+     */
     private void otevreniTruhly(Truhla truhla) {
         for (JComponent komp : tlacitkaTruhel) {
             komp.setEnabled(false);

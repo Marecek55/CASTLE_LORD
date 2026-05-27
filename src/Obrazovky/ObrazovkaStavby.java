@@ -9,6 +9,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * ObrazovkaStavby je obrazovka ktera stavi budovy a vylepsuje je
+ */
 public class ObrazovkaStavby extends Obrazovka {
     private PanelNaPozadi panelStavby;
     private JButton btnZpet;
@@ -22,6 +25,12 @@ public class ObrazovkaStavby extends Obrazovka {
     private JButton btnVylepsitTrenink;
     private Hrad hrad;
 
+    /**
+     * V teto metode se nastavujou tlacitka
+     * @param nazev nazev obrazovky
+     * @param malaObrazovka jestli ma byt mala
+     * @param hrad prenos hradu
+     */
     public ObrazovkaStavby(String nazev, boolean malaObrazovka, Hrad hrad) {
         super(nazev, malaObrazovka);
         this.hrad = hrad;
@@ -54,6 +63,10 @@ public class ObrazovkaStavby extends Obrazovka {
     int sirkaTlacitka2 = (int) (vyska * 0.4);
     int vyskaTlacitka2 = (int) (sirkaTlacitka2 * (272.0 / 917.0));
 
+    /**
+     * V teto metode se nacitaji obrazky tlacitek a jejich lokace a take se spousti jejich viditelnost
+     * pomoci setEnabled a take se spousti metody na tlacitka
+     */
     @Override
     public void inicializace() {
         StylTlacitek.nastavJakoObrazek(btnPostavitLekarna, "/Obrazky/ObrazkyVHradu/postavitTlacitko.png",sirkaTlacitka2,vyskaTlacitka2);
@@ -97,12 +110,21 @@ public class ObrazovkaStavby extends Obrazovka {
         budovaTlacitkaKontrola(hrad.getSkladyJidla(), 4, maxUroven, btnVylepsitSkladJidla, btnPostavitSkladJidla);
         budovaTlacitkaKontrola(hrad.getTreninkoveHaly(), 3, maxUroven, btnVylepsitTrenink, btnPostavitTrenink);
 
-        vytvortexty(hrad.getLekarny(), 200, 100, 2, (int)(sirka * 0.4), (int)(vyska * 0.14));
-        vytvortexty(hrad.getSkladyPenez(), 200, 300, 4, (int)(sirka * 0.4), (int)(vyska * 0.56));
-        vytvortexty(hrad.getSkladyJidla(), 150, 200, 4, (int)(sirka * 0.89), (int)(vyska * 0.14));
-        vytvortexty(hrad.getTreninkoveHaly(), 300, 200, 3, (int)(sirka * 0.89), (int)(vyska * 0.56));
+        vytvortexty(hrad.getLekarny(), 1000, 1000, 2, (int)(sirka * 0.4), (int)(vyska * 0.14));
+        vytvortexty(hrad.getSkladyPenez(), 2000, 1500, 4, (int)(sirka * 0.4), (int)(vyska * 0.56));
+        vytvortexty(hrad.getSkladyJidla(), 3000, 2000, 4, (int)(sirka * 0.89), (int)(vyska * 0.14));
+        vytvortexty(hrad.getTreninkoveHaly(), 1500, 800, 3, (int)(sirka * 0.89), (int)(vyska * 0.56));
     }
 
+    /**
+     * Tato metoda kontroluj jestli uz je postavene nebo jestli ma max uroven a nebo max pocet postaveni
+     * a podle toho se povoluji tlacitka
+     * @param mistnosti mistnosti napr lekarny z ktere se veme prvni a naraz se vylepsi
+     * @param maxPostaveni max pocet postaveni
+     * @param maxUroven max uroven
+     * @param vylepsit tlacitko k vylepseni
+     * @param postavit tlacitko k postaveni
+     */
     private void budovaTlacitkaKontrola(ArrayList<? extends Mistnost> mistnosti, int maxPostaveni, int maxUroven, JButton vylepsit, JButton postavit) {
         int aktualniPocet = mistnosti.size();
 
@@ -125,19 +147,44 @@ public class ObrazovkaStavby extends Obrazovka {
         }
     }
 
+    /**
+     * Tato metoda kontroluje jestli je postavena mistnost ktera prichazi a pise text k jejimu poli pro upgrade
+     * kdyz neni vypisuje cenu za postaveni to stejne s urovni
+     * @param mistnosti
+     * @param cenaZaPostaveni
+     * @param cenaZaVylepseni
+     * @param maxPostaveni
+     * @param x
+     * @param y
+     */
     private void vytvortexty(ArrayList<? extends Mistnost> mistnosti, int cenaZaPostaveni, int cenaZaVylepseni, int maxPostaveni, int x, int y) {
         int pocet = mistnosti.size();
         boolean jePostaveno = pocet > 0;
-        int uroven = jePostaveno ? mistnosti.get(0).getUroven() : 0;
-
-        String cena = jePostaveno ? String.valueOf(cenaZaVylepseni * (uroven + 1)) : String.valueOf(cenaZaPostaveni);
-
+        int uroven;
+        String cena;
+        if (jePostaveno) {
+            uroven = mistnosti.get(0).getUroven();
+        } else {
+            uroven = 0;
+        }
+        if (jePostaveno) {
+            cena = String.valueOf(cenaZaVylepseni * (uroven + 1));
+        } else {
+            cena = String.valueOf(cenaZaPostaveni);
+        }
         pridatText(cena, x, y, new Color(150, 255, 150));
         pridatText(String.valueOf(maxPostaveni), x, y + (int)(vyska * 0.04), new Color(245, 240, 210));
         pridatText(String.valueOf(pocet), x, y + (int)(vyska * 0.085), new Color(245, 240, 210));
         pridatText(String.valueOf(uroven), x, y + (int)(vyska * 0.125), new Color(255, 215, 0));
     }
 
+    /**
+     * Tato metoda pridava text na obrazovku se svym fontem
+     * @param text text
+     * @param x pozice x
+     * @param y pozice y
+     * @param barva barva textu
+     */
     private void pridatText(String text, int x, int y, Color barva) {
         JLabel label = new JLabel(text);
         label.setFont(new Font("Georgia", Font.BOLD, (int)(vyska * 0.03)));
@@ -146,6 +193,9 @@ public class ObrazovkaStavby extends Obrazovka {
         panelStavby.add(label);
     }
 
+    /**
+     * Tato metoda dava funkcnost vsem tlacitkum a vypisuje zpravu po vylepseni
+     */
     @Override
     public void funkcnost() {
         btnZpet.addActionListener(e -> {
@@ -156,10 +206,18 @@ public class ObrazovkaStavby extends Obrazovka {
             this.okno.setVisible(false);
         });
 
-        btnPostavitLekarna.addActionListener(e -> staveni(TypMistnosti.LEKARNA));
-        btnPostavitSkladPenez.addActionListener(e -> staveni(TypMistnosti.SKLAD_PENEZ));
-        btnPostavitSkladJidla.addActionListener(e -> staveni(TypMistnosti.SKLAD_JIDLA));
-        btnPostavitTrenink.addActionListener(e -> staveni(TypMistnosti.TRENINKOVA_HALA));
+        btnPostavitLekarna.addActionListener(e -> {
+            staveni(TypMistnosti.LEKARNA);
+        });
+        btnPostavitSkladPenez.addActionListener(e ->{
+            staveni(TypMistnosti.SKLAD_PENEZ);
+        } );
+        btnPostavitSkladJidla.addActionListener(e -> {
+            staveni(TypMistnosti.SKLAD_JIDLA);
+        });
+        btnPostavitTrenink.addActionListener(e -> {
+            staveni(TypMistnosti.TRENINKOVA_HALA);
+        });
 
         btnVylepsitLekarna.addActionListener(e -> {
             if (!hrad.getLekarny().isEmpty()) {
@@ -206,6 +264,13 @@ public class ObrazovkaStavby extends Obrazovka {
         });
     }
 
+    /**
+     * Tato metoda se pta na jakou pozici chce hrac budovu postavit a pak ji tam vlozi pomoci metody ve tride
+     * hrad a kontroluje jestli uzivatel zadal spravne parametry
+     * @param typ typ mistnosti
+     */
+
+
     private void staveni(TypMistnosti typ) {
         String odpoved = JOptionPane.showInputDialog(okno, "Na jakou pozici 1-18 chceš budovu postavit?");
         if (odpoved != null) {
@@ -225,6 +290,9 @@ public class ObrazovkaStavby extends Obrazovka {
         }
     }
 
+    /**
+     * Tato metoda zkracene obnovuje a prekresluje obrazovku po kazde stavbe
+     */
     private void obnovitObrazovku() {
             panelStavby.removeAll();
             inicializace();

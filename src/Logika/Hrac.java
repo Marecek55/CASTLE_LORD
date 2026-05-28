@@ -28,11 +28,11 @@ public class Hrac implements Serializable {
      */
     public void pridejxp() {
         this.xp = this.xp + 50;
-        int xpNaDalsi = this.uroven * 100;
+        int xpNaDalsi = this.uroven * 50;
         while (this.xp >= xpNaDalsi) {
             this.uroven++;
             this.xp = this.xp - xpNaDalsi;
-            xpNaDalsi = this.uroven * 100;
+            xpNaDalsi = this.uroven * 50;
         }
     }
 
@@ -64,5 +64,9 @@ public class Hrac implements Serializable {
 
     public int getXp() {
         return xp;
+    }
+
+    public void setUroven(int uroven) {
+        this.uroven = uroven;
     }
 }

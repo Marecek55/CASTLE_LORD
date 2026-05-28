@@ -1,6 +1,9 @@
 package Obrazovky;
 
 import Hrad.TypMistnosti;
+import Logika.Hra;
+import Postavy.Postava;
+
 import java.awt.*;
 import java.util.HashMap;
 
@@ -18,6 +21,11 @@ public class PanelPohyblivehoPozadi extends PanelNaPozadi {
     private Image trenink = nactiObrazek("/Obrazky/ObrazkyVHradu/treninkovaMistnost.png");
     private Image skladPenez = nactiObrazek("/Obrazky/ObrazkyVHradu/skladPenez.png");
     private Image skladJidla = nactiObrazek("/Obrazky/ObrazkyVHradu/skladJidla.png");
+    private Image mec= nactiObrazek("/Obrazky/ObrazkyPostav/bojovnikMecKlidny.png");
+    private Image luk = nactiObrazek("/Obrazky/ObrazkyPostav/bojovnikLukKlidny.png");
+    private Image mag = nactiObrazek("/Obrazky/ObrazkyPostav/bojovnikMagKlidny.png");
+
+
 
     /**
      * Tato metoda spousti pohyblive pozadi
@@ -112,7 +120,8 @@ public class PanelPohyblivehoPozadi extends PanelNaPozadi {
     /**
      * Tato metoda vykresli mapu na pozici kam ji hrac posunul a rekne pomoci translate
      * mistnostem aby se hybaly stejne jako kamera jako hrad a vykresli mistnsoti ve velikosti meritka
-     * a zepta se na jakych souradnicich jaka mistnost je a tu vykresli
+     * a zepta se na jakych souradnicich jaka mistnost je a tu vykresli take vykresluje bojovniky
+     * ktere ma hrac v tymu do kasarny
      * @param g the <code>Graphics</code> object to protect
      */
     @Override
@@ -130,6 +139,27 @@ public class PanelPohyblivehoPozadi extends PanelNaPozadi {
         gMapy.scale(meritko, meritko);
         if (kasarna != null){
             gMapy.drawImage(kasarna, 787, 1114, 1494, 498, null);
+
+            int xBojovnika = 1000;
+            int yBojovnika = 1190;
+            int sirkaBojovnika = (int)(1494 * 0.18);
+            int vyskaBojovnika = sirkaBojovnika * 612/408;
+
+            for (Postava p : Hra.hracuvTym) {
+                Image obrazek = null;
+                switch (p.getTyp()) {
+                    case "Bojovnik": obrazek = mec;
+                    break;
+                    case "Lukostrelec": obrazek = luk;
+                    break;
+                    case "Mag": obrazek = mag;
+                    break;
+                }
+
+                gMapy.drawImage(obrazek, xBojovnika, yBojovnika, sirkaBojovnika, vyskaBojovnika, null);
+                xBojovnika = xBojovnika + sirkaBojovnika + 100;
+
+            }
         }
 
         HashMap<Integer, Integer[]> lokace = obrazovka.getHrad().getLokaceMistnosti();

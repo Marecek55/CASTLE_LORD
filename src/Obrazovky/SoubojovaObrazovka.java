@@ -92,6 +92,9 @@ public class SoubojovaObrazovka extends Obrazovka {
                 ((Bojovnik) p).resetTreninkuPoBoji();
             }
         }
+        if (Hra.obrazovkaHradu != null && Hra.obrazovkaHradu.getHrad() != null) {
+            Hra.obrazovkaHradu.getHrad().resetLeceni();
+        }
         String cestaKObrazku = "";
         if (lokace.equals("arena")) {
             if (hracVyhral) {

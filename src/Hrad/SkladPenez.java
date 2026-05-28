@@ -5,14 +5,12 @@ import Predmety.Penize;
  * Trida SkladPenez nastavuje co sklad bude delat a co se odecte uzivateli po postaveni
  */
 public class SkladPenez extends Mistnost{
-
-
     public SkladPenez(String nazev, int cenaZaPostaveni, int cenaZaVylepseni, int uroven, int velikost) throws Exception {
         super(nazev, cenaZaPostaveni, cenaZaVylepseni, uroven, velikost);
         maxPostaveni = 4;
 
             if (Penize.getPocet() >= cenaZaPostaveni) {
-                Penize.setMaxpocet(Penize.getMaxpocet() + 10000);
+                Penize.setMaxpocet(Penize.getMaxpocet() + 5000);
                 aktualniPocetPostaveni++;
                 Penize.setPocet(Penize.getPocet() - cenaZaPostaveni);
             }else {

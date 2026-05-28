@@ -1,9 +1,13 @@
 package Hrad;
 
 import Logika.Hra;
+import Logika.TvorbaPostav;
 import Postavy.Bojovnik;
 import Postavy.Postava;
+import Predmety.Jidlo;
 import Predmety.Penize;
+import Predmety.Zbrane.Luk;
+import Predmety.Zbrane.MagickaHul;
 
 import javax.swing.*;
 import java.io.Serializable;
@@ -30,6 +34,7 @@ public class Hrad implements Serializable {
         this.okno = okno;
         try {
             kasarna = new Kasarna("Kasárna", 0, 100, 1, 1);
+
         } catch (Exception e) {
             System.out.println("Kasarna nejde vytvorit");
         }
@@ -66,7 +71,7 @@ public class Hrad implements Serializable {
      * Tato metoda stavi mistnost podle vyberu a pridava ji do listu mistnosti a prida se do jeji cislo postaveni do listu pozicePostavenych
      * aby se vedela jaka je obsazena a prida se samotna mistnost do HashMapy postavene kde pak hrac interaguje s postavenymi mistnostmi
      *
-     * @param typ    typ mistnosti
+     * @param typ typ mistnosti
      * @param pozice pozice na jake je mistnost postavena
      */
 
@@ -133,24 +138,33 @@ public class Hrad implements Serializable {
     /**
      * Tato metoda vyhodnocuje co se stane po kliknuti na kasarnu
      */
-
+    int pocetKoupenych = 0;
     private void kliknutiKasarna() {
-        if (Hra.hrac.getUroven() < 2) {
-            JOptionPane.showMessageDialog(okno, "Kasárna je zamčená Musíš mít alespoň úroveň 2.");
+        if (Hra.hrac.getUroven() < 5) {
+            JOptionPane.showMessageDialog(okno, "Kasárna je zamčená Musíš mít alespoň úroveň 5.");
+        } else if (pocetKoupenych == 1 && Hra.hrac.getUroven() <10) {
+            JOptionPane.showMessageDialog(okno, "Kasárna je zamčená Musíš mít alespoň úroveň 10.");
         } else if (Hra.hracuvTym.size() >= 3) {
             JOptionPane.showMessageDialog(okno, "Máš plný tým Můžeš mít maximálně 3 bojovníky.");
         } else {
-            int cenaVojaka = 500;
+            int cenaVojaka = Hra.hrac.getUroven()/5*500;
             int volba = JOptionPane.showConfirmDialog(okno, "Chceš koupit nového bojovníka? \nCena: " + cenaVojaka + " zlaťáků", "Koupení", JOptionPane.YES_NO_OPTION);
             if (volba == JOptionPane.YES_OPTION) {
                 if (Penize.getPocet() >= cenaVojaka) {
+                    Penize.setPocet(Penize.getPocet()-cenaVojaka);
                     String jmeno = JOptionPane.showInputDialog(okno, "Zadej jméno pro nového bojovníka:");
                     if (jmeno != null) {
-                        Bojovnik b = Logika.TvorbaPostav.tvorbaHracovaBojovnika(jmeno.toUpperCase(), Hra.hrac.getUroven(), new Predmety.Zbrane.Mec("Meč", 5, 10, Predmety.Rarita.BĚŽNÁ));
+                        Bojovnik b = null;
+                        if (Hra.hracuvTym.size() ==1){
+                             b= TvorbaPostav.tvorbaHracovaBojovnika(jmeno.toUpperCase(), Hra.hrac.getUroven(), new Luk("Luk", 5, 10, Predmety.Rarita.BĚŽNÁ));
+                        }else {
+                            b = TvorbaPostav.tvorbaHracovaBojovnika(jmeno.toUpperCase(), Hra.hrac.getUroven(), new MagickaHul("Magická Hůl", 5, 10, Predmety.Rarita.BĚŽNÁ));
+                        }
                         kasarna.pridatBojovnika(b);
                         Hra.hracuvTym.add(b);
                         JOptionPane.showMessageDialog(okno, jmeno.toUpperCase() + " byl úspěšně přidán!");
                         Hra.obrazovkaHradu.aktualizace();
+                        pocetKoupenych++;
                     }
                 } else {
                     JOptionPane.showMessageDialog(okno, "Nemáš dost peněz!");
@@ -163,10 +177,23 @@ public class Hrad implements Serializable {
 
     /**
      * Tato metoda vyhodnocuje co se stane po kliknuti na lekarnu
+     * hrac ma omezeny pocet leceni bojovniku a tak musi vylepsovat
      */
+    private int pocetLeceni = 0;
 
+    public void resetLeceni() {
+        pocetLeceni = 0;
+    }
     private void kliknutiLekarna(Lekarna l) {
         ArrayList<String> jmena = new ArrayList<>();
+        int celkovaKapacita = 0;
+        for (Lekarna lekarna : lekarny) {
+            celkovaKapacita = celkovaKapacita + lekarna.getUroven();
+        }
+        if (pocetLeceni >= celkovaKapacita) {
+            JOptionPane.showMessageDialog(okno, "Tvoje lékarna má malou kapacitu! Kapacita lékáren je: " + celkovaKapacita + "\nMusíš jít do bitvy nebo ji vylepši.");
+            return;
+        }
         for (Postava p : Hra.hracuvTym) {
             if (p instanceof Bojovnik) {
                 Bojovnik bojovnik = (Bojovnik) p;
@@ -180,16 +207,16 @@ public class Hrad implements Serializable {
             return;
         }
         String vybrane = (String) JOptionPane.showInputDialog(okno, "Vyber hrdinu na léčení: \nCena: 200 jídla", "Lékárna", JOptionPane.QUESTION_MESSAGE, null, jmena.toArray(), jmena.get(0));
-
         if (vybrane != null) {
-
             if (Predmety.Jidlo.getPocet() >= 200) {
                 for (Postava p : Hra.hracuvTym) {
                 if (p.getJmeno().equals(vybrane) && p instanceof Bojovnik) {
                     Bojovnik bojovnik = (Bojovnik) p;
                     bojovnik.setZivoty(bojovnik.getMaxZivoty());
-                    Predmety.Jidlo.setPocet(Predmety.Jidlo.getPocet() - 200);
-                        JOptionPane.showMessageDialog(okno, vybrane + " byl úspěšně vyléčen za 200 jídla!");
+                    Jidlo.setPocet(Jidlo.getPocet() - 200);
+                    pocetLeceni++;
+                    int zbyva = celkovaKapacita - pocetLeceni;
+                    JOptionPane.showMessageDialog(okno, vybrane + " byl vyléčen za 200 jídla!\nZbývá léčení před další bitvou: " + zbyva);
                         Hra.obrazovkaHradu.aktualizace();
                         break;
                     }
@@ -203,6 +230,7 @@ public class Hrad implements Serializable {
     }
     /**
      * Tato metoda vyhodnocuje co se stane po kliknuti na treninkovou halu
+     * hrac plati vice kdyz ma vetsi uroven ale ma lepsi bonus k utoku
      */
 
     private void kliknutiTrenink(TreninkovaHala h) {
@@ -213,19 +241,20 @@ public class Hrad implements Serializable {
         if (jmena.isEmpty()) {
             JOptionPane.showMessageDialog(okno, "Nemáš žádné bojovniky na trénování.");
         } else {
-            String jmeno = (String) JOptionPane.showInputDialog(okno, "Vyber hrdinu na trénink:", "Trénink", JOptionPane.QUESTION_MESSAGE, null, jmena.toArray(), jmena.get(0));
+            int cena = 100 * h.getUroven();
+            int bonus = 3 * h.getUroven();
+            String jmeno = (String) JOptionPane.showInputDialog(okno, "Vyber hrdinu na trénink:\nCena: " + cena + " jídla\nBonus k útoku: +" + bonus, "Trénink", JOptionPane.QUESTION_MESSAGE, null, jmena.toArray(), jmena.get(0));
             if (jmeno != null) {
                 for (Postava p : Hra.hracuvTym) {
                     if (p.getJmeno().equals(jmeno) && p instanceof Bojovnik) {
                         Bojovnik bojovnik = (Bojovnik) p;
-                        int cena = 50 * h.getUroven();
                         if (Predmety.Jidlo.getPocet() >= cena) {
                             boolean uspech = h.trenovaniBojovnika(bojovnik);
                             if (uspech) {
                                 JOptionPane.showMessageDialog(okno, bojovnik.getJmeno() + " si zvedl útok!");
                                 Hra.obrazovkaHradu.aktualizace();
                             } else {
-                                JOptionPane.showMessageDialog(okno, bojovnik.getJmeno() + " už trénoval 2x! Musí jít nejdřív do bitvy.");
+                                JOptionPane.showMessageDialog(okno, bojovnik.getJmeno() + " už trénoval 2x! Musí jít do bitvy.");
                             }
                         } else {
                             JOptionPane.showMessageDialog(okno, "Nemáš dostatek jídla!");

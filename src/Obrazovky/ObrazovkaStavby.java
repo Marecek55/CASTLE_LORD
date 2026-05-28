@@ -234,6 +234,10 @@ public class ObrazovkaStavby extends Obrazovka {
             if (!hrad.getSkladyPenez().isEmpty()) {
                 try {
                     hrad.getSkladyPenez().get(0).vylepsitMistnost();
+                    int novaUroven = hrad.getSkladyPenez().get(0).getUroven();
+                    int novyLimit = Predmety.Penize.getMaxpocet();
+                    JOptionPane.showMessageDialog(okno, "Sklad je vylepšen na úroveň " + novaUroven + "!\nTvoje maximální kapacita peněz se zvýšila na: " + novyLimit);
+                    obnovitObrazovku();
                     obnovitObrazovku();
                 } catch (Exception exception) {
                     JOptionPane.showMessageDialog(okno, exception.getMessage());
@@ -245,6 +249,9 @@ public class ObrazovkaStavby extends Obrazovka {
             if (!hrad.getSkladyJidla().isEmpty()) {
                 try {
                     hrad.getSkladyJidla().get(0).vylepsitMistnost();
+                    int novaUroven = hrad.getSkladyJidla().get(0).getUroven();
+                    int novyLimit = Predmety.Jidlo.getMaxpocet();
+                    JOptionPane.showMessageDialog(okno, "Sklad jídla je vylepšen na úroveň " + novaUroven + "!\nTvoje maximální kapacita jídla se zvýšila na: " + novyLimit);
                     obnovitObrazovku();
                 } catch (Exception exception) {
                     JOptionPane.showMessageDialog(okno, exception.getMessage());

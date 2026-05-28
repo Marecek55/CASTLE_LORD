@@ -93,15 +93,20 @@ public class TvorbaPostav {
      * @return
      */
     public static Bojovnik tvorbaProtihracovaBojovnika(String jmeno , int urovenHradu){
-        Zbran z = Zbran.vytvoritZbran(urovenHradu,false, null);
+        int urovenNepritele = (int) (urovenHradu *0.25);
+        if (urovenNepritele < 1) {
+            urovenNepritele = 1;
+        }
+        Zbran z = Zbran.vytvoritZbran(urovenNepritele,false, null);
         int nahoda = Hra.rand.nextInt(1,11);
         Brneni b = null;
-        if (nahoda<=7){
-            b = Brneni.vytvoritBrneni(urovenHradu,false, null);
+
+        if (nahoda<=4){
+            b = Brneni.vytvoritBrneni(urovenNepritele,false, null);
         }
         int nahoda2 = Hra.rand.nextInt(1,11);
         Medailon m = null;
-        if (nahoda2<=5){
+        if (nahoda2<=2){
             m = Medailon.vytvoritMedailon(false, null);
         }
         String utociciObrazek = "";
@@ -116,7 +121,7 @@ public class TvorbaPostav {
             case "Magická Hůl":  utociciObrazek =  bojovnikMagUtok;
                 klidnyObrazek = bojovnikMagKlidny;
         }
-        Bojovnik novyBojovnik = new Bojovnik(jmeno, z, b, m,klidnyObrazek, utociciObrazek,"", urovenHradu);
+        Bojovnik novyBojovnik = new Bojovnik(jmeno, z, b, m,klidnyObrazek, utociciObrazek,"", urovenNepritele);
 
 
         if (m != null) {

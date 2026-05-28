@@ -1,6 +1,8 @@
 package Obrazovky;
 import Logika.Hra;
 import Obrazovky.Tlacitka.StylTlacitek;
+import Predmety.Jidlo;
+import Predmety.Penize;
 import Predmety.Predmet;
 import Predmety.Rarita;
 import Predmety.Truhly.Truhla;
@@ -136,7 +138,19 @@ public class ObrazovkaTruhel extends Obrazovka {
                 panelTruhel.remove(velkyOtaznik);
                 panelTruhel.removeAll();
                 inicializace();
-                JOptionPane.showMessageDialog(okno, "Truhla v sobě měla suroviny! Máš je ve skladu.");
+                boolean plneJidlo = false;
+                boolean plnePenize = false;
+                if (Jidlo.getPocet() >= Jidlo.getMaxpocet()){
+                    plneJidlo = true;
+                } else if (Penize.getPocet() >= Penize.getMaxpocet()) {
+                    plnePenize =true;
+                }
+
+                if (plneJidlo || plnePenize) {
+                    JOptionPane.showMessageDialog(okno, "Truhla v sobě měla suroviny!\nAle máš plný sklad.\nPostav nebo vylepši sklady.");
+                } else {
+                    JOptionPane.showMessageDialog(okno, "Truhla v sobě měla suroviny! Máš je ve skladu.");
+                }
             } else {
                 int cisloVeci = 0;
                 String nazevObrazku = "";

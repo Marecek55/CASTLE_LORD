@@ -48,12 +48,15 @@ public class Hra {
             int sila = rand.nextInt(3, 8);
             int crit = rand.nextInt(8, 11);
             Zbran m = new Mec("Meč", sila, crit, Rarita.BĚŽNÁ);
-            Brneni b = new ListoveBrneni("", Rarita.LEGENDÁRNÍ, 2,2);
-            Medailon me = new MedailonObrany("" , Rarita.VZÁCNÁ);
+//            Zbran m2 = new Luk("Luk", sila, crit, Rarita.BĚŽNÁ);
+//            Zbran m3= new MagickaHul("Magická Hůl", sila, crit, Rarita.BĚŽNÁ);
+
             Postava p = TvorbaPostav.tvorbaHracovaBojovnika(jmeno, 1, m);
-            p.setBrneni(b);
-            p.setMedailon(me);
+//            Postava p2 = TvorbaPostav.tvorbaHracovaBojovnika(jmeno, 1, m2);
+//            Postava p3 = TvorbaPostav.tvorbaHracovaBojovnika(jmeno, 1, m3);
             hracuvTym.add(p);
+//            hracuvTym.add(p2);
+//            hracuvTym.add(p3);
 
         }
     }
@@ -67,8 +70,10 @@ public class Hra {
         hudbaPozadi = new Hudba("/Hudba/HudbaPozadi.wav");
         hudbaBitva = new Hudba("/Hudba/HudbaBitva.wav");
         Hra.hudbaPozadi.hraj(true);
-        Penize.setPocet(1000);
-        Jidlo.setPocet(500);
+        Penize.setPocet(3000);
+        Jidlo.setPocet(3000);
+        Penize.setMaxpocet(5000);
+        Jidlo.setMaxpocet(5000);
 
         startovaciObrazovka = new StartovaciObrazovka("Start");
 

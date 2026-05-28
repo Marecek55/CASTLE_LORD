@@ -14,6 +14,44 @@ public class Penize extends Predmet{
 
     }
 
+    /**
+     * Tato metoda pocita kolik penez dostane podle truhly
+     * @param level uroven hrace
+     * @param raritaTruhly rarita truhly
+     * @param nasobitelPenezPodleTruhly nasobitel dane truhly
+     * @return
+     */
+    public static int  dostanePenize(int level, Rarita raritaTruhly,double nasobitelPenezPodleTruhly) {
+        int pocetPenez = 0;
+        switch (raritaTruhly){
+            case VZÁCNÁ:
+                pocetPenez = 1000;
+                break;
+            case BĚŽNÁ:
+                pocetPenez = 500;
+                break;
+            case LEGENDÁRNÍ:
+                pocetPenez = 2000;
+                break;
+        }
+        return (int) (pocetPenez * level* nasobitelPenezPodleTruhly);
+
+    }
+
+    /**
+     * Tato metoda pridava penize do poctu z truhly
+     * @param penize pocet penez
+     * @param levelHrace uroven hrace
+     */
+    public static void  pridaniDoHromadyPenezZTruhly(int penize,int levelHrace){
+        pocet  = pocet + penize;
+
+
+        if (pocet > maxpocet) {
+            pocet = maxpocet;
+        }
+    }
+
     public static int getPocet() {
         return pocet;
     }

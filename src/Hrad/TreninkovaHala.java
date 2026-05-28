@@ -10,7 +10,7 @@ public class TreninkovaHala extends Mistnost{
     public TreninkovaHala(String nazev, int cenaZaPostaveni, int cenaZaVylepseni, int uroven, int velikost) throws Exception {
         super(nazev, cenaZaPostaveni, cenaZaVylepseni, uroven, velikost);
         maxPostaveni = 3;
-        if (aktualniPocetPostaveni >maxPostaveni){
+        if (aktualniPocetPostaveni <=maxPostaveni){
             if (Penize.getPocet() >= cenaZaPostaveni) {
                 Penize.setPocet(Penize.getPocet() - cenaZaPostaveni);
                 aktualniPocetPostaveni++;
@@ -40,7 +40,7 @@ public class TreninkovaHala extends Mistnost{
      * Tato metoda uskutecnuje trenink bojovniku za jidlo a podava cislo k bonusu utokua pocita ho
      */
     public boolean trenovaniBojovnika(Bojovnik b) {
-        int cenaTreninku = 50 * uroven;
+        int cenaTreninku = 100 * uroven;
         int bonusKUtoku = uroven * 3;
 
         if (Jidlo.getPocet() >= cenaTreninku) {

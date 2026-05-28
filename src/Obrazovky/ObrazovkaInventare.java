@@ -134,26 +134,28 @@ public class ObrazovkaInventare extends Obrazovka {
         Postava bojovnik = Hra.hracuvTym.get(pozice);
 
 
-            ImageIcon icon = null;
-            switch (bojovnik.getTyp()) {
-                case "Bojovnik":
-                    icon = new ImageIcon(getClass().getResource("/Obrazky/ObrazkyPostav/bojovnikMecKlidny.png"));
-                    break;
-                case "Lukostrelec":
-                    icon = new ImageIcon(getClass().getResource("/Obrazky/ObrazkyPostav/bojovnikLukKlidny.png"));
-                    break;
-                case "Mag":
-                    icon = new ImageIcon(getClass().getResource("/Obrazky/ObrazkyPostav/bojovnikMagKlidny.png"));
-                    break;
-            }
-            int sirkaBojovnika = (int) (sirka * 0.3);
-            int vyskaBojovnika  = sirkaBojovnika * 612/408;
+        ImageIcon icon = null;
+        switch (bojovnik.getTyp()) {
+            case "Bojovnik":
+                icon = new ImageIcon(getClass().getResource("/Obrazky/ObrazkyPostav/bojovnikMecKlidny.png"));
+                break;
+            case "Lukostrelec":
+                icon = new ImageIcon(getClass().getResource("/Obrazky/ObrazkyPostav/bojovnikLukKlidny.png"));
+                break;
+            case "Mag":
+                icon = new ImageIcon(getClass().getResource("/Obrazky/ObrazkyPostav/bojovnikMagKlidny.png"));
+                break;
+        }
 
-            if (icon != null) {
-                obrazekBojovnika.setIcon(icon);
-                obrazekBojovnika.setBounds((int) (sirka * 0.17), (int) (vyska * 0.06), sirkaBojovnika, vyskaBojovnika);
-            }
+        int vyskaBojovnika = (int) (vyska * 0.45);
+        int sirkaBojovnika = vyskaBojovnika * 408 / 612;
 
+        if (icon != null) {
+            Image img = icon.getImage();
+            Image zvetseny = img.getScaledInstance(sirkaBojovnika, vyskaBojovnika, Image.SCALE_SMOOTH);
+            obrazekBojovnika.setIcon(new ImageIcon(zvetseny));
+            obrazekBojovnika.setBounds((int) (sirka * 0.16), (int) (vyska * 0.21), sirkaBojovnika, vyskaBojovnika);
+        }
 
         String jmeno = Hra.hracuvTym.get(pozice).getJmeno();
         jmenoBojovnika.setText(jmeno);

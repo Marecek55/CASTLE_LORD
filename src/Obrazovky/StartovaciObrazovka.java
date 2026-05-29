@@ -54,6 +54,7 @@ public class StartovaciObrazovka extends Obrazovka {
 
     /**
      * Tato metoda dava funkce tlacitkum a pta se hrace na jmeno prvniho bojovnika
+     * a kdyz nezada nic zada mu zakladni jmeno
      */
     @Override
     public void funkcnost() {

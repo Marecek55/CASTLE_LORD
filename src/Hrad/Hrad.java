@@ -70,7 +70,6 @@ public class Hrad implements Serializable {
     /**
      * Tato metoda stavi mistnost podle vyberu a pridava ji do listu mistnosti a prida se do jeji cislo postaveni do listu pozicePostavenych
      * aby se vedela jaka je obsazena a prida se samotna mistnost do HashMapy postavene kde pak hrac interaguje s postavenymi mistnostmi
-     *
      * @param typ typ mistnosti
      * @param pozice pozice na jake je mistnost postavena
      */
@@ -108,7 +107,7 @@ public class Hrad implements Serializable {
 
     /**
      * Tato metoda kontroluje na jake sourednice kliknul uzivatel a z toho se zapne prislusna metoda
-     *
+     * mistnosti kam hrac kliknul
      * @param xKurzor x kurzuru mysi
      * @param yKurzor y kurzuru mysi
      */
@@ -137,6 +136,7 @@ public class Hrad implements Serializable {
 
     /**
      * Tato metoda vyhodnocuje co se stane po kliknuti na kasarnu
+     * a kontroluje jeslti ma hrac dostatecnou uroven na vchod do kasarny
      */
     int pocetKoupenych = 0;
     private void kliknutiKasarna() {
@@ -178,6 +178,7 @@ public class Hrad implements Serializable {
     /**
      * Tato metoda vyhodnocuje co se stane po kliknuti na lekarnu
      * hrac ma omezeny pocet leceni bojovniku a tak musi vylepsovat
+     * a kontorluje jaky pocet bojovniku leci pred bojem a strhava za to jidlo
      */
     private int pocetLeceni = 0;
 
@@ -231,6 +232,7 @@ public class Hrad implements Serializable {
     /**
      * Tato metoda vyhodnocuje co se stane po kliknuti na treninkovou halu
      * hrac plati vice kdyz ma vetsi uroven ale ma lepsi bonus k utoku
+     * kontorluje jeslti uz bojovnike netrenoval mockrat
      */
 
     private void kliknutiTrenink(TreninkovaHala h) {

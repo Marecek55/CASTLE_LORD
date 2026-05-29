@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 /**
  * Tato trida uchovava hru po nacteni
+ * a jeji vsechny promene
  */
 public class UlozenaHra implements Serializable {
     public ArrayList<Postava> hracuvTym;

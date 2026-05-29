@@ -23,6 +23,7 @@ public class PanelGobliniStezky extends PanelNaPozadi {
 
     /**
      * Tato metoda vytvari seznam tlacitek a definuje jejich lokaci na obrazovce
+     * je jich 20 na 20 urovni a kazdy je postupne tezsi
      * @param obrazek
      * @param okno
      * @param predchoziObrazovka

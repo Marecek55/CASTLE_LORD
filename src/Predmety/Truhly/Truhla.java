@@ -26,6 +26,7 @@ public abstract class Truhla implements Serializable {
 
     /**
      * Tato metoda nastavuje sance truhle
+     * podle typu truhly
      */
     protected void nastavSance() {}
 

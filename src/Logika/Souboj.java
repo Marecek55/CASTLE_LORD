@@ -22,6 +22,7 @@ public class Souboj {
 
     /**
      * Tato metoda vyhodnucuje silu utoku
+     * a nastavuje posledni zasah hrace
      * @param utocici utocici postava
      * @param branici branici postava
      */
@@ -89,7 +90,7 @@ public class Souboj {
 
     /**
      * Spusti casovac pro kazdou postavu s nahodnym intervalem a spusti ranu a zkontroluje jestli nezemrel
-     * a nahodne vybira utpk
+     * a nahodne vybira utok na jednoho z nepratel
      * @param utocnik ten ktery utoci
      * @param jejiNepratele tym nepratel proti nemu
      */
@@ -123,7 +124,7 @@ public class Souboj {
     }
 
     /**
-     * Startuje bitvu spustenim casovace
+     * Startuje bitvu spustenim casovace pro kazdeho bojovnika
      */
     public void startBitvy() {
 

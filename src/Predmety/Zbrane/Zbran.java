@@ -29,6 +29,7 @@
 
         /**
          * Tato metoda vytvori zbran pomoci nahodnych cisel a urovne hrace
+         * a nasledne zbran vrati k dalsimu pouziti na tvorbu postavy
          * @param uroven uroven hrace
          * @param jeZtruhly jestli je z truhly
          * @param raritaZtruhly rarita truhly

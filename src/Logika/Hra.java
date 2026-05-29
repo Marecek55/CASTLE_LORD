@@ -41,6 +41,7 @@ public class Hra {
 
     /**
      * Tato metoda vytvari hracova prvniho hrace na start hry
+     * se zakladnim vybavenim
      * @param jmeno
      */
     public static void hracuvTym(String jmeno) {
@@ -57,9 +58,9 @@ public class Hra {
 
     /**
      * Konstruktor tridy hra spousti hudbu a prvni startovaciObrazovku
+     * a nastavi limit a pocet penez a jidla na zacatek
      */
     public Hra() {
-
         hrac = new Hrac(1,Penize.getPocet(), Jidlo.getPocet(),1,0);
         hudbaPozadi = new Hudba("/Hudba/HudbaPozadi.wav");
         hudbaBitva = new Hudba("/Hudba/HudbaBitva.wav");

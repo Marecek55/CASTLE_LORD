@@ -324,6 +324,7 @@ public class ObrazovkaInventare extends Obrazovka {
 
     /**
      * Tato metoda dava funkcnost tlacitkum a sipkam
+     * a kotnroluje jeslti je vhodne pouzit tlacitko
      */
     @Override
     public void funkcnost() {

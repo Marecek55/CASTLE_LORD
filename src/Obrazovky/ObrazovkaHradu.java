@@ -170,6 +170,7 @@ public class ObrazovkaHradu extends Obrazovka {
 
     /**
      * Funkcnost dava smysl po kliknuti na tlacitka a zpracovava ovladani mysi
+     * podle akce hrace
      */
     @Override
     public void funkcnost() {

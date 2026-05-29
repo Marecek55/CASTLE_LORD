@@ -28,6 +28,7 @@ public abstract class Medailon extends Predmet {
 
     /**
      * Tato metoda tvori medailon podle rarity truhly
+     * a podle nahodnych sanci
      * @param jeZtruhly jeslti je z truhly
      * @param raritaZtruhly rarita te truhly
      * @return

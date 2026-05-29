@@ -69,6 +69,7 @@ public class ObrazovkaMapy extends Obrazovka{
 
     /**
      * V teto metode se spousti funkcnost jednotlivych tlacitek
+     *
      */
     @Override
     public void funkcnost() {

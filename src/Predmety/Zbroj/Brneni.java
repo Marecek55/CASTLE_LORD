@@ -28,6 +28,7 @@ public abstract class Brneni extends Predmet {
 
     /**
      * Tato metoda tvori brneni podle urovne hrace a ririty a nahodnych cisel
+     * a nasledne brneni vrati
      * @param uroven uroven hrace
      * @param jeZtruhly jeslti je z truhly
      * @param raritaZtruhly rarita te truhly

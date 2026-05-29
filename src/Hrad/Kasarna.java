@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 /**
  * Trida Kasarnu nastavuje co kasarna bude delat a co se odecte uzivateli po postaveni
+ * dane mistnosti
  */
 public class Kasarna extends Mistnost{
     private ArrayList<Bojovnik> bojovnici;

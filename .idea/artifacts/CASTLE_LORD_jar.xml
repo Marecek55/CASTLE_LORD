@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CASTLE_LORD:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/CASTLE_LORD_jar</output-path>
+    <root id="archive" name="CASTLE_LORD.jar">
+      <element id="module-output" name="CASTLE_LORD" />
+    </root>
+  </artifact>
+</component>

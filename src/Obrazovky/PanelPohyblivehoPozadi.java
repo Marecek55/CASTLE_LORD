@@ -16,13 +16,13 @@ public class PanelPohyblivehoPozadi extends PanelNaPozadi {
     private double meritko = 1.0;
     private ObrazovkaHradu obrazovka;
 
-    private Image kasarna = nactiObrazek("/Obrazky/ObrazkyVHradu/kasarnaMistnost.png");
-    private Image lekarna = nactiObrazek("/Obrazky/ObrazkyVHradu/lekarnaMistnost.png");
-    private Image trenink = nactiObrazek("/Obrazky/ObrazkyVHradu/treninkovaMistnost.png");
-    private Image skladPenez = nactiObrazek("/Obrazky/ObrazkyVHradu/skladPenez.png");
-    private Image skladJidla = nactiObrazek("/Obrazky/ObrazkyVHradu/skladJidla.png");
+    private Image kasarna= nactiObrazek("/Obrazky/ObrazkyVHradu/kasarnaMistnost.png");
+    private Image lekarna= nactiObrazek("/Obrazky/ObrazkyVHradu/lekarnaMistnost.png");
+    private Image trenink =nactiObrazek("/Obrazky/ObrazkyVHradu/treninkovaMistnost.png");
+    private Image skladPenez =nactiObrazek("/Obrazky/ObrazkyVHradu/skladPenez.png");
+    private Image skladJidla= nactiObrazek("/Obrazky/ObrazkyVHradu/skladJidla.png");
     private Image mec= nactiObrazek("/Obrazky/ObrazkyPostav/bojovnikMecKlidny.png");
-    private Image luk = nactiObrazek("/Obrazky/ObrazkyPostav/bojovnikLukKlidny.png");
+    private Image luk= nactiObrazek("/Obrazky/ObrazkyPostav/bojovnikLukKlidny.png");
     private Image mag = nactiObrazek("/Obrazky/ObrazkyPostav/bojovnikMagKlidny.png");
 
 
@@ -57,16 +57,16 @@ public class PanelPohyblivehoPozadi extends PanelNaPozadi {
      */
     public void posunKamerou(int x, int y) {
         int noveX = xKamery + x;
-        int noveY = yKamery + y;
-        int aktualniSirkaObrazku = (int) (bg.getWidth(null) * meritko);
-        int aktualniVyskaObrazku = (int) (bg.getHeight(null) * meritko);
-        if (noveX > 0) noveX = 0;
+        int noveY =yKamery + y;
+        int aktualniSirkaObrazku= (int)(bg.getWidth(null) * meritko);
+        int aktualniVyskaObrazku = (int)(bg.getHeight(null) * meritko);
+        if (noveX >0) noveX = 0;
         if (noveX < getWidth() - aktualniSirkaObrazku) noveX = getWidth() - aktualniSirkaObrazku;
-        if (noveY > 0) noveY = 0;
-        if (noveY < getHeight() - aktualniVyskaObrazku) noveY = getHeight() - aktualniVyskaObrazku;
+        if (noveY> 0) noveY =0;
+        if (noveY < getHeight() - aktualniVyskaObrazku) noveY= getHeight() -aktualniVyskaObrazku;
 
-        xKamery = noveX;
-        yKamery = noveY;
+        xKamery =noveX;
+        yKamery= noveY;
         repaint();
     }
 
@@ -82,37 +82,35 @@ public class PanelPohyblivehoPozadi extends PanelNaPozadi {
     public void zmenaOddaleni(int smerKolecka, int xMysi, int yMysi) {
         double stareMeritko = meritko;
         if (smerKolecka > 0) {
-            meritko = meritko - 0.05;
+            meritko =meritko - 0.05;
         } else {
-            meritko = meritko + 0.05;
+            meritko= meritko + 0.05;
         }
-        double minimalniSirka = (double) getWidth() / bg.getWidth(null);
-        double minimalniVyska = (double) getHeight() / bg.getHeight(null);
-        double minimalniMeritko = Math.max(minimalniSirka, minimalniVyska);
+        double minimalniSirka =(double)getWidth() /bg.getWidth(null);
+        double minimalniVyska=(double) getHeight() / bg.getHeight(null);
+        double minimalniMeritko =Math.max(minimalniSirka, minimalniVyska);
         if (meritko < minimalniMeritko) {
-            meritko = minimalniMeritko;
+            meritko =minimalniMeritko;
         }
-        if (meritko > 2.5) {
+        if (meritko >2.5) {
             meritko = 2.5;
         }
-        double procentoRozdilu = meritko / stareMeritko;
-        int noveX = (int) (xMysi - (xMysi - xKamery) * procentoRozdilu);
-        int noveY = (int) (yMysi - (yMysi - yKamery) * procentoRozdilu);
-        if (noveX > 0) {
-            noveX = 0;
+        double procentoRozdilu = meritko/ stareMeritko;
+        int noveX = (int)(xMysi-(xMysi - xKamery) * procentoRozdilu);
+        int noveY = (int) (yMysi-(yMysi - yKamery) *procentoRozdilu);
+        if (noveX >0) {
+            noveX =0;
         }
-        if (noveY > 0) {
-            noveY = 0;
+        if (noveY> 0) {
+            noveY =0;
         }
-
-        if (noveX < getWidth() - (int)(bg.getWidth(null) * meritko)) {
+        if (noveX <getWidth() - (int)(bg.getWidth(null) * meritko)) {
             noveX = getWidth() - (int)(bg.getWidth(null) * meritko);
         }
-        if (noveY < getHeight() - (int)(bg.getHeight(null) * meritko)) {
+        if (noveY <getHeight() - (int)(bg.getHeight(null) * meritko)) {
             noveY = getHeight() - (int)(bg.getHeight(null) * meritko);
         }
-
-        xKamery = noveX;
+        xKamery =noveX;
         yKamery = noveY;
         repaint();
     }
@@ -129,33 +127,31 @@ public class PanelPohyblivehoPozadi extends PanelNaPozadi {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
-        if (bg != null) {
+        if (bg !=null) {
             g2.drawImage(bg, xKamery, yKamery, (int)(bg.getWidth(null) * meritko), (int)(bg.getHeight(null) * meritko), null);
         }
-        if (obrazovka.getHrad() == null) return;
+        if (obrazovka.getHrad()== null) return;
 
-        Graphics2D gMapy = (Graphics2D) g2.create();
-        gMapy.translate(xKamery, yKamery);
-        gMapy.scale(meritko, meritko);
-        if (kasarna != null){
+        Graphics2D gMapy =(Graphics2D) g2.create();
+        gMapy.translate(xKamery,yKamery);
+        gMapy.scale(meritko,meritko);
+        if (kasarna!= null){
             gMapy.drawImage(kasarna, 787, 1114, 1494, 498, null);
-
             int xBojovnika = 1000;
             int yBojovnika = 1190;
             int sirkaBojovnika = (int)(1494 * 0.18);
             int vyskaBojovnika = sirkaBojovnika * 612/408;
 
             for (Postava p : Hra.hracuvTym) {
-                Image obrazek = null;
+                Image obrazek =null;
                 switch (p.getTyp()) {
-                    case "Bojovnik": obrazek = mec;
+                    case "Bojovnik":obrazek = mec;
                     break;
-                    case "Lukostrelec": obrazek = luk;
+                    case "Lukostrelec": obrazek =luk;
                     break;
                     case "Mag": obrazek = mag;
                     break;
                 }
-
                 gMapy.drawImage(obrazek, xBojovnika, yBojovnika, sirkaBojovnika, vyskaBojovnika, null);
                 xBojovnika = xBojovnika + sirkaBojovnika + 100;
 
@@ -172,13 +168,16 @@ public class PanelPohyblivehoPozadi extends PanelNaPozadi {
             if (typ == TypMistnosti.LEKARNA) {
                 obrazek = lekarna;
             }
+
+
             else if (typ == TypMistnosti.TRENINKOVA_HALA){
                 obrazek = trenink;
             }
-            else if (typ == TypMistnosti.SKLAD_PENEZ){
+
+            else if (typ ==TypMistnosti.SKLAD_PENEZ){
                 obrazek = skladPenez;
             }
-            else if (typ == TypMistnosti.SKLAD_JIDLA) {
+            else if (typ ==TypMistnosti.SKLAD_JIDLA) {
                 obrazek = skladJidla;
             }
             if (obrazek != null) {
@@ -198,8 +197,8 @@ public class PanelPohyblivehoPozadi extends PanelNaPozadi {
     protected void paintChildren(Graphics g) {
         Graphics2D pozadi = (Graphics2D) g.create();
         for (Component c : getComponents()) {
-            if (c.getName() != null && (c.getName().equals("pevneTlacitka") || c.getName().equals("pevneTlacitkaText"))) {
-                Graphics2D gTlacitka = (Graphics2D) pozadi.create();
+            if (c.getName() !=null && (c.getName().equals("pevneTlacitka") || c.getName().equals("pevneTlacitkaText"))) {
+                Graphics2D gTlacitka =(Graphics2D) pozadi.create();
                 gTlacitka.translate(c.getX(), c.getY());
                 c.paint(gTlacitka);
                 gTlacitka.dispose();
@@ -218,7 +217,7 @@ public class PanelPohyblivehoPozadi extends PanelNaPozadi {
     @Override
     public Component getComponentAt(int x, int y) {
         for (Component component : getComponents()) {
-            if (component.getName() != null && (component.getName().equals("pevneTlacitka") || component.getName().equals("pevneTlacitkaText"))) {
+            if (component.getName() !=null && (component.getName().equals("pevneTlacitka") || component.getName().equals("pevneTlacitkaText"))) {
                 if (component.getBounds().contains(x, y)) {
                     return component;
                 }

@@ -33,7 +33,7 @@ public class ObrazovkaTruhel extends Obrazovka {
      */
     public ObrazovkaTruhel(String nazev, boolean malaObrazovka) {
         super(nazev, malaObrazovka);
-        panelTruhel = new PanelNaPozadi("/obrazkyInventar/pozadiTruhly.png");
+        panelTruhel = new PanelNaPozadi("/Obrazky/obrazkyInventar/pozadiTruhly.png");
         panelTruhel.setLayout(null);
 
         inicializace();
@@ -128,7 +128,7 @@ public class ObrazovkaTruhel extends Obrazovka {
 
         JButton velkyOtaznik = new JButton();
         velkyOtaznik.setBounds(x, y, velkaVelikost, velkaVelikost);
-        StylTlacitek.nastavJakoObrazek(velkyOtaznik, "/obrazkyInventar/zamknutyPredmet.png", velkaVelikost, velkaVelikost);
+        StylTlacitek.nastavJakoObrazek(velkyOtaznik, "/Obrazky/obrazkyInventar/zamknutyPredmet.png", velkaVelikost, velkaVelikost);
         panelTruhel.add(velkyOtaznik);
         panelTruhel.setComponentZOrder(velkyOtaznik, 0);
         velkyOtaznik.addActionListener(e -> {

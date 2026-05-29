@@ -40,7 +40,7 @@ public class ObrazovkaInventare extends Obrazovka {
      */
     public ObrazovkaInventare(String nazev, boolean malaObrazovka) {
         super(nazev, malaObrazovka);
-        panelInventare = new PanelNaPozadi("/obrazkyInventar/pozadiInventare.png");
+        panelInventare = new PanelNaPozadi("/Obrazky/obrazkyInventar/pozadiInventare.png");
         panelInventare.setLayout(null);
         sipka = new JButton();
         sipkaOtocena = new JButton();
@@ -86,10 +86,10 @@ public class ObrazovkaInventare extends Obrazovka {
      */
     @Override
     public void inicializace() {
-        StylTlacitek.nastavJakoObrazek(sipka, "/obrazkyInventar/sipky/sipka.png", sirkaTlacitek, vyskaTlacitek);
-        StylTlacitek.nastavJakoObrazek(sipkaOtocena, "/obrazkyInventar/sipky/sipkaOtocena.png", sirkaTlacitek, vyskaTlacitek);
-        StylTlacitek.nastavJakoObrazek(sipkaNahoru, "/obrazkyInventar/sipky/sipkaNahoru.png", sirkaTlacitek, vyskaTlacitek2);
-        StylTlacitek.nastavJakoObrazek(sipkaDolu, "/obrazkyInventar/sipky/sipkaDolu.png", sirkaTlacitek, vyskaTlacitek2);
+        StylTlacitek.nastavJakoObrazek(sipka, "/Obrazky/obrazkyInventar/sipky/sipka.png", sirkaTlacitek, vyskaTlacitek);
+        StylTlacitek.nastavJakoObrazek(sipkaOtocena, "/Obrazky/obrazkyInventar/sipky/sipkaOtocena.png", sirkaTlacitek, vyskaTlacitek);
+        StylTlacitek.nastavJakoObrazek(sipkaNahoru, "/Obrazky/obrazkyInventar/sipky/sipkaNahoru.png", sirkaTlacitek, vyskaTlacitek2);
+        StylTlacitek.nastavJakoObrazek(sipkaDolu, "/Obrazky/obrazkyInventar/sipky/sipkaDolu.png", sirkaTlacitek, vyskaTlacitek2);
         inventarVeci.setBounds((int)(sirka * 0.485), (int)(vyska * 0.145), (int)(sirka * 0.45), (int)(vyska * 0.75));
 
         int sirkaTlacitka = (int) (sirka * 0.2);

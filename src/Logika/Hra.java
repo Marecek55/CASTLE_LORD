@@ -48,15 +48,9 @@ public class Hra {
             int sila = rand.nextInt(3, 8);
             int crit = rand.nextInt(8, 11);
             Zbran m = new Mec("Meč", sila, crit, Rarita.BĚŽNÁ);
-//            Zbran m2 = new Luk("Luk", sila, crit, Rarita.BĚŽNÁ);
-//            Zbran m3= new MagickaHul("Magická Hůl", sila, crit, Rarita.BĚŽNÁ);
 
             Postava p = TvorbaPostav.tvorbaHracovaBojovnika(jmeno, 1, m);
-//            Postava p2 = TvorbaPostav.tvorbaHracovaBojovnika(jmeno, 1, m2);
-//            Postava p3 = TvorbaPostav.tvorbaHracovaBojovnika(jmeno, 1, m3);
             hracuvTym.add(p);
-//            hracuvTym.add(p2);
-//            hracuvTym.add(p3);
 
         }
     }

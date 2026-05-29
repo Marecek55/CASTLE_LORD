@@ -33,7 +33,7 @@ public class IkonaVeciVInventari extends JButton {
         URL adresaPozadi = getClass().getResource(cestaPozadi);
         pozadi = new ImageIcon(adresaPozadi).getImage();
 
-        String cestaVeci = "/obrazkyInventar/" + nazevObrazkuVeci;
+        String cestaVeci = "/Obrazky/obrazkyInventar/" + nazevObrazkuVeci;
         URL adresaVeci = getClass().getResource(cestaVeci);
         if (adresaVeci != null) {
             obrazek = new ImageIcon(adresaVeci).getImage();

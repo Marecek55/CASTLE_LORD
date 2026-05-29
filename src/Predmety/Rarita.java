@@ -4,9 +4,9 @@ package Predmety;
  * Tato trida v sobe me rarity predmetu
  */
 public enum Rarita {
-    BĚŽNÁ("/obrazkyInventar/rarePozadi.png"),
-    VZÁCNÁ("/obrazkyInventar/epicPozadi.png"),
-    LEGENDÁRNÍ("/obrazkyInventar/legendaryPozadi.png");
+    BĚŽNÁ("/Obrazky/obrazkyInventar/rarePozadi.png"),
+    VZÁCNÁ("/Obrazky/obrazkyInventar/epicPozadi.png"),
+    LEGENDÁRNÍ("/Obrazky/obrazkyInventar/legendaryPozadi.png");
 
     private final String cesta;
 

@@ -22,6 +22,7 @@ Celá hra se ovládá pomocí myši a klávesnice:
 ### ✅ Jak hru spustit
 1. Stáhněte si soubor `CASTLELORD.jar`.
 2. Hru zapnete dvojklikem na soubor `CASTLELORD.jar`.
+3. Nebo pomocí příkazu: `java -jar .\CASTLE_LORD.jar`.
 
 ### 📚 Použité knihovny a technologie
 * **Java** - Programovací jazyk ve kterém je hra napsána.

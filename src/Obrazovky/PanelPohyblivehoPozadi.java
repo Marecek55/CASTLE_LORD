@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 /**
  * Tato trida vytvari pohyblive pozadi po hradu s pohybem mysi a oddaleni
+ * Matematicke posuny kamery jsem delal za pomoci internetu
  */
 public class PanelPohyblivehoPozadi extends PanelNaPozadi {
     private int xKamery =0;

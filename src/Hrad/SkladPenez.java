@@ -35,7 +35,7 @@ public class SkladPenez extends Mistnost{
             Penize.setMaxpocet(Penize.getMaxpocet() + 10000 * uroven);
 
         }else {
-            throw new RuntimeException("Nemáš dostatek peněz na vylepšení!");
+            throw new RuntimeException("Nemáš dost peněz!");
         }
 
 

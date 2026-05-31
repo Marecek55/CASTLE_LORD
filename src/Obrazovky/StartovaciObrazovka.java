@@ -63,7 +63,7 @@ public class StartovaciObrazovka extends Obrazovka {
         btnHrat.addActionListener(e -> {
 
             if (Hra.hracuvTym.isEmpty()) {
-                String zadaneJmeno = JOptionPane.showInputDialog(okno, "Zadej jméno svého prvního hrdiny:");
+                String zadaneJmeno = JOptionPane.showInputDialog(okno, "Zadej jméno svého prvního bojovníka:");
                 if (zadaneJmeno == null) {
                     zadaneJmeno = "EDVARD";
                 }

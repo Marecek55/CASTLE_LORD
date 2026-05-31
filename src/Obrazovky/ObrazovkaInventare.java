@@ -260,6 +260,7 @@ public class ObrazovkaInventare extends Obrazovka {
 
     /**
      * Tato metoda prekresluje inventar po kliknuti na dalsi stranku a zpracovava funkci vymazani predmetu
+     * Matematicke operace v teto metode jsem vytvarel s pomoci internetu
      */
     public void dalsiStranka() {
         inventarVeci.removeAll();
@@ -325,6 +326,7 @@ public class ObrazovkaInventare extends Obrazovka {
     /**
      * Tato metoda dava funkcnost tlacitkum a sipkam
      * a kotnroluje jeslti je vhodne pouzit tlacitko
+     * Matematicke operace v teto metode jsem vytvarel s pomoci internetu
      */
     @Override
     public void funkcnost() {

@@ -77,7 +77,7 @@ public class Hrad implements Serializable {
     public void postavitMistnost(TypMistnosti typ, int pozice) {
         try {
             if (pozicePostavenych.contains(pozice)) {
-                JOptionPane.showMessageDialog(okno, "Tahle pozice je obsazená jinou budovou!");
+                JOptionPane.showMessageDialog(okno, "Tahle pozice je obsazená!");
             } else {
                 switch (typ) {
                     case LEKARNA:
@@ -108,6 +108,7 @@ public class Hrad implements Serializable {
     /**
      * Tato metoda kontroluje na jake sourednice kliknul uzivatel a z toho se zapne prislusna metoda
      * mistnosti kam hrac kliknul
+     * Cast metody s pocitanim kam se hrac trefil jsem prevzal vytvoril pomoci ai
      * @param xKurzor x kurzuru mysi
      * @param yKurzor y kurzuru mysi
      */
@@ -141,11 +142,11 @@ public class Hrad implements Serializable {
     int pocetKoupenych = 0;
     private void kliknutiKasarna() {
         if (Hra.hrac.getUroven() < 5) {
-            JOptionPane.showMessageDialog(okno, "Kasárna je zamčená Musíš mít alespoň úroveň 5.");
+            JOptionPane.showMessageDialog(okno, "Kasárna je nedostupná Musíš mít alespoň úroveň 5.");
         } else if (pocetKoupenych == 1 && Hra.hrac.getUroven() <10) {
-            JOptionPane.showMessageDialog(okno, "Kasárna je zamčená Musíš mít alespoň úroveň 10.");
+            JOptionPane.showMessageDialog(okno, "Kasárna je nedostupná Musíš mít alespoň úroveň 10.");
         } else if (Hra.hracuvTym.size() >= 3) {
-            JOptionPane.showMessageDialog(okno, "Máš plný tým Můžeš mít maximálně 3 bojovníky.");
+            JOptionPane.showMessageDialog(okno, "Můžeš mít maximálně 3 bojovníky.");
         } else {
             int cenaVojaka = Hra.hrac.getUroven()/5*500;
             int volba = JOptionPane.showConfirmDialog(okno, "Chceš koupit nového bojovníka? \nCena: " + cenaVojaka + " zlaťáků", "Koupení", JOptionPane.YES_NO_OPTION);
@@ -192,7 +193,7 @@ public class Hrad implements Serializable {
             celkovaKapacita = celkovaKapacita + lekarna.getUroven();
         }
         if (pocetLeceni >= celkovaKapacita) {
-            JOptionPane.showMessageDialog(okno, "Tvoje lékarna má malou kapacitu! Kapacita lékáren je: " + celkovaKapacita + "\nMusíš jít do bitvy nebo ji vylepši.");
+            JOptionPane.showMessageDialog(okno, "Tvoje lékarna nemá dost místa! Kapacita lékáren je: " + celkovaKapacita + "\nMusíš jít do bitvy nebo ji vylepši.");
             return;
         }
         for (Postava p : Hra.hracuvTym) {
@@ -256,7 +257,7 @@ public class Hrad implements Serializable {
                                 JOptionPane.showMessageDialog(okno, bojovnik.getJmeno() + " si zvedl útok!");
                                 Hra.obrazovkaHradu.aktualizace();
                             } else {
-                                JOptionPane.showMessageDialog(okno, bojovnik.getJmeno() + " už trénoval 2x! Musí jít do bitvy.");
+                                JOptionPane.showMessageDialog(okno, bojovnik.getJmeno() + " už trénoval 2x! Musí jít nejříve do bitvy.");
                             }
                         } else {
                             JOptionPane.showMessageDialog(okno, "Nemáš dostatek jídla!");

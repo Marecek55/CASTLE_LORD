@@ -87,7 +87,7 @@ public class ObrazovkaMapy extends Obrazovka{
                 zivoty = zivoty + hrdina.getZivoty();
             }
             if (zivoty <= 0) {
-                JOptionPane.showMessageDialog(okno, "Nemůžeš bojovat! Tvoji hrdinové jsou mrtví. Běž se vyléčit do lékárny.");
+                JOptionPane.showMessageDialog(okno, "Nemůžeš bojovat! Tvoji hrdinové jsou mrtví.");
                 return;
             }
             PanelArena panelAreny = new PanelArena("/Obrazky/ObrazkyBoje/arena.png", okno, this);

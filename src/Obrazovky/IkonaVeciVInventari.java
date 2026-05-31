@@ -58,6 +58,7 @@ public class IkonaVeciVInventari extends JButton {
 
     /**
      * Tato metoda prekresluje tlacitko a dava mu vrstvy zbrane pozadi a cisla
+     * Logiku teto metody jsem delal za pomoci internetu
      * @param g the <code>Graphics</code> object to protect
      */
     @Override

@@ -183,7 +183,10 @@ public class PanelGobliniStezky extends PanelNaPozadi {
                     seznamTlacitek.get(i).setVisible(false);
 
                 }
-                for (java.awt.event.ActionListener al : bitvaTlacitko.getActionListeners()) {//TODO
+                /**
+                 * Tento cyklus jsem vytvoril pomoci ai
+                 */
+                for (java.awt.event.ActionListener al : bitvaTlacitko.getActionListeners()) {
                     bitvaTlacitko.removeActionListener(al);
                 }
                 bitvaTlacitko.addActionListener(e1 -> {
@@ -192,7 +195,7 @@ public class PanelGobliniStezky extends PanelNaPozadi {
                         zivoty = zivoty + hrdina.getZivoty();
                     }
                     if (zivoty <= 0) {
-                        JOptionPane.showMessageDialog(okno, "Tvoji hrdinové zemřeli. Běž se vyléčit do lékárny.");
+                        JOptionPane.showMessageDialog(okno, "Tvoji hrdinové zemřeli.");
                         return;
                     }
                     if (okno != null) {

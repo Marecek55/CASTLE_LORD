@@ -52,6 +52,7 @@ public class ObrazovkaTruhel extends Obrazovka {
      * tim ze zbytek po deleni 4 takze ve 4 je to nula a jde to od znova 1 zbytek deleni 4 je 1 atd 0 zbytek deleni 4 je 0
      * 2 zbytek deleni 4 je 2 to znamena 2. sloupec
      * i/4 pocita pozici v radku kde 0 deleno 4 je nula 1 deleno 4 je 0 2 deleno 4 je 0 atd ale pak napr 7 deleno 4 je jedna
+     * Matematicke pocitani sloupcu a radku jsem se naucil pomoci ai
      */
     @Override
     public void inicializace() {
@@ -151,7 +152,7 @@ public class ObrazovkaTruhel extends Obrazovka {
                 }
 
                 if (plneJidlo || plnePenize) {
-                    JOptionPane.showMessageDialog(okno,"Truhla v sobě měla suroviny!\nAle máš plný sklad.\nPostav nebo vylepši sklady.");
+                    JOptionPane.showMessageDialog(okno,"Truhla v sobě měla suroviny!\nAle máš plný sklad.");
                 } else {
                     JOptionPane.showMessageDialog(okno,"Truhla v sobě měla suroviny! Máš je ve skladu.");
                 }

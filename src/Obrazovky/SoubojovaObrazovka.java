@@ -277,6 +277,7 @@ public class SoubojovaObrazovka extends Obrazovka {
      * Tato metoda nejdriv vyhladi grafiku a vykresluje hrdiny na levou stranu a protivniky na druhou
      * dava jim lokaci a velikost a otaci nepratele pro boj v arene a vykresluje baner zivotu podle pomeru zivotu
      * take vykresluje nad hlavy hodnotu zasahu cervenou a zelenou barvou
+     * Tuto metodu jsem vytvorel s pomoci internetu
      * @param g grafika panelu
      */
     public void vykresliPostavyATexty(Graphics g) {

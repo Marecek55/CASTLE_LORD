@@ -45,6 +45,7 @@ public class StylTlacitek extends JButton {
 
     /**
      * Tato metoda nastavi tlacitko jako obrazek pomoci url
+     * Tato metoda bylo vytvorena z materialu na moodlu
      * @param tlacitko tlacitko
      * @param cesta cesta k tlacitku
      * @param sirka sirka obrazku

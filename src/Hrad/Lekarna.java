@@ -38,7 +38,7 @@ public class Lekarna extends Mistnost{
             this.uroven++;
             this.maxKapacita = uroven;
         }else {
-            throw new RuntimeException("Nemáš dostatek peněz na vylepšení!");
+            throw new RuntimeException("Nemáš dost peněz!");
         }
     }
 

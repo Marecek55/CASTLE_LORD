@@ -151,6 +151,7 @@ public class ObrazovkaStavby extends Obrazovka {
     /**
      * Tato metoda kontroluje jestli je postavena mistnost ktera prichazi a pise text k jejimu poli pro upgrade
      * kdyz neni vypisuje cenu za postaveni to stejne s urovni
+     * Cast teto metody jsem tvoril za pomoci internetu hlavne vstup s wildcard
      * @param mistnosti
      * @param cenaZaPostaveni
      * @param cenaZaVylepseni
@@ -240,7 +241,7 @@ public class ObrazovkaStavby extends Obrazovka {
                     hrad.getSkladyPenez().get(0).vylepsitMistnost();
                     int novaUroven= hrad.getSkladyPenez().get(0).getUroven();
                     int novyLimit= Predmety.Penize.getMaxpocet();
-                    JOptionPane.showMessageDialog(okno,"Sklad je vylepšen na úroveň "+novaUroven+"!\nTvoje maximální kapacita peněz se zvýšila na: "+novyLimit);
+                    JOptionPane.showMessageDialog(okno,"Sklad je vylepšen na úroveň "+novaUroven+"!\nTvoje kapacita peněz se zvýšila na: "+novyLimit);
                     obnovitObrazovku();
                     obnovitObrazovku();
                 } catch (Exception exception) {
@@ -255,7 +256,7 @@ public class ObrazovkaStavby extends Obrazovka {
                     hrad.getSkladyJidla().get(0).vylepsitMistnost();
                     int novaUroven= hrad.getSkladyJidla().get(0).getUroven();
                     int novyLimit= Predmety.Jidlo.getMaxpocet();
-                    JOptionPane.showMessageDialog(okno,"Sklad jídla je vylepšen na úroveň "+novaUroven+"!\nTvoje maximální kapacita jídla se zvýšila na: "+novyLimit);
+                    JOptionPane.showMessageDialog(okno,"Sklad jídla je vylepšen na úroveň "+novaUroven+"!\nTvoje kapacita jídla se zvýšila na: "+novyLimit);
                     obnovitObrazovku();
                 } catch (Exception exception) {
                     JOptionPane.showMessageDialog(okno,exception.getMessage());

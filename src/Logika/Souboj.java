@@ -91,6 +91,7 @@ public class Souboj {
     /**
      * Spusti casovac pro kazdou postavu s nahodnym intervalem a spusti ranu a zkontroluje jestli nezemrel
      * a nahodne vybira utok na jednoho z nepratel
+     * Tuto metodu jsem vytvarel pomoci youtube videa na tema Timer
      * @param utocnik ten ktery utoci
      * @param jejiNepratele tym nepratel proti nemu
      */
